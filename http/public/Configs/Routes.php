@@ -38,9 +38,6 @@ $routes->set(array(
         '/account/change-password' => 'Account::changePassword',
         '/account/lang' => 'Account::lang',
         
-        // scanner
-        '/scanner/(:num)/(:num)' => 'Scanner::index'
-        
         
     ],
 
