@@ -33,6 +33,7 @@ $userM = Model::get(User::class);
     <link rel="stylesheet" href="<?php echo URL::asset('Application/Assets/css/shared/iconly.css'); ?>">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css" >
 
+    <call header_css>
 </head>
 
 <body class="theme-light">
