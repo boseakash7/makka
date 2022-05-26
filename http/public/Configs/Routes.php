@@ -36,7 +36,11 @@ $routes->set(array(
         '/flights/check-out/(:num)' => "Flights::checkOut",
 
         '/account/change-password' => 'Account::changePassword',
-        '/account/lang' => 'Account::lang'
+        '/account/lang' => 'Account::lang',
+        
+        // scanner
+        '/scanner/(:num)/(:num)' => 'Scanner::index'
+        
         
     ],
 
