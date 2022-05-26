@@ -8,6 +8,7 @@ use Application\Models\Airline;
 use Application\Models\Airport;
 use Application\Models\City;
 use Application\Models\Flights as ModelsFlights;
+use Application\Models\Passenger;
 use System\Core\Controller;
 use System\Core\Exceptions\Error404;
 use System\Core\Exceptions\Redirect;
@@ -306,6 +307,37 @@ class Flights extends AuthController
             'flight' => $flight,
             'supports' => $supports,
             'userInfo' => $userInfo
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
+    public function log( Request $request, Response $response )
+    {
+        $userInfo = $this->user->getInfo();
+
+        $id = $request->param(0);
+        /**
+         * @var ModelsFlights
+         */
+        $flightM = Model::get(ModelsFlights::class);
+        $flight = $flightM->find(['id' => $id]);
+        if ( empty($flight) ) throw new Error404;
+
+        /**
+         * @var Passenger
+         */
+        $pM = Model::get(Passenger::class);
+        $ciPassengers = $pM->findAll([ 'flight' => $flight['id'], 'status' => Passenger::STATUS_CHECK_IN ]);
+        $coPassengers = $pM->findAll([ 'flight' => $flight['id'], 'status' => Passenger::STATUS_CHECK_OUT ]);
+
+        $view  = new View();
+        $view->set('Flights/log', [
+            'flight' => $flight,
+            'ciPassengers' => $ciPassengers,
+            'coPassengers' => $coPassengers
         ]);
         $view->prepend('header');
         $view->append('footer');

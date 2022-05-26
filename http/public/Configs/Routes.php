@@ -34,10 +34,11 @@ $routes->set(array(
         '/flights/scan/(:num)' => "Flights::scan",
         '/flights/check-in/(:num)' => "Flights::checkIn",
         '/flights/check-out/(:num)' => "Flights::checkOut",
+        '/flights/log/(:num)' => "Flights::log",
 
         '/account/change-password' => 'Account::changePassword',
         '/account/lang' => 'Account::lang',
-        
+
         // forms
         '/departure-form/(:num)' => 'Form::departure'
         

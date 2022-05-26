@@ -78,4 +78,9 @@ return [
     'scan_flight_desc' => "Start scanning for the flight",
     'flight_num' => "Flight <span class='text-primary'>(:num)</span>",
     'source_airport' => "Source Airport",
+
+    'view_log' => "View Log",
+    'logs_for' => "Logs for <span class='text-primary'>(:flight)</span>",
+    'no_data' => "No Data"
 ];
+
