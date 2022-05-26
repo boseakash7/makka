@@ -39,7 +39,10 @@ $routes->set(array(
         '/account/lang' => 'Account::lang',
         
         // forms
-        '/departure-form/(:num)' => 'Form::departure'
+        '/departure-form/(:num)' => 'Form::departure',
+        '/arrival-form/(:num)' => 'Form::arrival',
+        '/arrival-form-success' => 'Form::arrivalSuccess',
+        '/departure-form-success' => 'Form::departureSuccess'
         
     ],
 
