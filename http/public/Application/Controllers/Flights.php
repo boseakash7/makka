@@ -17,6 +17,8 @@ use System\core\Response;
 use System\Libs\FormValidator;
 use System\Models\Language;
 use System\Responses\View;
+use Sinergi\BrowserDetector\Browser;
+use Sinergi\BrowserDetector\Os;
 
 class Flights extends AuthController
 {
@@ -274,6 +276,8 @@ class Flights extends AuthController
 
     public function scan( Request $request, Response $response )
     {
+        $userInfo = $this->user->getInfo();
+
         $id = $request->param(0);
         /**
          * @var ModelsFlights
@@ -285,9 +289,23 @@ class Flights extends AuthController
         $flight = FlightHelper::prepare([$flight]);
         $flight = $flight[0];
 
+        $browserM = new Browser();
+        $osM = new Os();
+
+        $supports = true;
+        if( $osM->getName() == 'iOS' )
+        {
+            if( $browserM->getName() != 'Safari' )
+            {
+                $supports = false;
+            }
+        }
+
         $view = new View();
         $view->set("Flights/scan", [
-            'flight' => $flight
+            'flight' => $flight,
+            'supports' => $supports,
+            'userInfo' => $userInfo
         ]);
         $view->prepend('header');
         $view->append('footer');

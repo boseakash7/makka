@@ -19,7 +19,7 @@ use System\Helpers\URL;
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>    
     <script src="<?php echo URL::asset('Application/Assets/js/app.js'); ?>"></script>
-
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <script src="<?php echo URL::asset('Application/Assets/js/pages/dashboard.js'); ?>"></script>    
 
     <call footer_js/>

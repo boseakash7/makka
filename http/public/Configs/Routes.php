@@ -38,6 +38,8 @@ $routes->set(array(
         '/account/change-password' => 'Account::changePassword',
         '/account/lang' => 'Account::lang',
         
+        // forms
+        '/departure-form/(:num)' => 'Form::departure'
         
     ],
 

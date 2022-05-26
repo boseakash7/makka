@@ -93,28 +93,6 @@
         // If you want to prefer front camera
         html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
 
-        // function onScanSuccess(decodedText, decodedResult) {
-        //     // Handle on success condition with the decoded text or result.
-        //     $(".result").show().html(decodedText);
-        //     console.log(`Scan result: ${decodedText}`, decodedResult);
-
-        //     // html5QrcodeScanner.clear();
-        //     // ^ this will stop the scanner (video feed) and clear the scan area.
-        // }
-
-        // function onScanError(errorMessage) {
-        //     // handle on error condition, with error message
-        // }
-
-        // var html5QrcodeScanner = new Html5QrcodeScanner(
-        //     "reader", { 
-        //         fps: 10, 
-        //         qrbox: 250 ,
-        //         supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-        //         facingMode: "environment"
-        //     });
-
-        // html5QrcodeScanner.render(onScanSuccess, onScanError);
     </script>
 </body>
 </html>

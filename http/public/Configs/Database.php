@@ -5,10 +5,16 @@ use System\Core\Config;
 $database = Config::get('Database');
 
 $database->set(array(
-    'host' => 'mysql',
-    'user' => getenv('MYSQL_USER'),
-    'password' => getenv('MYSQL_PASSWORD'),
-    'database' => getenv('MYSQL_DATABASE'),
+    // 'host' => 'mysql',
+    // 'user' => getenv('MYSQL_USER'),
+    // 'password' => getenv('MYSQL_PASSWORD'),
+    // 'database' => getenv('MYSQL_DATABASE'),
+    // 'port' => 3306,
+
+    'host' => 'localhost',
+    'user' => 'root',
+    'password' => '',
+    'database' => 'makka',
     'port' => 3306,
 
     // Connection options
