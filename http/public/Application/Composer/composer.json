@@ -1,5 +1,5 @@
 {
     "require": {
-        "whichbrowser/parser": "^2.1"
+        "sinergi/browser-detector": "^6.1"
     }
 }

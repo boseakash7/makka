@@ -6,6 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'WhichBrowser\\' => array($vendorDir . '/whichbrowser/parser/src', $vendorDir . '/whichbrowser/parser/tests/src'),
-    'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
+    'Sinergi\\BrowserDetector\\' => array($vendorDir . '/sinergi/browser-detector/src'),
 );
