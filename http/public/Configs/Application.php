@@ -119,7 +119,7 @@ $application->set([
     // ],
 
     // Where is composer autoload file?
-    // 'composer_autoload_path' => 'Path/To/vendor/autoload.php',
+    'composer_autoload_path' => 'Application/Composer/vendor/autoload.php',
     
     /**
     * Set an 404 error page controller
