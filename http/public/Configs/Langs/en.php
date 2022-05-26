@@ -81,6 +81,8 @@ return [
 
     'view_log' => "View Log",
     'logs_for' => "Logs for <span class='text-primary'>(:flight)</span>",
-    'no_data' => "No Data"
+    'no_data' => "No Data",
+    'success' => "Success",
+    'scan_another' => "Scan Another"
 ];
 
