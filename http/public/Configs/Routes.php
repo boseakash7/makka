@@ -32,6 +32,8 @@ $routes->set(array(
         '/flights/edit/(:num)' => "Flights::edit",
         '/flights/open/(:num)' => "Flights::open",
         '/flights/scan/(:num)' => "Flights::scan",
+        '/flights/check-in/(:num)' => "Flights::checkIn",
+        '/flights/check-out/(:num)' => "Flights::checkOut",
 
         '/account/change-password' => 'Account::changePassword',
         '/account/lang' => 'Account::lang'

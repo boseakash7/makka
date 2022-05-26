@@ -25,6 +25,8 @@ return [
     'airport' => "Airport",
     'open' => "Open",
     'start_scanning' => "Start scanning",
+    'add' => "Add",
+    'reload' => "Reload",
 
     'status' => "Status",
     'not_opened' => "Not Opened",
@@ -74,5 +76,6 @@ return [
 
     'scan_flight' => "Scan flight (:flight)",
     'scan_flight_desc' => "Start scanning for the flight",
-    'flight_number' => "Flight <span class='text-primary'>(:num)</span>"
+    'flight_num' => "Flight <span class='text-primary'>(:num)</span>",
+    'source_airport' => "Source Airport",
 ];

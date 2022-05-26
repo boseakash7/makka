@@ -236,6 +236,42 @@ class Flights extends AuthController
         throw new Redirect('flights');
     }
 
+    public function checkIn( Request $request, Response $response )
+    {
+        $id = $request->param(0);
+        /**
+         * @var ModelsFlights
+         */
+        $flightM = Model::get(ModelsFlights::class);
+        $flight = $flightM->find(['id' => $id]);
+        if ( empty($flight) ) throw new Error404;
+
+        // Update the flight status to open
+        $flightM->update($flight['id'], [
+            'status' => ModelsFlights::STATUS_CHECK_IN
+        ]);
+
+        throw new Redirect('flights/scan/' . $flight['id']);
+    }
+
+    public function checkOut( Request $request, Response $response )
+    {
+        $id = $request->param(0);
+        /**
+         * @var ModelsFlights
+         */
+        $flightM = Model::get(ModelsFlights::class);
+        $flight = $flightM->find(['id' => $id]);
+        if ( empty($flight) ) throw new Error404;
+
+        // Update the flight status to open
+        $flightM->update($flight['id'], [
+            'status' => ModelsFlights::STATUS_CHECK_OUT
+        ]);
+
+        throw new Redirect('flights/scan/' . $flight['id']);
+    }
+
     public function scan( Request $request, Response $response )
     {
         $id = $request->param(0);
@@ -245,6 +281,9 @@ class Flights extends AuthController
         $flightM = Model::get(ModelsFlights::class);
         $flight = $flightM->find(['id' => $id]);
         if ( empty($flight) ) throw new Error404;
+
+        $flight = FlightHelper::prepare([$flight]);
+        $flight = $flight[0];
 
         $view = new View();
         $view->set("Flights/scan", [

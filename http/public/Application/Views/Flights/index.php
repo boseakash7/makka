@@ -16,7 +16,8 @@ $lang = Model::get(Language::class);
     Manage your flights from here
 </define>
 <define right_header>
-    <a href="<?php echo URL::full('flights/add') ?>" class="btn btn-primary">Add</a>
+    <a href="<?php echo URL::full('flights/add') ?>" class="btn btn-primary"><?php echo $lang('add') ?></a>
+    <a href="<?php echo URL::full('flights') ?>" class="btn btn-primary"><?php echo $lang('reload') ?></a>
 </define>
 <section class="section">
     <div class="card">
@@ -54,7 +55,7 @@ $lang = Model::get(Language::class);
                             <?php if ( $flight['status'] == Flights::STATUS_NOT_OPENED ): ?>
                                 <a href="<?php echo URL::full('flights/open/' . $flight['id']) ?>" class="btn btn-primary"><?php echo $lang('open'); ?></a>
                             <?php elseif( $flight['status'] == Flights::STATUS_OPENED ): ?>
-                                <a href="<?php echo URL::full('flights/scan/' . $flight['id']) ?>" class="btn btn-danger"><?php echo $lang('start_scanning') ?></a>
+                                <a href="<?php echo URL::full('flights/scan/' . $flight['id']) ?>" class="btn btn-danger" target="_blank"><?php echo $lang('start_scanning') ?></a>
                             <?php endif; ?>
                             <a href="<?php echo URL::full('flights/edit/' . $flight['id']); ?>" class="btn btn-primary"><?php echo $lang('edit') ?></a>
                         </td>
