@@ -1,0 +1,9 @@
+data/*
+!data/.gitkeep
+logs/apache/*
+!logs/apache/.gitkeep
+logs/mysql/*
+!logs/mysql/.gitkeep
+http/public/Application/Cache/*
+!http/public/Application/Cache/.gitkeep
+whats_done_yet.txt

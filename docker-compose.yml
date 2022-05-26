@@ -1,0 +1,59 @@
+version: '3.1'
+services:
+  ullash:
+    build:
+      context: .
+      dockerfile: .docker/apache/Dockerfile
+    image: ${COMPOSE_PROJECT_NAME}:apache
+    ports:
+      - 80:80
+    depends_on:
+      - mysql
+      - php
+    volumes:
+      - ./http:/usr/local/apache2/web
+      - ./logs/apache:/usr/local/apache2/logs
+  php:
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
+    image: ${COMPOSE_PROJECT_NAME}:php
+    volumes:
+      - ./http:/usr/local/apache2/web
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_RANDOM_ROOT_PASSWORD=${MYSQL_RANDOM_ROOT_PASSWORD}
+    depends_on:
+      - mysql
+  mysql:
+    build:
+      context: .
+      dockerfile: .docker/mysql/Dockerfile
+    image: ${COMPOSE_PROJECT_NAME}:mysql
+    command: mysqld --sql-mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_RANDOM_ROOT_PASSWORD=${MYSQL_RANDOM_ROOT_PASSWORD}
+    volumes:
+      - ./data:/var/lib/mysql
+      - .docker/mysql/config:/etc/mysql/conf.d
+      - ./logs/mysql:/var/log/mysql
+  phpmyadmin:
+    build:
+      context: .
+      dockerfile: .docker/phpmyadmin/Dockerfile
+    image: ${COMPOSE_PROJECT_NAME}:phpmyadmin
+    ports: 
+      - 8080:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+      - PMA_USER=${MYSQL_USER}
+      - PMA_PASSWORD=${MYSQL_PASSWORD}
+      - UPLOAD_LIMIT=100M
