@@ -10,7 +10,7 @@ $lang = Model::get(Language::class);
 </define>
 <section class="section">
     <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
 
@@ -41,8 +41,6 @@ $lang = Model::get(Language::class);
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
@@ -63,7 +61,7 @@ $lang = Model::get(Language::class);
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 </section>
 
 <define footer_js>

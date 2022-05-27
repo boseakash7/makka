@@ -204,6 +204,10 @@ class Form extends Controller
                 'created_at' => time()
             ]);
 
+            Model::get(Flights::class)->update($flightId, [
+                'status' => Flights::STATUS_COMPLETE
+            ]);
+
             throw new Redirect('arrival-form-success');
         }
 
@@ -245,6 +249,10 @@ class Form extends Controller
             'departure_city' => [
                 'required' => true,
                 'type' => 'string',
+            ],
+            'departure_airport' => [
+                'required' => true,
+                'type' => 'select'
             ],
             'flight_number' => [
                 'required' => true,
@@ -405,6 +413,11 @@ class Form extends Controller
                 'flight_id' => $flightId,
                 'json' => $json,
                 'created_at' => time()
+            ]);
+
+            Model::get(Flights::class)->update($flightId, [
+                'status' => Flights::STATUS_ON_AIR,
+                'dairport' => $formValidator->getValue('departure_airport')
             ]);
 
             throw new Redirect('departure-form-success');

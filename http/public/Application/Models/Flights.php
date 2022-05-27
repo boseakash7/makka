@@ -10,6 +10,10 @@ class Flights extends Model
     const STATUS_OPENED = 'opened';
     const STATUS_CHECK_IN = 'check_in';
     const STATUS_CHECK_OUT = 'check_out';
+    const STATUS_CLOSED = 'closed';
+    const STATUS_ON_AIR = 'on_air';
+    const STATUS_ARRIVED = 'arrived';
+    const STATUS_COMPLETE = 'complete';
 
     private $_table = 'flights';
 
@@ -81,8 +85,19 @@ class Flights extends Model
         $where = [];
         foreach ( $with as $key => $value )
         {
-            $where[] = " `{$key}` = ? ";
-            $dbValues[] = $value;
+            if ( !is_array($value) ) {
+                $where[] = " `{$key}` = ? ";
+                $dbValues[] = $value;
+                continue;
+            }
+
+            $placeholders = array_fill(0, count($value), '?');            
+            $placeholders = implode(", ", $placeholders);
+            $values = array_values($value);
+
+            $where[] = " `{$key}` IN (" . $placeholders . ") ";
+
+            $dbValues = array_merge($dbValues, $values);
         }
 
         $SQL = "SELECT * FROM

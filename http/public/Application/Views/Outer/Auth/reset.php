@@ -11,7 +11,7 @@ $formValidator = FormValidator::instance("reset");
 <div class="col-lg-5 col-12">
     <div id="auth-left">
         <div class="auth-logo">
-            <a href="<?php echo URL::siteUrl(); ?>"><img src="<?php echo URL::full('Application/Assets/images/logo/logo.svg'); ?>" alt="Logo"></a>
+            <a href="<?php echo URL::siteUrl(); ?>"><img src="<?php echo URL::full('Application/Assets/images/logo/logo-png.png'); ?>" alt="Logo"></a>
         </div>
         <h1 class="auth-title"><?php echo $lang('forgot_password') ?></h1>
         <p class="auth-subtitle mb-5"><?php echo $lang('forgot_password_desc') ?></p>

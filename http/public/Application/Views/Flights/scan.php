@@ -48,6 +48,15 @@ $lang = Model::get(Language::class);
                             <a href="<?php echo !empty($ciClass) ? '' : URL::full('flights/check-in/' . $flight['id']) ?>" class="btn <?php echo $ciClass ?>"><?php echo $lang('check_in') ?></a>
                             <a href="<?php echo !empty($coClass) ? '' : URL::full('flights/check-out/' . $flight['id']) ?>" class="btn <?php echo $coClass ?>"><?php echo $lang('check_out') ?></a>
                         </div>
+                        <div class="form mt-5">
+                            <form action="<?php echo URL::current() ?>" method="POST" onsubmit="submitForm(event)">
+                                <div class="form-group">
+                                    <label for=""><?php echo $lang('id'); ?></label>
+                                    <input type="text" name="qr_code" class="form-control" id="qr_input">
+                                </div>
+                                <button type="submit" class="btn btn-primary"><?php echo $lang('submit'); ?></button>
+                            </form>
+                        </div>
                         <div id="reader" class="mx-auto mt-5"></div>
                     <?php else : ?>
                         <p>Please open this url in safari browser only</p>
@@ -61,33 +70,69 @@ $lang = Model::get(Language::class);
 <define footer_js>
     <script>
 
+            var qrCodeSuccessCallback = function (decodedText) {                
+                if (scan) {                                        
+                    scan = false;
+                    $.ajax({
+                        url: '<?php echo URL::full('ajax/flight/passenger-check/') ?>',
+                        type: 'POST',
+                        accepts: 'JSON',
+                        dataType: 'JSON',
+                        data: {
+                            id: decodedText
+                        },
+                        beforeSend: function() {
+
+                        },
+                        success: function( data ) {
+                            if ( !data ) {
+                                swal({
+                                    title: '<?php echo $lang('success') ?>',    
+                                    text: decodedText,
+                                    icon: "success",
+                                    button: '<?php echo $lang('scan_another') ?>'
+                                }).then((result) => {
+                                    _handleAjax();
+                                });
+                            }
+                            
+                        }
+                    });
+
+                    var _handleAjax = function() {
+                        $.ajax({
+                            url: '<?php echo URL::full('ajax/flight/passenger-add/') ?>',
+                            type: 'POST',
+                            accepts: 'JSON',
+                            dataType: 'JSON',
+                            data: {
+                                id: decodedText
+                            },
+                            beforeSend: function() {
+
+                            },
+                            success: function( data ) {
+                                swal({
+                                    title: '<?php echo $lang('success') ?>',    
+                                    text: decodedText,
+                                    icon: "success",
+                                    button: '<?php echo $lang('scan_another') ?>'
+                                }).then((result) => {
+
+                                });
+                            }
+                        });
+                    };
+                }
+            };
+
         try {
 
 
             var scan = true;
 
-            const html5QrCode = new Html5Qrcode("reader");
-            const qrCodeSuccessCallback = (decodedText, decodedResult) => {                
-                if (scan) {
-                    
-                    $.ajax({
-                        url: 
-                    });
-
-                    swal({
-                        title: '<?php echo $lang('success') ?>',    
-                        text: decodedText,
-                        icon: "success",
-                        button: '<?php echo $lang('scan_another') ?>'
-                    }).then((result) => {
-                        if ( result ) {
-
-                        }
-                    });
-                }
-                scan = false;
-            };
-            const config = {
+            var html5QrCode = new Html5Qrcode("reader");            
+            var config = {
                 fps: 10,
                 qrbox: 250,
                 supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
@@ -100,6 +145,17 @@ $lang = Model::get(Language::class);
             }, config, qrCodeSuccessCallback);
         } catch (e) {
             document.body.innerHTML = e.toString();
+        }
+    </script>
+
+    <script>
+        function submitForm(e) {
+            e.preventDefault();
+
+            var val = $('#qr_input').val().trim();            
+            if ( val == '' ) return;
+
+            qrCodeSuccessCallback(val);
         }
     </script>
 </define>

@@ -28,12 +28,70 @@ class Flights extends AuthController
         $userInfo = $this->user->getInfo();
 
         $flightM = Model::get(ModelsFlights::class);
-        $flights = $flightM->findAll([ 'sairport' => $userInfo['airport'] ]);
+        $flights = $flightM->findAll([
+            'sairport' => $userInfo['airport'],
+            'status' => [
+                ModelsFlights::STATUS_NOT_OPENED,
+                ModelsFlights::STATUS_OPENED,
+                ModelsFlights::STATUS_CHECK_IN,
+                ModelsFlights::STATUS_CHECK_OUT,
+                ModelsFlights::STATUS_CLOSED,
+            ]
+        ]);
         $flights = FlightHelper::prepare($flights);
 
         $view = new View();
         $view->set('Flights/index', [
             'flights' => $flights
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
+    public function arrival( Request $request, Response $response )
+    {
+        $userInfo = $this->user->getInfo();
+
+        $flightM = Model::get(ModelsFlights::class);
+        $flights = $flightM->findAll([
+            'dairport' => $userInfo['airport'],
+            'status' => [
+                ModelsFlights::STATUS_ON_AIR,
+                ModelsFlights::STATUS_ARRIVED,
+            ]
+        ]);
+        $flights = FlightHelper::prepare($flights);
+
+        $view = new View();        
+        $view->set('Flights/index', [
+            'flights' => $flights,
+            'arrival' => true
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
+    public function completed( Request $request, Response $response )
+    {
+        $userInfo = $this->user->getInfo();
+
+        $flightM = Model::get(ModelsFlights::class);
+        $flights = $flightM->findAll([
+            'dairport' => $userInfo['airport'],
+            'status' => [
+                ModelsFlights::STATUS_COMPLETE
+            ]
+        ]);
+        $flights = FlightHelper::prepare($flights);
+
+        $view = new View();        
+        $view->set('Flights/index', [
+            'flights' => $flights,
+            'arrival' => true
         ]);
         $view->prepend('header');
         $view->append('footer');
@@ -234,6 +292,43 @@ class Flights extends AuthController
         // Update the flight status to open
         $flightM->update($flight['id'], [
             'status' => ModelsFlights::STATUS_OPENED
+        ]);
+
+        throw new Redirect('flights');
+    }
+
+    public function arrived( Request $request, Response $response )
+    {
+        $id = $request->param(0);
+        /**
+         * @var ModelsFlights
+         */
+        $flightM = Model::get(ModelsFlights::class);
+        $flight = $flightM->find(['id' => $id]);
+        if ( empty($flight) ) throw new Error404;
+
+        // Update the flight status to open
+        $flightM->update($flight['id'], [
+            'status' => ModelsFlights::STATUS_ARRIVED
+        ]);
+
+        throw new Redirect('arrivals');
+    }
+
+    
+    public function close( Request $request, Response $response )
+    {
+        $id = $request->param(0);
+        /**
+         * @var ModelsFlights
+         */
+        $flightM = Model::get(ModelsFlights::class);
+        $flight = $flightM->find(['id' => $id]);
+        if ( empty($flight) ) throw new Error404;
+
+        // Update the flight status to open
+        $flightM->update($flight['id'], [
+            'status' => ModelsFlights::STATUS_CLOSED
         ]);
 
         throw new Redirect('flights');

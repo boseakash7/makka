@@ -11,7 +11,7 @@ $formValidator = FormValidator::instance("arrival-form");
 
 ?>
 <define title>
-    Departure Form
+    Arrival Form
 </define>
 <define page_desc>
     Complete the form
@@ -41,7 +41,7 @@ $formValidator = FormValidator::instance("arrival-form");
                                 <label for="city"><?php echo $lang('arrival_city') ?><span class="text-danger">*</span></label>
                                 <select name="arrival_city" id="arrival_city" class="form-control">
                                     <?php foreach ($cities as $city) : ?>
-                                        <option value="<?php echo $city['id'] ?>"><?php echo $city[$lang->current() . '_name'] ?></option>
+                                        <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('arrival_city') == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <?php if ($formValidator->hasError('arrival_city')) : ?>
@@ -51,7 +51,7 @@ $formValidator = FormValidator::instance("arrival-form");
                         </div>
                         <div class="form-group">
                             <label for="flight_number"><?php echo $lang('flight_number') ?><span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="flight_number" id="flight_number" value="<?php echo $formValidator->getValue('flight_number'); ?>" />
+                            <input type="text" class="form-control" name="flight_number" id="flight_number" value="<?php echo $formValidator->getValue('flight_number', $flightInfo['number']); ?>" />
                             <?php if ($formValidator->hasError('flight_number')) : ?>
                                 <p class="text-danger"><?php echo $formValidator->getError('flight_number'); ?></p>
                             <?php endif; ?>
@@ -93,7 +93,7 @@ $formValidator = FormValidator::instance("arrival-form");
                                 <label for="take_off_place"><?php echo $lang('take_off_place') ?><span class="text-danger">*</span></label>
                                 <select name="take_off_place" id="take_off_place" class="form-control">
                                     <?php foreach ($cities as $city) : ?>
-                                        <option value="<?php echo $city['id'] ?>"><?php echo $city[$lang->current() . '_name'] ?></option>
+                                        <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('take_off_place') == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <?php if ($formValidator->hasError('take_off_place')) : ?>
@@ -146,8 +146,8 @@ $formValidator = FormValidator::instance("arrival-form");
                         <div class="form-group">
                             <label for="flight_delay"><?php echo $lang('flight_delay') ?><span class="text-danger">*</span></label>
                             <select name="flight_delay" id="flight_delay" class="form-control">
-                                <option >There is no delay</option>
-                                <option >There is delay</option>
+                                <option value="no_delay" <?php echo $formValidator->getValue('flight_delay') == 'no_delay' ? 'selected' : '' ?>><?php echo $lang('no_delay'); ?></option>
+                                <option value="delay" <?php echo $formValidator->getValue('flight_delay') == 'delay' ? 'selected' : '' ?>><?php echo $lang('delay'); ?></option>
                             </select>
                             <?php if ($formValidator->hasError('flight_delay')) : ?>
                                 <p class="text-danger"><?php echo $formValidator->getError('flight_delay'); ?></p>
@@ -171,18 +171,18 @@ $formValidator = FormValidator::instance("arrival-form");
                             <div class="col form-group">
                                 <label for=""><?php echo $lang('are_there_unmarked_buses') ?><span class="text-danger">*</span></label>
                                 <select name="are_there_unmarked_buses" class="form-control" id="are_there_unmarked_buses">
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
+                                    <option value="yes" <?php echo $formValidator->getValue('are_there_unmarked_buses') == 'yes' ? 'selected' : '' ?>><?php echo $lang('yes') ?></option>
+                                    <option value="no" <?php echo $formValidator->getValue('are_there_unmarked_buses') == 'no' ? 'selected' : '' ?>><?php echo $lang('no') ?></option>
                                 </select>
                                 <?php if ($formValidator->hasError('are_there_unmarked_buses')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('are_there_unmarked_buses'); ?></p>
                                 <?php endif; ?>
                             </div>
                             <div class="col form-group">
-                                <label for=""><?php echo $lang('are_there_any_accidents') ?><span class="text-danger">*</span></label>
+                                <label for=""><?php echo $lang('are_there_any_accidents') ?><span class="text-danger">*</span></label>                                
                                 <select name="are_there_any_accidents" class="form-control" id="are_there_any_accidents">
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
+                                    <option value="yes" <?php echo $formValidator->getValue('are_there_any_accidents') == 'yes' ? 'selected' : '' ?>><?php echo $lang('yes') ?></option>
+                                    <option value="no" <?php echo $formValidator->getValue('are_there_any_accidents') == 'no' ? 'selected' : '' ?>><?php echo $lang('no') ?></option>
                                 </select>
                                 <?php if ($formValidator->hasError('are_there_any_accidents')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('are_there_any_accidents'); ?></p>

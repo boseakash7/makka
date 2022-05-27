@@ -28,22 +28,29 @@ $routes->set(array(
         '/supervisor/edit/(:num)' => "Supervisor::edit",
 
         '/flights' => "Flights::index",
+        '/arrivals' => "Flights::arrival",
+        '/completed' => "Flights::completed",
         '/flights/add' => "Flights::add",
         '/flights/edit/(:num)' => "Flights::edit",
         '/flights/open/(:num)' => "Flights::open",
         '/flights/scan/(:num)' => "Flights::scan",
+        '/flights/arrived/(:num)' => "Flights::arrived",
         '/flights/check-in/(:num)' => "Flights::checkIn",
         '/flights/check-out/(:num)' => "Flights::checkOut",
+        '/flights/close/(:num)' => "Flights::close",
         '/flights/log/(:num)' => "Flights::log",
 
         '/account/change-password' => 'Account::changePassword',
         '/account/lang' => 'Account::lang',
 
         // forms
-        '/departure-form/(:num)' => 'Form::departure',
-        '/arrival-form/(:num)' => 'Form::arrival',
+        '/form/departure/(:num)' => 'Form::departure',
+        '/form/arrival/(:num)' => 'Form::arrival',
         '/arrival-form-success' => 'Form::arrivalSuccess',
-        '/departure-form-success' => 'Form::departureSuccess'
+        '/departure-form-success' => 'Form::departureSuccess',
+
+        '/ajax/flights/passenger-check' => "Ajax\Flights::check",
+        '/ajax/flights/passenger-add' => "Ajax\Flights::add",
         
     ],
 

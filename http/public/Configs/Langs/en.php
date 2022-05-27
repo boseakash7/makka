@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\map;
+
 return [
     'flights' => "Flights",
     'airports' => "Airports",
@@ -35,6 +37,7 @@ return [
     'departure_time' => "Departure Time",
     'average_pilgrim_waiting' => "Arrival Pilgrim Waiting",
     'average_pilgrim_service' => "Arrival Pilgrim Service",
+    'close' => "Close",
 
     // Form Departure
     'counters_working_start_time' => 'Counters working start time',
@@ -54,7 +57,7 @@ return [
     'speed_of_communication' => 'Speed of communication',
     'connection_status' => 'Connection Status',
     'fingerprint_status' => 'Fingerprint Status',
-    'departure_airport' => 'Departure Airport',
+    'departure_airport' => 'Destination Airport',
     'number_of_seats' => 'Number of seats',
     'number_of_cases' => 'Number of cases',
     
@@ -82,7 +85,10 @@ return [
     'opened' => "Opened",
     'check_in' => "Check In",
     'check_out' => "Check Out",
-    'closed' => "closed",
+    'closed' => "Closed",
+    'on_air' => "On Air",
+    'arrived' => "Arrived",
+    'complete' => "Complete",
     
 
     // Login page
@@ -132,6 +138,28 @@ return [
     'logs_for' => "Logs for <span class='text-primary'>(:flight)</span>",
     'no_data' => "No Data",
     'success' => "Success",
-    'scan_another' => "Scan Another"
+    'scan_another' => "Scan Another",
+
+    'assessment_form' => "Assessment form",
+    'departure_form_submit' => "Leave Form Submit",
+    'arrival_form_submit' => "Arrival Form Submit",
+
+    'departure_flights' => "Departure Flights",
+    'close_flight' => "Close Flight",
+
+    'arrival_flights' => "Arrival Flights",
+    'completed_flights' => "Completed flights",
+
+    'excellent' => "Excellent",
+    'good' => "Good",
+    'weak' => "Weak",
+
+    'no_delay' => "There is no delay",
+    'delay' => "There is delay",
+
+    'yes' => "Yes",
+    'no' => "No",
+
+    'view_summery' => "View summery"
 ];
 

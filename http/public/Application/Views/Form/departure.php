@@ -41,7 +41,7 @@ $formValidator = FormValidator::instance("departure-form");
                                 <label for="city"><?php echo $lang('departure_city') ?><span class="text-danger">*</span></label>
                                 <select name="departure_city" id="departure_city" class="form-control">
                                     <?php foreach ($cities as $city) : ?>
-                                        <option value="<?php echo $city['id'] ?>"><?php echo $city[$lang->current() . '_name'] ?></option>
+                                        <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('departure_city') == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <?php if ($formValidator->hasError('departure_city')) : ?>
@@ -53,7 +53,7 @@ $formValidator = FormValidator::instance("departure-form");
                             <label for="departure_airport"><?php echo $lang('departure_airport') ?><span class="text-danger">*</span></label>
                             <select name="departure_airport" id="departure_airport" class="form-control">
                                 <?php foreach ($airports as $airport) : ?>
-                                    <option value="<?php echo $airport['id'] ?>"><?php echo $airport[$lang->current() . '_name'] ?></option>
+                                    <option value="<?php echo $airport['id'] ?>" <?php  echo $formValidator->getValue('departure_airport') == $airport['id'] ? 'selected' : ''; ?>><?php echo $airport[$lang->current() . '_name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <?php if ($formValidator->hasError('departure_airport')) : ?>
@@ -62,7 +62,7 @@ $formValidator = FormValidator::instance("departure-form");
                         </div>
                         <div class="form-group">
                             <label for="flight_number"><?php echo $lang('flight_number') ?><span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="flight_number" id="flight_number" value="<?php echo $formValidator->getValue('flight_number'); ?>" />
+                            <input type="text" class="form-control" name="flight_number" id="flight_number" value="<?php echo $formValidator->getValue('flight_number', $flightInfo['number']); ?>"  />
                             <?php if ($formValidator->hasError('flight_number')) : ?>
                                 <p class="text-danger"><?php echo $formValidator->getError('flight_number'); ?></p>
                             <?php endif; ?>
@@ -88,7 +88,7 @@ $formValidator = FormValidator::instance("departure-form");
                                 <label for="arrival_city"><?php echo $lang('arrival_city') ?><span class="text-danger">*</span></label>
                                 <select name="arrival_city" id="arrival_city" class="form-control">
                                     <?php foreach ($cities as $city) : ?>
-                                        <option value="<?php echo $city['id'] ?>"><?php echo $city[$lang->current() . '_name'] ?></option>
+                                        <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('arrival_city') == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <?php if ($formValidator->hasError('arrival_city')) : ?>
@@ -211,9 +211,9 @@ $formValidator = FormValidator::instance("departure-form");
                             <div class="col form-group">
                                 <label for="fingerprint_status"><?php echo $lang('fingerprint_status') ?><span class="text-danger">*</span></label>
                                 <select name="fingerprint_status" class="form-control" id="fingerprint_status">
-                                    <option value="excellent">excellent</option>
-                                    <option value="good">good</option>
-                                    <option value="weak">weak</option>
+                                    <option value="excellent" <?php echo $formValidator->getValue('fingerprint_status') == 'excellent' ? 'selected' : ''; ?>><?php echo $lang('excellent') ?></option>
+                                    <option value="good" <?php echo $formValidator->getValue('fingerprint_status') == 'good' ? 'selected' : ''; ?>><?php echo $lang('good') ?></option>
+                                    <option value="weak" <?php echo $formValidator->getValue('fingerprint_status') == 'weak' ? 'selected' : ''; ?>><?php echo $lang('weak') ?></option>
                                 </select>
                                 <?php if ($formValidator->hasError('fingerprint_status')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('fingerprint_status'); ?></p>
@@ -223,9 +223,9 @@ $formValidator = FormValidator::instance("departure-form");
                             <div class="col form-group">
                                 <label for="connection_status"><?php echo $lang('connection_status') ?><span class="text-danger">*</span></label>
                                 <select name="connection_status" class="form-control" id="connection_status">
-                                    <option value="excellent">excellent</option>
-                                    <option value="good">good</option>
-                                    <option value="weak">weak</option>
+                                    <option value="excellent" <?php echo $formValidator->getValue('connection_status') == 'excellent' ? 'selected' : ''; ?>><?php echo $lang('excellent') ?></option>
+                                    <option value="good" <?php echo $formValidator->getValue('connection_status') == 'good' ? 'selected' : ''; ?>><?php echo $lang('good') ?></option>
+                                    <option value="weak" <?php echo $formValidator->getValue('connection_status') == 'weak' ? 'selected' : ''; ?>><?php echo $lang('weak') ?></option>
                                 </select>
                                 <?php if ($formValidator->hasError('connection_status')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('connection_status'); ?></p>
