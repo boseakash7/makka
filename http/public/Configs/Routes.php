@@ -50,8 +50,8 @@ $routes->set(array(
         '/form/arrival/(:num)' => 'Form::arrival',
         '/departure-form-success' => 'Form::departureSuccess',
         '/departure-form-success' => 'Form::departureSuccess',
-        '/form/departure-assesment/(:num)' => 'Form::departureAssesment',
-        '/form/arrival-assesment/(:num)' => 'Form::arrivalAssesment',
+        '/form/departure-assessment/(:num)' => 'Form::departureAssesment',
+        '/form/arrival-assessment/(:num)' => 'Form::arrivalAssesment',
         '/arrival-assesment-form-success' => 'Form::arrivalAssesmentSuccess',
         '/departure-assesment-form-success' => 'Form::departureAssesmentSuccess',
 

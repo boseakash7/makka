@@ -173,6 +173,8 @@ return [
     'yes' => "Yes",
     'no' => "No",
 
+    // 'ad'
+
     'view_summery' => "View summery"
 ];
 
