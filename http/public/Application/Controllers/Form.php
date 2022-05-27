@@ -38,6 +38,13 @@ class Form extends Controller
         $flight = FlightHelper::prepare(array($flight));
         $flight = $flight[0];
 
+        $selectedLang = 'en';
+
+        if( $request->get('lang') )
+        {
+            $selectedLang = $request->get('lang');
+        }
+
         $formValidator = FormValidator::instance("departure-assesment");
         $formValidator->setRules([
             'employment_interaction' => [
@@ -74,17 +81,11 @@ class Form extends Controller
                 'flight_id' => $flightId,
                 'user_id' => $userInfo['id'],
                 'json' => $json,
+                'lang' => $selectedLang,
                 'created_at' => time()
             ]);
 
             throw new Redirect('departure-assesment-form-success');
-        }
-
-        $selectedLang = 'en';
-
-        if( $request->get('lang') )
-        {
-            $selectedLang = $request->get('lang');
         }
 
         $view = new View();
@@ -110,6 +111,15 @@ class Form extends Controller
         $flight = $flightM->getById( $flightId );
         $flight = FlightHelper::prepare(array($flight));
         $flight = $flight[0];
+
+        
+        $selectedLang = 'en';
+
+        if( $request->get('lang') )
+        {
+            $selectedLang = $request->get('lang');
+        }
+
 
         $formValidator = FormValidator::instance("arrival-assesment");
         $formValidator->setRules([
@@ -147,17 +157,11 @@ class Form extends Controller
                 'flight_id' => $flightId,
                 'user_id' => $userInfo['id'],
                 'json' => $json,
+                'lang' => $selectedLang,
                 'created_at' => time()
             ]);
 
             throw new Redirect('arrival-assesment-form-success');
-        }
-
-        $selectedLang = 'en';
-
-        if( $request->get('lang') )
-        {
-            $selectedLang = $request->get('lang');
         }
 
         $view = new View();
