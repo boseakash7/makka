@@ -41,6 +41,11 @@ $routes->set(array(
         '/flights/check-out/(:num)' => "Flights::checkOut",
         '/flights/close/(:num)' => "Flights::close",
         '/flights/log/(:num)' => "Flights::log",
+        '/flights/summary/(:num)' => "Flights::summary",
+        '/flights/arrival-assessment/(:num)' => "Flights::arrivalAssessment",
+        '/flights/departure-assessment/(:num)' => "Flights::departureAssessment",
+        '/flights/departure-form/(:num)' => "Flights::departureForm",
+        '/flights/arrival-form/(:num)' => "Flights::arrivalForm",
 
         '/account/change-password' => 'Account::changePassword',
         '/account/lang' => 'Account::lang',

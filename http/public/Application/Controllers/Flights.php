@@ -6,7 +6,11 @@ use Application\Helpers\FlightHelper;
 use Application\Main\AuthController;
 use Application\Models\Airline;
 use Application\Models\Airport;
+use Application\Models\ArrivalAssesment;
+use Application\Models\ArrivalForm;
 use Application\Models\City;
+use Application\Models\DepartureAssesment;
+use Application\Models\DepartureForm;
 use Application\Models\Flights as ModelsFlights;
 use Application\Models\Passenger;
 use System\Core\Controller;
@@ -23,6 +27,208 @@ use Sinergi\BrowserDetector\Os;
 
 class Flights extends AuthController
 {
+
+    public function arrivalForm( Request $request, Response $response )
+    {
+        $userInfo = $this->user->getInfo();
+
+        $param = $request->param(0);
+
+        $flightM = Model::get(ModelsFlights::class);
+        $flight = $flightM->getById( $param );
+        $flight = FlightHelper::prepare([$flight]);
+        $flight = $flight[0];
+
+        $arrivalAM = Model::get(ArrivalForm::class);
+        $arrivalInfo = $arrivalAM->getByFlightId( $param );
+
+        if( !empty($arrivalInfo) )
+        {
+            $arrivalInfo['arr'] = json_decode($arrivalInfo['json'], true);
+        }
+
+        $view = new View();
+        $view->set('Flights/arrival_form', [
+            'flight' => $flight,
+            'arrivalInfo' => $arrivalInfo
+
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
+    public function departureForm( Request $request, Response $response )
+    {
+        $userInfo = $this->user->getInfo();
+
+        $param = $request->param(0);
+
+        $flightM = Model::get(ModelsFlights::class);
+        $flight = $flightM->getById( $param );
+        $flight = FlightHelper::prepare([$flight]);
+        $flight = $flight[0];
+
+        $departureAM = Model::get(DepartureForm::class);
+        $departureInfo = $departureAM->getByFlightId( $param );
+
+        if( !empty($departureInfo) )
+        {
+            $departureInfo['arr'] = json_decode($departureInfo['json'], true);
+        }
+
+        $view = new View();
+        $view->set('Flights/departure_form', [
+            'flight' => $flight,
+            'departureInfo' => $departureInfo
+
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
+    public function departureAssessment( Request $request, Response $response )
+    {
+        $userInfo = $this->user->getInfo();
+
+        $param = $request->param(0);
+
+        $flightM = Model::get(ModelsFlights::class);
+        $flight = $flightM->getById( $param );
+        $flight = FlightHelper::prepare([$flight]);
+        $flight = $flight[0];
+
+        $departureAM = Model::get(DepartureAssesment::class);
+        $departureInfos = $departureAM->getByFlightIdALL( $param );
+
+        foreach( $departureInfos as &$departureInfo )
+        {
+            if( !empty($departureInfo) )
+            {
+                $departureInfo['arr'] = json_decode($departureInfo['json'], true);
+            }
+
+            switch ($departureInfo['lang']) {
+                case 'en':
+                    $departureInfo['langFull'] = 'English';
+                    break;
+                case 'arb':
+                    $departureInfo['langFull'] = 'Arabic';
+                    break;
+                case 'pak':
+                    $departureInfo['langFull'] = 'Pakistan';
+                    break;
+                case 'indo':
+                    $departureInfo['langFull'] = 'Indonesia';
+                    break;
+                case 'malay':
+                    $departureInfo['langFull'] = 'Malaysia';
+                    break;
+                case 'bng':
+                    $departureInfo['langFull'] = 'Bangladesh';
+                    break;
+
+                default:
+                    $departureInfo['langFull'] = 'English';
+                    break;
+            }
+        }
+
+        $view = new View();
+        $view->set('Flights/departure_assessment', [
+            'flight' => $flight,
+            'departureInfos' => $departureInfos
+
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
+    public function arrivalAssessment( Request $request, Response $response )
+    {
+        $userInfo = $this->user->getInfo();
+
+        $param = $request->param(0);
+
+        $flightM = Model::get(ModelsFlights::class);
+        $flight = $flightM->getById( $param );
+        $flight = FlightHelper::prepare([$flight]);
+        $flight = $flight[0];
+
+        $arrivalAM = Model::get(ArrivalAssesment::class);
+        $arrivalInfos = $arrivalAM->getByFlightIdAll( $param );
+
+        foreach( $arrivalInfos as &$arrivalInfo )
+        {
+            if( !empty($arrivalInfo) )
+            {
+                $arrivalInfo['arr'] = json_decode($arrivalInfo['json'], true);
+            }
+
+            switch ($arrivalInfo['lang']) {
+                case 'en':
+                    $arrivalInfo['langFull'] = 'English';
+                    break;
+                case 'arb':
+                    $arrivalInfo['langFull'] = 'Arabic';
+                    break;
+                case 'pak':
+                    $arrivalInfo['langFull'] = 'Pakistan';
+                    break;
+                case 'indo':
+                    $arrivalInfo['langFull'] = 'Indonesia';
+                    break;
+                case 'malay':
+                    $arrivalInfo['langFull'] = 'Malaysia';
+                    break;
+                case 'bng':
+                    $arrivalInfo['langFull'] = 'Bangladesh';
+                    break;
+
+                default:
+                    $arrivalInfo['langFull'] = 'English';
+                    break;
+            }
+        }
+
+        $view = new View();
+        $view->set('Flights/arrival_assessment', [
+            'flight' => $flight,
+            'arrivalInfos' => $arrivalInfos
+
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+    
+    public function summary( Request $request, Response $response )
+    {
+        $userInfo = $this->user->getInfo();
+
+        $param = $request->param(0);
+
+        $flightM = Model::get(ModelsFlights::class);
+        $flight = $flightM->getById( $param );
+        $flight = FlightHelper::prepare([$flight]);
+        $flight = $flight[0];
+
+        $view = new View();
+        $view->set('Flights/summary', [
+            'flight' => $flight
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
     public function index( Request $request, Response $response )
     {
         $userInfo = $this->user->getInfo();
