@@ -182,6 +182,9 @@ return [
     'yes' => "Yes",
     'no' => "No",
 
+    'add_supervisor' => "Add Supervisor",
+    'add_scanner' => "Add Scanner",
+
     // 'ad'
 
     'view_summery' => "View summery"

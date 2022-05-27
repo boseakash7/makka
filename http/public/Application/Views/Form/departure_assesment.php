@@ -30,9 +30,17 @@ $formValidator = FormValidator::instance("departure-assesment");
 
                     </div>
                     <div class="card-body">
+                        
+                        <div class="btn-group">
+                                <a href="<?php echo URL::current() . '?lang=en' ?>" class="btn <?php if( $selectedLang == 'en' ) echo 'btn-primary' ?>" value="en">English</a>
+                                <a href="<?php echo URL::current() . '?lang=indo' ?>" class="btn <?php if( $selectedLang == 'indo' ) echo 'btn-primary' ?>" value="indo">Indonesia</a>
+                                <a href="<?php echo URL::current() . '?lang=malay' ?>" class="btn <?php if( $selectedLang == 'malay' ) echo 'btn-primary' ?>" value="malay">Malaysia</a>
+                                <a href="<?php echo URL::current() . '?lang=pak' ?>" class="btn <?php if( $selectedLang == 'pak' ) echo 'btn-primary' ?>" value="pak">Pakistan</a>
+                                <a href="<?php echo URL::current() . '?lang=arb' ?>" class="btn <?php if( $selectedLang == 'arb' ) echo 'btn-primary' ?>" value="arb">Arabic</a>
+                                <a href="<?php echo URL::current() . '?lang=bng' ?>" class="btn <?php if( $selectedLang == 'bng' ) echo 'btn-primary' ?>" value="bng">Bangladesh</a>
+                        </div>
 
-
-                        <div class="form-group">
+                        <div class="form-group d-none">
                             <label class="mb-2" for="selected_lang">Language<span class="text-danger">*</span></label>
                             <select name="selected_lang" class="form-control" id="selected_lang">
                                 <option <?php if( $selectedLang == 'en' ) echo 'selected' ?> value="en">English</option>

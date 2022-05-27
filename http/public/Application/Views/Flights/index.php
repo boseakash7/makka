@@ -1,5 +1,6 @@
 <?php
 
+use Application\Controllers\Ajax\Flight;
 use Application\Models\Flights;
 use Application\Models\User;
 use System\Core\Model;
@@ -48,6 +49,34 @@ $userM = Model::get(User::class);
                     </tr>
                 </thead>
                 <?php foreach ( $flights as $flight ): ?>
+
+                    
+                    <?php 
+                        $statusBg = 'bg-primary';
+
+                        switch( $flight['status'] )
+                        {
+                            case Flights::STATUS_NOT_OPENED:
+                                $statusBg = 'bg-secondary';
+                                break;
+                            case Flights::STATUS_CHECK_IN:
+                            case Flights::STATUS_CHECK_OUT:
+                                $statusBg = 'bg-danger';
+                                break;
+                            case Flights::STATUS_ON_AIR:                            
+                                $statusBg = 'bg-warning';
+                                break;
+                            case Flights::STATUS_CLOSED:                            
+                                $statusBg = 'bg-warning';
+                                break;
+                            case Flights::STATUS_ARRIVED:                            
+                                $statusBg = 'bg-info';
+                                break;
+                            case Flights::STATUS_COMPLETE:                            
+                                $statusBg = 'bg-info';
+                                break;
+                        }
+                    ?>
                     <tr>
                         <td><?php echo $flight['id'] ?></td>
                         <td><?php echo htmlentities($flight['number']); ?></td>
@@ -57,7 +86,7 @@ $userM = Model::get(User::class);
                         <td><?php echo $flight['saudi_date'] ?></td>
                         <td><?php echo $flight['saudi_time'] ?></td>
                         <td><?php echo $flight['passengers'] ?></td>                        
-                        <td><span class="badge bg-primary"><?php echo $lang($flight['status']); ?></span></td>                        
+                        <td><span class="badge <?php echo $statusBg ?>"><?php echo $lang($flight['status']); ?></span></td>                        
                         <!-- <td><?php // echo $flight['sairport'][$lang->current() . '_name']; ?></td>       -->
                         <!-- <td><?php // echo $flight['dairport'][$lang->current() . '_name']; ?></td>       -->
                         <td>
@@ -73,8 +102,7 @@ $userM = Model::get(User::class);
                                     <a href="<?php echo URL::full('flights/scan/' . $flight['id']) ?>/check-in" class="btn btn-danger" target="_blank"><?php echo $lang('start_scanning') ?></a>
                                 <?php endif; ?>
                                 <?php if ( $userM->isSup() ): ?>
-                                    <a href="<?php echo URL::full('flights/close/' . $flight['id']) ?>" class="btn btn-secondary m-2"><?php echo $lang('close_flight') ?></a>
-                                    <a href="<?php echo URL::full('flights/log/' . $flight['id']) ?>" class="btn btn-info m-2" target="_blank"><?php echo $lang('view_log') ?></a>
+                                    <a href="<?php echo URL::full('flights/close/' . $flight['id']) ?>" class="btn btn-secondary m-2"><?php echo $lang('close_flight') ?></a>                                    
                                     <a href="<?php echo URL::full('/form/departure-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>
                                 <?php endif; ?>
                             <?php elseif ( $flight['status'] == Flights::STATUS_CLOSED ): ?>
@@ -85,7 +113,7 @@ $userM = Model::get(User::class);
                                 <?php endif; ?>
                             <?php elseif ( $flight['status'] == Flights::STATUS_ON_AIR ): ?>
                                 <?php if ( $userM->isSup() ): ?>
-                                    <a href="<?php echo URL::full('flights/arrived/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('arrived') ?></a>        
+                                    <a href="<?php echo URL::full('flights/arrived/' . $flight['id']) ?>" class="btn btn-primary m-2"><?php echo $lang('arrived') ?></a>        
                                     <a href="<?php echo URL::full('/form/arrival-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>                        
                                 <?php else: ?>
                                     -
@@ -99,11 +127,12 @@ $userM = Model::get(User::class);
                                 <?php endif; ?>
                             <?php elseif ( $flight['status'] == Flights::STATUS_COMPLETE ): ?>
                                 <?php if ( $userM->isSup() ): ?>
-                                    <a href="<?php echo URL::full('flight/summery/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('view_summery') ?></a>
+                                    <a href="<?php echo URL::full('flights/summary/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('view_summery') ?></a>
                                 <?php else: ?>
                                     -
                                 <?php endif; ?>
                             <?php endif; ?>                                                        
+                            <a href="<?php echo URL::full('flights/log/' . $flight['id']) ?>" class="btn btn-info m-2" target="_blank"><?php echo $lang('view_log') ?></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -131,7 +160,17 @@ $userM = Model::get(User::class);
 <define footer_js>
     <script>
         $(document).ready( function () {
-            $('.datatable').DataTable();
+            $('.table').DataTable({
+                responsive: true
+            });
         } );
     </script>
+</define>
+
+<define header_css>
+    <style>
+        .dataTables_wrapper {
+            overflow-y: auto;
+        }
+    </style>
 </define>

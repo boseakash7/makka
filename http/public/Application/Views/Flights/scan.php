@@ -48,6 +48,9 @@ $lang = Model::get(Language::class);
                             <a href="<?php echo !empty($ciClass) ? '#!' : URL::full('flights/scan/' . $flight['id'] . '/check-in') ?>" class="btn <?php echo $ciClass ?>"><?php echo $lang('check_in') ?></a>
                             <a href="<?php echo !empty($coClass) ? '#!' : URL::full('flights/scan/' . $flight['id'] . '/check-out') ?>" class="btn <?php echo $coClass ?>"><?php echo $lang('check_out') ?></a>
                         </div>
+
+                        <div id="reader" class="mx-auto mt-5"></div>
+
                         <div class="form mt-5">
                             <form action="<?php echo URL::current() ?>" method="POST" onsubmit="submitForm(event)">
                                 <div class="form-group">
@@ -56,8 +59,7 @@ $lang = Model::get(Language::class);
                                 </div>
                                 <button type="submit" class="btn btn-primary"><?php echo $lang('submit'); ?></button>
                             </form>
-                        </div>
-                        <div id="reader" class="mx-auto mt-5"></div>
+                        </div>                        
                     <?php else : ?>
                         <p>Please open this url in safari browser only</p>
                     <?php endif; ?>
@@ -66,7 +68,7 @@ $lang = Model::get(Language::class);
         </div>
     </div>
 </section>
-
+<?php if ( $supports ): ?>
 <define footer_js>
     <script>
         var qrCodeSuccessCallback = function(decodedText) {
@@ -170,3 +172,4 @@ $lang = Model::get(Language::class);
         }
     </script>
 </define>
+<?php endif; ?>

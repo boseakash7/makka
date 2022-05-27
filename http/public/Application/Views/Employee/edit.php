@@ -54,7 +54,14 @@ $formValidator = FormValidator::instance("employee");
                             <?php if ( $formValidator->hasError('airport') ): ?>
                                 <p><?php echo $formValidator->getError('airport'); ?></p>
                             <?php endif; ?>
-                        </div>                                                                                                         
+                        </div>         
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" value="<?php echo $formValidator->getValue('password'); ?>"/>
+                            <?php if ( $formValidator->hasError('password') ): ?>
+                                <p><?php echo $formValidator->getError('password'); ?></p>
+                            <?php endif; ?>
+                        </div>                                                                                                   
                         <button type="submit" class="btn btn-primary"><?php echo $lang('submit'); ?></button>
                     </form>
                 </div>

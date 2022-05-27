@@ -3,6 +3,7 @@
 namespace Application\Controllers;
 
 use Application\Helpers\UserHelper;
+use Application\Main\AuthController;
 use Application\Models\Airport;
 use Application\Models\User;
 use Application\Models\City;
@@ -15,7 +16,7 @@ use System\Libs\FormValidator;
 use System\Models\Language;
 use System\Responses\View;
 
-class Supervisor extends Controller
+class Supervisor extends AuthController
 {
     public function index( Request $request, Response $response )
     {
@@ -125,7 +126,10 @@ class Supervisor extends Controller
             'airport' => [
                 'required' => true,
                 'type' => 'select'
-            ],         
+            ],    
+            'password' => [                
+                'type' => 'string'
+            ]     
         ])->setErrors([
             'name.required' => $lang('field_required'),            
             'email.required' => $lang('field_required'),
@@ -148,11 +152,17 @@ class Supervisor extends Controller
         
         if ( $request->getHTTPMethod() == 'POST' && $formValidator->validate() )
         {
-            $result = $userM->update($param, [
+            $arr = [
                 'name' => $formValidator->getValue('name'),
                 'email' => $formValidator->getValue('email'),
                 'airport' => $formValidator->getValue('airport')
-            ]);
+            ];
+            $password = $formValidator->getValue('password');
+            if ( !empty($password) )
+            {
+                $arr['password'] = password_hash($password, PASSWORD_DEFAULT);
+            }
+            $result = $userM->update($param, $arr);
 
             if ( $result ) throw new Redirect('supervisor');
         }

@@ -31,10 +31,7 @@ $lang = Model::get(Language::class);
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3><?php echo $lang('check_in') ?></h3>
-                </div>
+            <div class="card">                
                 <div class="card-body">
                     <?php if ( !empty($passengers) ): ?>
                         <table class="table table-responsive">
