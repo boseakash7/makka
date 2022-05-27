@@ -69,69 +69,86 @@ $lang = Model::get(Language::class);
 
 <define footer_js>
     <script>
+        var qrCodeSuccessCallback = function(decodedText) {
+            if (scan) {
+                scan = false;
 
-            var qrCodeSuccessCallback = function (decodedText) {                
-                if (scan) {                                        
-                    scan = false;
-                    $.ajax({
-                        url: '<?php echo URL::full('ajax/flight/passenger-check/') ?>',
-                        type: 'POST',
-                        accepts: 'JSON',
-                        dataType: 'JSON',
-                        data: {
-                            id: decodedText
-                        },
-                        beforeSend: function() {
-
-                        },
-                        success: function( data ) {
-                            if ( !data ) {
-                                swal({
-                                    title: '<?php echo $lang('success') ?>',    
-                                    text: decodedText,
-                                    icon: "success",
-                                    button: '<?php echo $lang('scan_another') ?>'
-                                }).then((result) => {
-                                    _handleAjax();
-                                });
-                            }
-                            
-                        }
-                    });
-
-                    var _handleAjax = function() {
-                        $.ajax({
-                            url: '<?php echo URL::full('ajax/flight/passenger-add/') ?>',
-                            type: 'POST',
-                            accepts: 'JSON',
-                            dataType: 'JSON',
-                            data: {
-                                id: decodedText
+                var _handleAjax = function() {
+                    swal('<?php echo $lang('special_need') ?>', {
+                            buttons: {
+                                yes: '<?php echo $lang('yes') ?>',
+                                no: '<?php echo $lang('no') ?>'
                             },
-                            beforeSend: function() {
+                        })
+                        .then((value) => {
+                            $.ajax({
+                                url: '<?php echo URL::full('ajax/flight/passenger-add/') ?>',
+                                type: 'POST',
+                                accepts: 'JSON',
+                                dataType: 'JSON',
+                                data: {
+                                    id: decodedText,
+                                    flight: <?php echo $flight['id'] ?>,
+                                    special: value
+                                },
+                                beforeSend: function() {
 
-                            },
-                            success: function( data ) {
-                                swal({
-                                    title: '<?php echo $lang('success') ?>',    
-                                    text: decodedText,
-                                    icon: "success",
-                                    button: '<?php echo $lang('scan_another') ?>'
-                                }).then((result) => {
-
-                                });
-                            }
+                                },
+                                success: function(data) {
+                                    swal({
+                                        title: '<?php echo $lang('success') ?>',
+                                        text: decodedText,
+                                        icon: "success",
+                                        button: '<?php echo $lang('scan_another') ?>'
+                                    }).then((result) => {
+                                        window.location.reload();
+                                    });
+                                }
+                            });
                         });
-                    };
-                }
-            };
+                };
+
+                $.ajax({
+                    url: '<?php echo URL::full('ajax/flight/passenger-check/') ?>',
+                    type: 'POST',
+                    accepts: 'JSON',
+                    dataType: 'JSON',
+                    data: {
+                        id: decodedText,
+                        flight: <?php echo $flight['id'] ?>
+                    },
+                    beforeSend: function() {
+
+                    },
+                    success: function(data) {
+                        if (!data) {
+                            swal({
+                                title: '<?php echo $lang('warning') ?>',
+                                text: '<?php echo $lang(!empty($ciClass) ? 'already_checked_in' : 'already_checked_out') ?>',
+                                icon: "warning",
+                                button: '<?php echo $lang('ok') ?>'
+                            }).then((result) => {
+                                _handleAjax();
+                            });
+                            return;
+                        }
+
+
+                        _handleAjax();
+
+                        return;
+
+                    }
+                });
+            }
+        };
 
         try {
 
 
             var scan = true;
 
-            var html5QrCode = new Html5Qrcode("reader");            
+            var html5QrCode = new Html5Qrcode("reader");
             var config = {
                 fps: 10,
                 qrbox: 250,
@@ -152,8 +169,8 @@ $lang = Model::get(Language::class);
         function submitForm(e) {
             e.preventDefault();
 
-            var val = $('#qr_input').val().trim();            
-            if ( val == '' ) return;
+            var val = $('#qr_input').val().trim();
+            if (val == '') return;
 
             qrCodeSuccessCallback(val);
         }

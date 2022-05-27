@@ -61,7 +61,21 @@ $formValidator = FormValidator::instance("flight");
                             <?php if ( $formValidator->hasError('time') ): ?>
                                 <p><?php echo $formValidator->getError('time'); ?></p>
                             <?php endif; ?>
-                        </div>      
+                        </div>    
+                        <div class="form-group">
+                            <label for="saudi_date"><?php echo $lang('saudi_date') ?></label>
+                            <input type="date" class="form-control" name="saudi_date" id="saudi_date" value="<?php echo $formValidator->getValue('saudi_date'); ?>"/>
+                            <?php if ( $formValidator->hasError('saudi_date') ): ?>
+                                <p><?php echo $formValidator->getError('saudi_date'); ?></p>
+                            <?php endif; ?>
+                        </div>                                        
+                        <div class="form-group">
+                            <label for="saudi_time"><?php echo $lang('saudi_time') ?></label>
+                            <input type="time" class="form-control" name="saudi_time" id="saudi_time" value="<?php echo $formValidator->getValue('saudi_time'); ?>"/>
+                            <?php if ( $formValidator->hasError('saudi_time') ): ?>
+                                <p><?php echo $formValidator->getError('saudi_time'); ?></p>
+                            <?php endif; ?>
+                        </div>       
                         <div class="form-group">
                             <label for="passengers"><?php echo $lang('number_of_passengers') ?></label>
                             <input type="number" class="form-control" name="passengers" id="passengers" value="<?php echo $formValidator->getValue('passengers'); ?>"/>

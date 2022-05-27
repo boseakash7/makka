@@ -38,6 +38,7 @@ class Employee extends Controller
 
     public function add( Request $request, Response $response )
     {
+        $airportId = $request->param(0);
 
         $lang = Model::get(Language::class);
 
@@ -89,7 +90,8 @@ class Employee extends Controller
 
         $view = new View();
         $view->set('Employee/add', [
-            'airports' => $airports
+            'airports' => $airports,
+            'airportId' => $airportId
         ]);
         $view->prepend('header');
         $view->append('footer');

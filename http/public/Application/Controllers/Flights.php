@@ -130,6 +130,14 @@ class Flights extends AuthController
                 'required' => true,
                 'type' => 'select'
             ],
+            'saudi_date' => [
+                'required' => true,
+                'type' => 'string'
+            ],
+            'saudi_time' => [
+                'required' => true,
+                'type' => 'string'
+            ],
             // 'dairport' => [
             //     'required' => true,
             //     'type' => 'select'
@@ -141,6 +149,8 @@ class Flights extends AuthController
             'time.required' => $lang('field_required'),
             'passengers.required' => $lang('field_required'),
             'sairport.required' => $lang('field_required'),
+            'saudi_date.required' => $lang('field_required'),
+            'saudi_time.required' => $lang('field_required'),
             // 'dairport.required' => $lang('field_required'),
         ]);
 
@@ -165,6 +175,8 @@ class Flights extends AuthController
                 'airline' => $formValidator->getValue('airlines'),
                 'tdate' => $formValidator->getValue('date'),
                 'ttime' => $formValidator->getValue('time'),
+                'saudi_date' => $formValidator->getValue('saudi_date'),
+                'saudi_time' => $formValidator->getValue('saudi_time'),
                 'passengers' => $formValidator->getValue('passengers'),
                 'sairport' => $formValidator->getValue('sairport'),
                 'dairport' => null,
@@ -226,6 +238,14 @@ class Flights extends AuthController
                 'required' => true,
                 'type' => 'select'
             ],
+            'saudi_date' => [
+                'required' => true,
+                'type' => 'string'
+            ],
+            'saudi_time' => [
+                'required' => true,
+                'type' => 'string'
+            ],
             // 'dairport' => [
             //     'required' => true,
             //     'type' => 'select'
@@ -237,6 +257,8 @@ class Flights extends AuthController
             'time.required' => $lang('field_required'),
             'passengers.required' => $lang('field_required'),
             'sairport.required' => $lang('field_required'),
+            'saudi_date.required' => $lang('field_required'),
+            'saudi_time.required' => $lang('field_required'),     
             // 'dairport.required' => $lang('field_required')
         ]);
 
@@ -259,6 +281,8 @@ class Flights extends AuthController
                 'airline' => $formValidator->getValue('airlines'),
                 'tdate' => $formValidator->getValue('date'),
                 'ttime' => $formValidator->getValue('time'),
+                'saudi_date' => $formValidator->getValue('saudi_date'),
+                'saudi_time' => $formValidator->getValue('saudi_time'),
                 'passengers' => $formValidator->getValue('passengers'),
                 'sairport' => $formValidator->getValue('sairport'),
                 // 'dairport' => $formValidator->getValue('dairport'),
@@ -420,6 +444,8 @@ class Flights extends AuthController
         $flightM = Model::get(ModelsFlights::class);
         $flight = $flightM->find(['id' => $id]);
         if ( empty($flight) ) throw new Error404;
+        $flight = FlightHelper::prepare([$flight]);
+        $flight = $flight[0];
 
         /**
          * @var Passenger

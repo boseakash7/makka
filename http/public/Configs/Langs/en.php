@@ -60,6 +60,8 @@ return [
     'departure_airport' => 'Destination Airport',
     'number_of_seats' => 'Number of seats',
     'number_of_cases' => 'Number of cases',
+    'success' => "Success",
+    'warning' => "Warning",
     
     // Arrival Form
     'number_of_counter_custom_staffs' => 'Number of custom counter staffs',
@@ -133,9 +135,13 @@ return [
     'scan_flight_desc' => "Start scanning for the flight",
     'flight_num' => "Flight <span class='text-primary'>(:num)</span>",
     'source_airport' => "Source Airport",
+    'saudi_time' => "Saudi Arrival Time",
+    'saudi_date' => "Saudi Arrival Date",
+    'special' => "Special Need",
+    'special_need' => "Special Need?",
 
     'view_log' => "View Log",
-    'logs_for' => "Logs for <span class='text-primary'>(:flight)</span>",
+    'logs_for' => "Logs for (:flight)",
     'no_data' => "No Data",
     'success' => "Success",
     'scan_another' => "Scan Another",
@@ -146,6 +152,9 @@ return [
 
     'departure_flights' => "Departure Flights",
     'close_flight' => "Close Flight",
+    'already_checked_in' => "This id is already checked in",
+    'already_checked_out' => "This id is already checked out",
+    'ok' => "Ok",
 
     'arrival_flights' => "Arrival Flights",
     'completed_flights' => "Completed flights",

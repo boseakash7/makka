@@ -39,7 +39,11 @@ $lang = Model::get(Language::class);
                         <td><?php echo $airport[$lang->current() . '_name'] ?></td>
                         <td><?php echo $airport['city'][$lang->current() . '_name'] ?></td>
                         <td><?php echo $lang($airport['type']) ?></td>
-                        <td><a href="<?php echo URL::full('airports/edit/' . $airport['id']); ?>" class="btn btn-primary"><?php echo $lang('edit') ?></a></td>
+                        <td>
+                            <a href="<?php echo URL::full('airports/edit/' . $airport['id']); ?>" class="btn btn-primary"><?php echo $lang('edit') ?></a>
+                            <a href="<?php echo URL::full('supervisor/add/' . $airport['id']); ?>" class="btn btn-primary"><?php echo $lang('add_supervisor') ?></a>
+                            <a href="<?php echo URL::full('employee/add/' . $airport['id']); ?>" class="btn btn-primary"><?php echo $lang('add_scanner') ?></a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 <thead>

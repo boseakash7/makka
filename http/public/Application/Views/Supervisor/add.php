@@ -48,7 +48,7 @@ $formValidator = FormValidator::instance("employee");
                             <select name="airport" class="form-control">
                                 <option value=""><?php echo $lang('select_airport'); ?></option>
                                 <?php foreach ( $airports as $item ): ?>
-                                    <option value="<?php echo $item['id'] ?>" <?php echo $formValidator->getValue('airport') == $item['id'] ? 'selected' : ''; ?>><?php echo $item[$lang->current() . '_name'] . ' (' . $lang($item['type']) . ')'; ?> </option>
+                                    <option value="<?php echo $item['id'] ?>" <?php echo $formValidator->getValue('airport', $airportId) == $item['id'] ? 'selected' : ''; ?>><?php echo $item[$lang->current() . '_name'] . ' (' . $lang($item['type']) . ')'; ?> </option>
                                 <?php endforeach; ?>
                             </select>
                             <?php if ( $formValidator->hasError('airport') ): ?>

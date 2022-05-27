@@ -21,10 +21,12 @@ $routes->set(array(
 
         '/employee' => "Employee::index",
         '/employee/add' => "Employee::add",
+        '/employee/add/(:num)' => "Employee::add",
         '/employee/edit/(:num)' => "Employee::edit",
 
         '/supervisor' => "Supervisor::index",
         '/supervisor/add' => "Supervisor::add",
+        '/supervisor/add/(:num)' => "Supervisor::add",
         '/supervisor/edit/(:num)' => "Supervisor::edit",
 
         '/flights' => "Flights::index",
@@ -49,8 +51,8 @@ $routes->set(array(
         '/arrival-form-success' => 'Form::arrivalSuccess',
         '/departure-form-success' => 'Form::departureSuccess',
 
-        '/ajax/flights/passenger-check' => "Ajax\Flights::check",
-        '/ajax/flights/passenger-add' => "Ajax\Flights::add",
+        '/ajax/flight/passenger-check' => "Ajax\Flight::check",
+        '/ajax/flight/passenger-add' => "Ajax\Flight::add",
         
     ],
 
