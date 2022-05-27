@@ -239,6 +239,10 @@ class Form extends Controller
                 'required' => true,
                 'type' => 'string',
             ],
+            'flight_delay' => [
+                'required' => true,
+                'type' => 'string',
+            ],
             'arrival_city' => [
                 'required' => true,
                 'type' => 'string',
@@ -321,6 +325,7 @@ class Form extends Controller
                 'type' => 'string',
             ],
         ])->setErrors([
+            'flight_delay.required' => $lang('field_required'),
             'date.required' => $lang('field_required'),
             'arrival_city.required' => $lang('field_required'),
             'flight_number.required' => $lang('field_required'),
@@ -342,6 +347,7 @@ class Form extends Controller
         if ( $request->getHTTPMethod() == 'POST' && $formValidator->validate() )
         {
             $data = [
+                'flight_delay' => $formValidator->getValue('flight_delay') ,
                 'date' => $formValidator->getValue('date') ,
                 'arrival_city' => $formValidator->getValue('arrival_city') ,
                 'flight_number' => $formValidator->getValue('flight_number') ,

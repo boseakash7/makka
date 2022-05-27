@@ -38,6 +38,7 @@ return [
     'average_pilgrim_waiting' => "Arrival Pilgrim Waiting",
     'average_pilgrim_service' => "Arrival Pilgrim Service",
     'close' => "Close",
+    'no_data_found' => "No data found",
 
     // Form Departure
     'counters_working_start_time' => 'Counters working start time',
@@ -114,6 +115,14 @@ return [
 
     'new_password' => "New password",
     'retype_password' => "Retype password",
+
+    // arrival assessment
+    'arrival_assessment' => "Flight arrival assessment for (:flight)",
+    'arrival_form' => "Flight arrival form for (:flight)",
+
+    // Departure assessment
+    'departure_assessment' => "Flight departure assessment for (:flight)",
+    'departure_form' => "Flight departure form for (:flight)",
 
     'email_password_combination_wrong' => "Email/Password combination is wrong",
     'remember_password' => "Remember your password?",

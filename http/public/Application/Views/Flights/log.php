@@ -1,5 +1,6 @@
 <?php
 
+use Application\Models\Flights;
 use System\Core\Model;
 use System\Models\Language;
 
@@ -77,8 +78,10 @@ $lang = Model::get(Language::class);
 
 <define footer_js>
     <script>
-        setTimeout(function() {
-            window.location.reload();
-        }, 3000);
+        <?php if( $flight['status'] != Flights::STATUS_COMPLETE ): ?>
+            setTimeout(function() {
+                window.location.reload();
+            }, 3000);
+        <?php endif; ?>
     </script>
 </define>

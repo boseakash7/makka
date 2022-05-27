@@ -13,4 +13,10 @@ class ArrivalAssesment extends Model
     {
         return $this->_db->insert($this->_table, $data);
     }
+
+    public function getByFlightId( $id )
+    {
+        $SQL = "SELECT * FROM `{$this->_table}` WHERE `flight_id` = ?";
+        return $this->_db->query($SQL, [$id])->get();
+    }
 }
