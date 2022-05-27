@@ -90,6 +90,10 @@ return [
     'arrived' => "Arrived",
     'complete' => "Complete",
     
+    
+    'arrival_assesment_form_submitted' => "Arrival assesment form submitted",
+    'departure_assesment_form_submitted' => "Departure assesment form submitted",
+    
 
     // Login page
     'login' => "Login",
