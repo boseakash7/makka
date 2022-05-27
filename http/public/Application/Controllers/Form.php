@@ -6,10 +6,13 @@ use Application\Helpers\AirportHelper;
 use Application\Helpers\FlightHelper;
 use Application\Main\AuthController;
 use Application\Models\Airport;
+use Application\Models\ArrivalAssesment;
 use Application\Models\ArrivalForm;
 use Application\Models\City;
+use Application\Models\DepartureAssesment;
 use Application\Models\DepartureForm;
 use Application\Models\Flights;
+use Application\Models\User;
 use System\Core\Controller;
 use System\Core\Exceptions\Redirect;
 use System\Core\Model;
@@ -22,8 +25,177 @@ use System\Responses\View;
 class Form extends Controller
 {
 
+    public function departureAssesment( Request $request, Response $response )
+    {
+
+        $lang = Model::get(Language::class);
+
+        $userInfo = Model::get(User::class)->getInfo();
+
+        $flightId = $request->param(0);
+        $flightM = Model::get(Flights::class);
+        $flight = $flightM->getById( $flightId );
+        $flight = FlightHelper::prepare(array($flight));
+        $flight = $flight[0];
+
+        $selectedLang = 'en';
+
+        if( $request->get('lang') )
+        {
+            $selectedLang = $request->get('lang');
+        }
+
+        $formValidator = FormValidator::instance("departure-assesment");
+        $formValidator->setRules([
+            'employment_interaction' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'clarity_procedure' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'service_provided' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ])->setErrors([
+            'employment_interaction.required' => $lang('field_required'),
+            'clarity_procedure.required' => $lang('field_required'),
+            'service_provided.required' => $lang('field_required'),
+        ]);
+
+        if ( $request->getHTTPMethod() == 'POST' && $formValidator->validate() )
+        {
+
+            $data = [
+                'employment_interaction' => $formValidator->getValue('employment_interaction'),
+                'clarity_procedure' => $formValidator->getValue('clarity_procedure'),
+                'service_provided' => $formValidator->getValue('service_provided'),
+            ];
+
+            $json = json_encode($data);
+
+            $arrivalAM = Model::get(DepartureAssesment::class);
+            $arrivalAM->create([
+                'flight_id' => $flightId,
+                'user_id' => $userInfo['id'],
+                'json' => $json,
+                'lang' => $selectedLang,
+                'created_at' => time()
+            ]);
+
+            throw new Redirect('departure-assesment-form-success');
+        }
+
+        $view = new View();
+        $view->set('Form/departure_assesment', [
+            'selectedLang' => $selectedLang,
+            'flight' => $flight
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
+    public function arrivalAssesment( Request $request, Response $response )
+    {
+
+        $lang = Model::get(Language::class);
+
+        $userInfo = Model::get(User::class)->getInfo();
+
+        $flightId = $request->param(0);
+        $flightM = Model::get(Flights::class);
+        $flight = $flightM->getById( $flightId );
+        $flight = FlightHelper::prepare(array($flight));
+        $flight = $flight[0];
+
+        
+        $selectedLang = 'en';
+
+        if( $request->get('lang') )
+        {
+            $selectedLang = $request->get('lang');
+        }
+
+
+        $formValidator = FormValidator::instance("arrival-assesment");
+        $formValidator->setRules([
+            'employment_interaction' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'clarity_procedure' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'service_provided' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+        ])->setErrors([
+            'employment_interaction.required' => $lang('field_required'),
+            'clarity_procedure.required' => $lang('field_required'),
+            'service_provided.required' => $lang('field_required'),
+        ]);
+
+        if ( $request->getHTTPMethod() == 'POST' && $formValidator->validate() )
+        {
+
+            $data = [
+                'employment_interaction' => $formValidator->getValue('employment_interaction'),
+                'clarity_procedure' => $formValidator->getValue('clarity_procedure'),
+                'service_provided' => $formValidator->getValue('service_provided'),
+            ];
+
+            $json = json_encode($data);
+
+            $arrivalAM = Model::get(ArrivalAssesment::class);
+            $arrivalAM->create([
+                'flight_id' => $flightId,
+                'user_id' => $userInfo['id'],
+                'json' => $json,
+                'lang' => $selectedLang,
+                'created_at' => time()
+            ]);
+
+            throw new Redirect('arrival-assesment-form-success');
+        }
+
+        $view = new View();
+        $view->set('Form/arrival_assesment', [
+            'selectedLang' => $selectedLang,
+            'flight' => $flight
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
     
     
+    public function arrivalAssesmentSuccess( Request $request, Response $response )
+    {
+        $view = new View();
+        $view->set('Form/arrival_assesment_success', []);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
+    public function departureAssesmentSuccess( Request $request, Response $response )
+    {
+        $view = new View();
+        $view->set('Form/departure_assesment_success', []);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
     public function arrivalSuccess( Request $request, Response $response )
     {
         $view = new View();

@@ -48,8 +48,12 @@ $routes->set(array(
         // forms
         '/form/departure/(:num)' => 'Form::departure',
         '/form/arrival/(:num)' => 'Form::arrival',
-        '/arrival-form-success' => 'Form::arrivalSuccess',
         '/departure-form-success' => 'Form::departureSuccess',
+        '/departure-form-success' => 'Form::departureSuccess',
+        '/form/departure-assesment/(:num)' => 'Form::departureAssesment',
+        '/form/arrival-assesment/(:num)' => 'Form::arrivalAssesment',
+        '/arrival-assesment-form-success' => 'Form::arrivalAssesmentSuccess',
+        '/departure-assesment-form-success' => 'Form::departureAssesmentSuccess',
 
         '/ajax/flight/passenger-check' => "Ajax\Flight::check",
         '/ajax/flight/passenger-add' => "Ajax\Flight::add",
