@@ -19,4 +19,10 @@ class DepartureForm extends Model
         $SQL = "SELECT * FROM `{$this->_table}` WHERE `flight_id` = ?";
         return $this->_db->query($SQL, [$id])->get();
     }
+
+    public function getByFlightIdALL( $id )
+    {
+        $SQL = "SELECT * FROM `{$this->_table}` WHERE `flight_id` = ?";
+        return $this->_db->query($SQL, [$id])->getAll();
+    }
 }

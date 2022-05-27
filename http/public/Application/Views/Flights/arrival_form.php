@@ -9,7 +9,7 @@ use System\Responses\View;
 $lang = Model::get(Language::class);
 ?>
 <define title>
-    <?php echo $lang('departure_form', ['flight' => $flight['number']]) ?>
+    <?php echo $lang('arrival_form', ['flight' => $flight['number']]) ?>
 </define>
 <!-- <define page_desc>
     <?php // echo $lang('scan_flight_desc') 
@@ -19,9 +19,28 @@ $lang = Model::get(Language::class);
 <section class="section">
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+
+                    </div>
+                    <div class="card-body">
+                        <h1><?php echo $lang('flight_num', ['num' => $flight['number']]) ?></h1>
+                        <div class="other-info clearfix">
+                            <p class="float-start me-3"><strong><?php echo $lang('airlines'); ?>:</strong> <?php echo $flight['number'] ?></p>
+                            <p class="float-start me-3"><strong><?php echo $lang('take_off_date'); ?>:</strong> <?php echo $flight['tdate'] ?></p>
+                            <p class="float-start me-3"><strong><?php echo $lang('take_off_time'); ?>:</strong> <?php echo $flight['ttime'] ?></p>
+                            <p class="float-start me-3"><strong><?php echo $lang('number_of_passengers'); ?>:</strong> <?php echo $flight['passengers'] ?></p>
+                            <p class="float-start me-3"><strong><?php echo $lang('source_airport'); ?>:</strong> <?php echo $flight['sairport'][$lang->current() . '_name'] ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    
+
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -34,7 +53,7 @@ $lang = Model::get(Language::class);
                             <h5><?php echo $lang('arrival_city') ?></h5>
                             <p><?php echo $arrivalInfo['arr']['arrival_city'] ?></p>
                         </div>
-                        
+
                     </div>
                     <div class="row">
                         <div class="col">
@@ -173,4 +192,3 @@ $lang = Model::get(Language::class);
         </div>
     </div>
 </section>
-

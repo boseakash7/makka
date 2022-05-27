@@ -102,42 +102,45 @@ class Flights extends AuthController
         $flight = $flight[0];
 
         $departureAM = Model::get(DepartureAssesment::class);
-        $departureInfo = $departureAM->getByFlightId( $param );
+        $departureInfos = $departureAM->getByFlightIdALL( $param );
 
-        if( !empty($departureInfo) )
+        foreach( $departureInfos as &$departureInfo )
         {
-            $departureInfo['arr'] = json_decode($departureInfo['json'], true);
-        }
+            if( !empty($departureInfo) )
+            {
+                $departureInfo['arr'] = json_decode($departureInfo['json'], true);
+            }
 
-        switch ($departureInfo['lang']) {
-            case 'en':
-                $departureInfo['langFull'] = 'English';
-                break;
-            case 'arb':
-                $departureInfo['langFull'] = 'Arabic';
-                break;
-            case 'pak':
-                $departureInfo['langFull'] = 'Pakistan';
-                break;
-            case 'indo':
-                $departureInfo['langFull'] = 'Indonesia';
-                break;
-            case 'malay':
-                $departureInfo['langFull'] = 'Malaysia';
-                break;
-            case 'bng':
-                $departureInfo['langFull'] = 'Bangladesh';
-                break;
+            switch ($departureInfo['lang']) {
+                case 'en':
+                    $departureInfo['langFull'] = 'English';
+                    break;
+                case 'arb':
+                    $departureInfo['langFull'] = 'Arabic';
+                    break;
+                case 'pak':
+                    $departureInfo['langFull'] = 'Pakistan';
+                    break;
+                case 'indo':
+                    $departureInfo['langFull'] = 'Indonesia';
+                    break;
+                case 'malay':
+                    $departureInfo['langFull'] = 'Malaysia';
+                    break;
+                case 'bng':
+                    $departureInfo['langFull'] = 'Bangladesh';
+                    break;
 
-            default:
-                $departureInfo['langFull'] = 'English';
-                break;
+                default:
+                    $departureInfo['langFull'] = 'English';
+                    break;
+            }
         }
 
         $view = new View();
         $view->set('Flights/departure_assessment', [
             'flight' => $flight,
-            'departureInfo' => $departureInfo
+            'departureInfos' => $departureInfos
 
         ]);
         $view->prepend('header');
@@ -158,42 +161,45 @@ class Flights extends AuthController
         $flight = $flight[0];
 
         $arrivalAM = Model::get(ArrivalAssesment::class);
-        $arrivalInfo = $arrivalAM->getByFlightId( $param );
+        $arrivalInfos = $arrivalAM->getByFlightIdAll( $param );
 
-        if( !empty($arrivalInfo) )
+        foreach( $arrivalInfos as &$arrivalInfo )
         {
-            $arrivalInfo['arr'] = json_decode($arrivalInfo['json'], true);
-        }
+            if( !empty($arrivalInfo) )
+            {
+                $arrivalInfo['arr'] = json_decode($arrivalInfo['json'], true);
+            }
 
-        switch ($arrivalInfo['lang']) {
-            case 'en':
-                $arrivalInfo['langFull'] = 'English';
-                break;
-            case 'arb':
-                $arrivalInfo['langFull'] = 'Arabic';
-                break;
-            case 'pak':
-                $arrivalInfo['langFull'] = 'Pakistan';
-                break;
-            case 'indo':
-                $arrivalInfo['langFull'] = 'Indonesia';
-                break;
-            case 'malay':
-                $arrivalInfo['langFull'] = 'Malaysia';
-                break;
-            case 'bng':
-                $arrivalInfo['langFull'] = 'Bangladesh';
-                break;
+            switch ($arrivalInfo['lang']) {
+                case 'en':
+                    $arrivalInfo['langFull'] = 'English';
+                    break;
+                case 'arb':
+                    $arrivalInfo['langFull'] = 'Arabic';
+                    break;
+                case 'pak':
+                    $arrivalInfo['langFull'] = 'Pakistan';
+                    break;
+                case 'indo':
+                    $arrivalInfo['langFull'] = 'Indonesia';
+                    break;
+                case 'malay':
+                    $arrivalInfo['langFull'] = 'Malaysia';
+                    break;
+                case 'bng':
+                    $arrivalInfo['langFull'] = 'Bangladesh';
+                    break;
 
-            default:
-                $arrivalInfo['langFull'] = 'English';
-                break;
+                default:
+                    $arrivalInfo['langFull'] = 'English';
+                    break;
+            }
         }
 
         $view = new View();
         $view->set('Flights/arrival_assessment', [
             'flight' => $flight,
-            'arrivalInfo' => $arrivalInfo
+            'arrivalInfos' => $arrivalInfos
 
         ]);
         $view->prepend('header');
