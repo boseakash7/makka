@@ -29,49 +29,46 @@ $lang = Model::get(Language::class);
             </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h3><?php echo $lang('check_in') ?></h3>
                 </div>
                 <div class="card-body">
-                    <?php if ( !empty($ciPassengers) ): ?>
-                        <?php foreach ( $ciPassengers as $passenger ): ?>
-                            <div class="mb-2 mt-2 clearfix">
-                                <?php echo $passenger['info']; ?>
-                                <p class="special-need">
-                                    <strong><?php echo $lang('special') ?>:</strong> <?php echo $lang($passenger['special']) ?>
-                                </p>
-                                <strong class="float-end"><?php echo date('Y-m-d H:m:s', $passenger['created_at']); ?></strong>
-                            </div>
-                            <hr>
-                        <?php endforeach; ?>
+                    <?php if ( !empty($passengers) ): ?>
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th><?php echo $lang('check_in') ?></th>
+                                    <th><?php echo $lang('check_out') ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ( $passengers as $passenger ): ?>
+                                <tr>
+                                    <td><?php echo $passenger['info']; ?></td>
+                                    <td><?php echo $passenger['check_in_time'] != null ? date('Y-m-d H:m:s', $passenger['check_in_time']) : '-'; ?></td>
+                                    <td><?php echo $passenger['check_out_time'] != null ? date('Y-m-d H:m:s', $passenger['check_out_time']) : '-'; ?></td>
+                                </tr>
+                            
+                            <?php endforeach; ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th><?php echo $lang('check_in') ?></th>
+                                    <th><?php echo $lang('check_out') ?></th>
+                                </tr>
+                            </tfoot>
+                        </table>                        
                     <?php else: ?>
                         <?php echo $lang('no_data') ?>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3><?php echo $lang('check_out') ?></h3>
-                </div>
-                <div class="card-body">
-                <?php if ( !empty($coPassengers) ): ?>
-                        <?php foreach ( $coPassengers as $passenger ): ?>
-                            <div class="mb-2 mt-2 clearfix">
-                                <?php echo $passenger['info']; ?>
-                                <strong class="float-end"><?php echo date('Y-m-d H:m:s', $passenger['created_at']); ?></strong>
-                            </div>
-                            <hr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <?php echo $lang('no_data') ?>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
+        
     </div>    
 </section>
 

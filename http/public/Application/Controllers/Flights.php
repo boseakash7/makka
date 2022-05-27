@@ -360,38 +360,38 @@ class Flights extends AuthController
 
     public function checkIn( Request $request, Response $response )
     {
-        $id = $request->param(0);
-        /**
-         * @var ModelsFlights
-         */
-        $flightM = Model::get(ModelsFlights::class);
-        $flight = $flightM->find(['id' => $id]);
-        if ( empty($flight) ) throw new Error404;
+        // $id = $request->param(0);
+        // /**
+        //  * @var ModelsFlights
+        //  */
+        // $flightM = Model::get(ModelsFlights::class);
+        // $flight = $flightM->find(['id' => $id]);
+        // if ( empty($flight) ) throw new Error404;
 
-        // Update the flight status to open
-        $flightM->update($flight['id'], [
-            'status' => ModelsFlights::STATUS_CHECK_IN
-        ]);
+        // // Update the flight status to open
+        // $flightM->update($flight['id'], [
+        //     'status' => ModelsFlights::STATUS_CHECK_IN
+        // ]);
 
-        throw new Redirect('flights/scan/' . $flight['id']);
+        // throw new Redirect('flights/scan/' . $flight['id']);
     }
 
     public function checkOut( Request $request, Response $response )
     {
-        $id = $request->param(0);
-        /**
-         * @var ModelsFlights
-         */
-        $flightM = Model::get(ModelsFlights::class);
-        $flight = $flightM->find(['id' => $id]);
-        if ( empty($flight) ) throw new Error404;
+        // $id = $request->param(0);
+        // /**
+        //  * @var ModelsFlights
+        //  */
+        // $flightM = Model::get(ModelsFlights::class);
+        // $flight = $flightM->find(['id' => $id]);
+        // if ( empty($flight) ) throw new Error404;
 
-        // Update the flight status to open
-        $flightM->update($flight['id'], [
-            'status' => ModelsFlights::STATUS_CHECK_OUT
-        ]);
+        // // Update the flight status to open
+        // $flightM->update($flight['id'], [
+        //     'status' => ModelsFlights::STATUS_CHECK_OUT
+        // ]);
 
-        throw new Redirect('flights/scan/' . $flight['id']);
+        // throw new Redirect('flights/scan/' . $flight['id']);
     }
 
     public function scan( Request $request, Response $response )
@@ -399,6 +399,8 @@ class Flights extends AuthController
         $userInfo = $this->user->getInfo();
 
         $id = $request->param(0);
+        $mode = $request->param(1);
+
         /**
          * @var ModelsFlights
          */
@@ -425,7 +427,8 @@ class Flights extends AuthController
         $view->set("Flights/scan", [
             'flight' => $flight,
             'supports' => $supports,
-            'userInfo' => $userInfo
+            'userInfo' => $userInfo,
+            'mode' => $mode
         ]);
         $view->prepend('header');
         $view->append('footer');
@@ -451,14 +454,12 @@ class Flights extends AuthController
          * @var Passenger
          */
         $pM = Model::get(Passenger::class);
-        $ciPassengers = $pM->findAll([ 'flight' => $flight['id'], 'status' => Passenger::STATUS_CHECK_IN ]);
-        $coPassengers = $pM->findAll([ 'flight' => $flight['id'], 'status' => Passenger::STATUS_CHECK_OUT ]);
+        $passengers = $pM->findAll([ 'flight' => $flight['id']]);        
 
         $view  = new View();
         $view->set('Flights/log', [
             'flight' => $flight,
-            'ciPassengers' => $ciPassengers,
-            'coPassengers' => $coPassengers
+            'passengers' => $passengers
         ]);
         $view->prepend('header');
         $view->append('footer');

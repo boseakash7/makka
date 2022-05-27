@@ -35,7 +35,7 @@ $routes->set(array(
         '/flights/add' => "Flights::add",
         '/flights/edit/(:num)' => "Flights::edit",
         '/flights/open/(:num)' => "Flights::open",
-        '/flights/scan/(:num)' => "Flights::scan",
+        '/flights/scan/(:num)/(:string)' => "Flights::scan",        
         '/flights/arrived/(:num)' => "Flights::arrived",
         '/flights/check-in/(:num)' => "Flights::checkIn",
         '/flights/check-out/(:num)' => "Flights::checkOut",

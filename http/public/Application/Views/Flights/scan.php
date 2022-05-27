@@ -39,14 +39,14 @@ $lang = Model::get(Language::class);
                             <?php
                             $ciClass = "";
                             $coClass = "";
-                            if ($flight['status'] == Flights::STATUS_CHECK_IN || $flight['status'] == Flights::STATUS_OPENED) {
+                            if ($mode == 'check-in') {
                                 $ciClass = "btn-primary";
-                            } else if ($flight['status'] == Flights::STATUS_CHECK_OUT) {
+                            } else if ($mode == 'check-out') {
                                 $coClass = "btn-primary";
                             }
                             ?>
-                            <a href="<?php echo !empty($ciClass) ? '' : URL::full('flights/check-in/' . $flight['id']) ?>" class="btn <?php echo $ciClass ?>"><?php echo $lang('check_in') ?></a>
-                            <a href="<?php echo !empty($coClass) ? '' : URL::full('flights/check-out/' . $flight['id']) ?>" class="btn <?php echo $coClass ?>"><?php echo $lang('check_out') ?></a>
+                            <a href="<?php echo !empty($ciClass) ? '#!' : URL::full('flights/scan/' . $flight['id'] . '/check-in') ?>" class="btn <?php echo $ciClass ?>"><?php echo $lang('check_in') ?></a>
+                            <a href="<?php echo !empty($coClass) ? '#!' : URL::full('flights/scan/' . $flight['id'] . '/check-out') ?>" class="btn <?php echo $coClass ?>"><?php echo $lang('check_out') ?></a>
                         </div>
                         <div class="form mt-5">
                             <form action="<?php echo URL::current() ?>" method="POST" onsubmit="submitForm(event)">
@@ -74,38 +74,31 @@ $lang = Model::get(Language::class);
                 scan = false;
 
                 var _handleAjax = function() {
-                    swal('<?php echo $lang('special_need') ?>', {
-                            buttons: {
-                                yes: '<?php echo $lang('yes') ?>',
-                                no: '<?php echo $lang('no') ?>'
-                            },
-                        })
-                        .then((value) => {
-                            $.ajax({
-                                url: '<?php echo URL::full('ajax/flight/passenger-add/') ?>',
-                                type: 'POST',
-                                accepts: 'JSON',
-                                dataType: 'JSON',
-                                data: {
-                                    id: decodedText,
-                                    flight: <?php echo $flight['id'] ?>,
-                                    special: value
-                                },
-                                beforeSend: function() {
+                    $.ajax({
+                        url: '<?php echo URL::full('ajax/flight/passenger-add/') ?>',
+                        type: 'POST',
+                        accepts: 'JSON',
+                        dataType: 'JSON',
+                        data: {
+                            id: decodedText,
+                            flight: <?php echo $flight['id'] ?>,
+                            mode: '<?php echo $mode ?>',
+                            special: 'no'
+                        },
+                        beforeSend: function() {
 
-                                },
-                                success: function(data) {
-                                    swal({
-                                        title: '<?php echo $lang('success') ?>',
-                                        text: decodedText,
-                                        icon: "success",
-                                        button: '<?php echo $lang('scan_another') ?>'
-                                    }).then((result) => {
-                                        window.location.reload();
-                                    });
-                                }
+                        },
+                        success: function(data) {
+                            swal({
+                                title: '<?php echo $lang('success') ?>',
+                                text: decodedText,
+                                icon: "success",
+                                button: '<?php echo $lang('scan_another') ?>'
+                            }).then((result) => {
+                                window.location.reload();
                             });
-                        });
+                        }
+                    });
                 };
 
                 $.ajax({
@@ -115,7 +108,8 @@ $lang = Model::get(Language::class);
                     dataType: 'JSON',
                     data: {
                         id: decodedText,
-                        flight: <?php echo $flight['id'] ?>
+                        flight: <?php echo $flight['id'] ?>,
+                        mode: '<?php echo $mode ?>'
                     },
                     beforeSend: function() {
 

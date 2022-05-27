@@ -9,12 +9,14 @@ class Passenger extends Model
 
     private $_table = 'passengers';
 
-    const STATUS_CHECK_IN = 'check_in';
-    const STATUS_CHECK_OUT = 'check_out';
-
     public function create( $data )
     {
-        return $this->_db->insert($this->_table, $data);
+        return $this->_db->insert($this->_table, $data, true);
+    }
+
+    public function update( $id, $data )
+    {
+        return $this->_db->update($this->_table, $id, $data);
     }
 
     public function find( array $with )

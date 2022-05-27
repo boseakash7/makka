@@ -17,6 +17,7 @@ class Flight extends Controller
     {
         $id = $request->post('id');
         $flight = $request->post('flight');
+        $mode = $request->post('mode');
 
         /**
          * @var Flights
@@ -25,29 +26,34 @@ class Flight extends Controller
         $flight = $flightM->getById($flight);
         if ( empty($flight) ) throw new Error404();
 
-        $status = Passenger::STATUS_CHECK_OUT;
-
-        switch( $flight['status'] )
-        {
-            case Flights::STATUS_OPENED:
-            case Flights::STATUS_CHECK_IN:
-                $status = Passenger::STATUS_CHECK_IN;
-                break;
-        }
-
         /**
          * @var Passenger
          */
         $passM = Model::get(Passenger::class);
 
-        $pass = $passM->find([ 'info' => $id, 'flight' => $flight['id'], 'status' => $status ]);
-        if ( empty($pass) ) {
-            $json = new JSON();
-            $json->set(true);
-        } else {
-            $json = new JSON();
-            $json->set(false);
+        $pass = $passM->find([ 'info' => $id, 'flight' => $flight['id'] ]);
+        $isValid = true;
+
+        if ( !empty($pass) )
+        {
+            if ( $mode == 'check-in' )
+            {
+                if ( !empty($pass['check_in_time']) ) {
+                    $isValid = false;
+                }else {
+                    $isValid = true;
+                }
+            } else {
+                if ( !empty($pass['check_out_time']) ) {
+                    $isValid = false;
+                } else {
+                    $isValid = true;
+                }
+            }
         }
+
+        $json = new JSON();
+        $json->set($isValid);
 
         $response->set($json);
     }
@@ -57,6 +63,7 @@ class Flight extends Controller
         $id = $request->post('id');
         $flight = $request->post('flight');
         $special = $request->post('special');
+        $mode = $request->post('mode');
 
         /**
          * @var Flights
@@ -69,29 +76,40 @@ class Flight extends Controller
          * @var Passenger
          */
         $passM = Model::get(Passenger::class);
-        
-        $status = Passenger::STATUS_CHECK_OUT;
+        $pass = $passM->find([ 'info' => $id, 'flight' => $flight['id'] ]);        
+        if ( !empty($pass) )
+        {
+            if ( $mode == 'check-in' )
+            {
+                $passM->update($pass['id'], [
+                    'check_in_time' => time()
+                ]);
+            } else {
+                $passM->update($pass['id'], [
+                    'check_out_time' => time()
+                ]);
+            }
+            
+        } else {
+            $passM->create([
+                'flight' => $flight['id'],
+                'info' => $id,
+                'check_in_time' => $mode == 'check-in' ? time() : null,
+                'check_out_time' => $mode == 'check-out' ? time() : null,
+                'special' => $special,
+                'created_at' => time()
+            ]);
+        }
 
         switch( $flight['status'] )
         {
             case Flights::STATUS_OPENED:
             case Flights::STATUS_CHECK_IN:
-                $status = Passenger::STATUS_CHECK_IN;            
-                break;
+                $flightM->update($flight['id'], [
+                    'status' => $mode == 'check-in' ? Flights::STATUS_CHECK_IN : Flights::STATUS_CHECK_OUT
+                ]);
         }
-
-        $passM->create([
-            'flight' => $flight['id'],
-            'info' => $id,
-            'status' => $status,
-            'special' => $special,
-            'created_at' => time()
-        ]);
-
-        // update the flight status to check in
-        $flightM->update($flight['id'], [
-            'status' => $status
-        ]);
+        
         
         $json = new JSON();
         $json->set(true);
