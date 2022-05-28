@@ -31,11 +31,11 @@ $lang = Model::get(Language::class);
                     </div>
                     <hr>
                     <div class="other-info clearfix">
-                        <a href="<?php echo URL::full('flights/arrival-assessment/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Arrival Assessment</a>
-                        <a href="<?php echo URL::full('flights/departure-assessment/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Departure Assessment</a>
-                        <a href="<?php echo URL::full('flights/departure-form/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Departure Form</a>
-                        <a href="<?php echo URL::full('flights/arrival-form/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Arrival Form</a>
-                        <a href="<?php echo URL::full('flights/log/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Logs</a>
+                        <a target="_blank" href="<?php echo URL::full('flights/arrival-assessment/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Arrival Assessment</a>
+                        <a target="_blank" href="<?php echo URL::full('flights/departure-assessment/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Departure Assessment</a>
+                        <a target="_blank" href="<?php echo URL::full('flights/departure-form/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Departure Form</a>
+                        <a target="_blank" href="<?php echo URL::full('flights/arrival-form/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Arrival Form</a>
+                        <a target="_blank" href="<?php echo URL::full('flights/log/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Logs</a>
                     </div>
                     <hr>
                 </div>

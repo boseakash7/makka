@@ -9,7 +9,7 @@ $lang = Model::get(Language::class);
 
 <?php if (!empty($departureInfo['arr'])) : ?>
     <h5>1. تعامل الموظفين ؟?</h5>
-    <p><?php echo $arrivalInfo['arr']['employment_interaction'] ?></p>
+    <p><?php echo $departureInfo['arr']['employment_interaction'] ?></p>
 
     <h5>2. وضوح الاجراءات والمسارات ؟</h5>
     <p><?php echo $departureInfo['arr']['clarity_procedure'] ?></p>
