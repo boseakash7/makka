@@ -28,6 +28,40 @@ use Sinergi\BrowserDetector\Os;
 class Flights extends AuthController
 {
 
+    public function mode( Request $request, Response $response )
+    {
+        if( empty($request->get('flight_id')) || empty($request->get('status')) )
+        {
+            echo 'Please enter flight id and status in the url';
+            exit;
+        }
+
+        $flightId = $request->get('flight_id');
+        $status = $request->get('status');
+
+        $flightM = Model::get(ModelsFlights::class);
+        $flight = $flightM->getById($flightId);
+
+        if( empty($flight) )
+        {
+            echo 'The flight id you entered is invalid';
+            exit;
+        }
+
+        if( $status != ModelsFlights::STATUS_CHECK_IN && $status != ModelsFlights::STATUS_CHECK_OUT )
+        {
+            echo 'Please enter a valid status for the flight';
+            exit;
+        }
+
+        $flightM->update( $flightId, array(
+            'status' => $status
+        ) );
+
+        echo 'Flight Status has been successfully updated';
+
+    }
+
     public function arrivalForm( Request $request, Response $response )
     {
         $userInfo = $this->user->getInfo();
