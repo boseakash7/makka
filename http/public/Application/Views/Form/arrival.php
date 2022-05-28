@@ -204,8 +204,8 @@ $formValidator = FormValidator::instance("arrival-form");
                                 <textarea name="challenges" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('challenges'); ?></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="treatment"><?php echo $lang('solutions') ?></label>
-                                <textarea name="treatment" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('solutions'); ?></textarea>
+                                <label for="solutions"><?php echo $lang('solutions') ?></label>
+                                <textarea name="solutions" class="form-control" id="solutions" cols="30" rows="3"><?php echo $formValidator->getValue('solutions'); ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recommendations"><?php echo $lang('recommendations') ?></label>
