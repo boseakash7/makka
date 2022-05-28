@@ -40,6 +40,7 @@ return [
     'close' => "غلق",
     'menu' => "قائمة",
     'no_data_found' => "lem yetem al-athour ola piannat",
+    'do_another_assessment' => "إجراء تقييم آخر",
 
     // Form Departure
     'counters_working_start_time' => 'عدادات وقت بدء العمل',
@@ -207,6 +208,8 @@ return [
 
     'en_name' => "الاسم",
     'ar_name' => "الاسم العربي",
+
+    'invalid_qr_code' => "هذا غير صحيح",
 
     'view_summery' => "عرض الملخص",
 

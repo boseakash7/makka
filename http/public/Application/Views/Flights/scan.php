@@ -13,6 +13,25 @@ $lang = Model::get(Language::class);
 <define page_desc>
     <?php echo $lang('scan_flight_desc') ?>
 </define>
+<?php 
+    $canScan = ( $flight['status'] == Flights::STATUS_CHECK_IN || $flight['status'] == Flights::STATUS_CHECK_OUT || $flight['status'] == Flights::STATUS_OPENED );    
+?>
+
+<?php if ( !$canScan ): ?>
+    <section class="section">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="text-center"><?php echo $lang('sorry_this_page_is_not_available') ?></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php return; ?>
+<?php endif; ?>
+
 <section class="section">
     <div class="row">
         <div class="col-md-6">
@@ -73,9 +92,28 @@ $lang = Model::get(Language::class);
 <?php if ( $supports ): ?>
 <define footer_js>
     <script>
+        
+        var scan = true;
+
+        function _reset() {
+            scan = true;
+            $('#qr_input').val('');
+        }
+
         var qrCodeSuccessCallback = function(decodedText) {
             if (scan) {
+                console.log(decodedText);
                 scan = false;
+                if ( decodedText.search('#MK') == -1 ) {
+                    swal({
+                        title: '<?php echo $lang('invalid_qr_code') ?>',                        
+                        icon: "warning",
+                        button: '<?php echo $lang('scan_another') ?>'
+                    }).then((result) => {
+                        _reset();
+                    });
+                    return;
+                }
 
                 var _handleAjax = function() {
                     $.ajax({
@@ -99,7 +137,7 @@ $lang = Model::get(Language::class);
                                 icon: "success",
                                 button: '<?php echo $lang('scan_another') ?>'
                             }).then((result) => {
-                                window.location.reload();
+                                _reset();
                             });
                         }
                     });
@@ -144,8 +182,6 @@ $lang = Model::get(Language::class);
         try {
 
 
-            var scan = true;
-
             var html5QrCode = new Html5Qrcode("reader");
             var config = {
                 fps: 10,
@@ -162,6 +198,34 @@ $lang = Model::get(Language::class);
             document.body.innerHTML = e.toString();
         }
     </script>
+
+<?php if ( $canScan ): ?>
+    <script>
+        function checkStatus() {
+            $.ajax({
+                url: '<?php echo URL::full('ajax/flight/can-scan') ?>',
+                data: {
+                    flightId: <?php echo $flight['id'] ?>
+                },
+                beforeSend: function() {
+
+                },
+                type: 'POST',
+                dataType: 'JSON',
+                accepts: 'JSON',
+                success: function(data) {
+                    if ( !data ) window.location.reload();
+
+                    setTimeout(function() {
+                        checkStatus();
+                    }, 5000);
+                },
+            });
+        };
+
+        checkStatus();
+    </script>
+<?php endif; ?>
 
     <script>
         function submitForm(e) {

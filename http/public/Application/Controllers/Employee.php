@@ -53,7 +53,7 @@ class Employee extends AuthController
                 'required' => true,
                 'type' => 'string',
                 'unique' => 'users,email',
-                'pattern' => '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/'
+                // 'pattern' => '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/'
             ],           
             'airport' => [
                 'required' => true,
@@ -122,7 +122,7 @@ class Employee extends AuthController
                 'required' => true,
                 'type' => 'string',
                 'unique' => 'users,email,'. $user['email'],
-                'pattern' => '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/'
+                // 'pattern' => '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/'
             ],           
             'airport' => [
                 'required' => true,

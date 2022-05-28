@@ -8,10 +8,9 @@ use System\Models\Language;
 $lang = Model::get(Language::class);
 
 $formValidator = FormValidator::instance("flight");
-
 ?>
 <define title>
-    <?php echo $lang('add_flights') ?>
+    <?php echo $lang('add_flight') ?>
 </define>
 <define page_desc>
     <?php echo $lang('add_new_flights_from_here') ?>
@@ -88,7 +87,7 @@ $formValidator = FormValidator::instance("flight");
                             <select name="sairport" class="form-control">
                                 <option value=""><?php echo $lang('select_airport'); ?></option>
                                 <?php foreach ( $sAirports as $item ): ?>
-                                    <option value="<?php echo $item['id'] ?>" <?php echo $formValidator->getValue('sairport') == $item['id'] ? 'selected' : ''; ?>><?php echo $item[$lang->current() . '_name']; ?></option>
+                                    <option value="<?php echo $item['id'] ?>" <?php echo $formValidator->getValue('sairport') == $item['id'] || $userInfo['airport'] == $item['id'] ? 'selected' : ''; ?>><?php echo $item[$lang->current() . '_name']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <?php if ( $formValidator->hasError('sairport') ): ?>

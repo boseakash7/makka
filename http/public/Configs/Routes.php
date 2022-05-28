@@ -64,6 +64,7 @@ $routes->set(array(
 
         '/ajax/flight/passenger-check' => "Ajax\Flight::check",
         '/ajax/flight/passenger-add' => "Ajax\Flight::add",
+        '/ajax/flight/can-scan' => "Ajax\Flight::canScan",
         
     ],
 

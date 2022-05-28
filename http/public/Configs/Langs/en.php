@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\map;
-
 return [
     'flights' => "Flights",
     'airports' => "Airports",
@@ -41,6 +39,7 @@ return [
     'menu' => "Menu",
     'back' => "Back",
     'no_data_found' => "No data found",
+    'do_another_assessment' => "Do another assessment",
 
     // Form Departure
     'counters_working_start_time' => 'Counters working start time',
@@ -210,6 +209,10 @@ return [
 
     'en_name' => "En Name",
     'ar_name' => "Ar Name",
+
+    'invalid_qr_code' => "This is not valid",
+
+    'sorry_this_page_is_not_available' => "Sorry this page is not available",
 
     'view_summery' => "View summary",
     'employee_name' => "Employee Name",

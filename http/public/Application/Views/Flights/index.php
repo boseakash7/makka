@@ -61,7 +61,7 @@ $userM = Model::get(User::class);
                                 break;
                             case Flights::STATUS_CHECK_IN:
                             case Flights::STATUS_CHECK_OUT:
-                                $statusBg = 'bg-danger';
+                                $statusBg = 'bg-primary';
                                 break;
                             case Flights::STATUS_ON_AIR:                            
                                 $statusBg = 'bg-warning';
@@ -103,8 +103,8 @@ $userM = Model::get(User::class);
                                 <?php endif; ?>
                                 <?php if ( $userM->isSup() ): ?>
                                     <a href="<?php echo URL::full('flights/close/' . $flight['id']) ?>" class="btn btn-secondary m-2 close-flight"><?php echo $lang('close_flight') ?></a>                                    
-                                    <a href="<?php echo URL::full('/form/departure-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>
                                 <?php endif; ?>
+                                    <a href="<?php echo URL::full('/form/departure-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>
                             <?php elseif ( $flight['status'] == Flights::STATUS_CLOSED ): ?>
                                 <?php if ( $userM->isSup() ): ?>
                                     <a href="<?php echo URL::full('form/departure/' . $flight['id']) ?>" class="btn btn-primary"><?php echo $lang('departure_form_submit') ?></a>
@@ -114,10 +114,10 @@ $userM = Model::get(User::class);
                             <?php elseif ( $flight['status'] == Flights::STATUS_ON_AIR ): ?>
                                 <?php if ( $userM->isSup() ): ?>
                                     <a href="<?php echo URL::full('flights/arrived/' . $flight['id']) ?>" class="btn btn-primary m-2"><?php echo $lang('arrived') ?></a>        
-                                    <a href="<?php echo URL::full('/form/arrival-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>                        
                                 <?php else: ?>
                                     -
-                                <?php endif; ?>
+                                    <?php endif; ?>
+                                    <a href="<?php echo URL::full('/form/arrival-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>                        
                             <?php elseif ( $flight['status'] == Flights::STATUS_ARRIVED ): ?>
                                 <?php if ( $userM->isSup() ): ?>
                                     <a href="<?php echo URL::full('/form/arrival-assessment/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('assessment_form') ?></a>
@@ -136,22 +136,7 @@ $userM = Model::get(User::class);
                         </td>
                     </tr>
                 <?php endforeach; ?>
-                <tfoot>
-                    <tr>
-                    <th><?php echo $lang('id'); ?></th>
-                        <th><?php echo $lang('flight_number'); ?></th>
-                        <th><?php echo $lang('airlines'); ?></th>
-                        <th><?php echo $lang('take_off_date'); ?></th>
-                        <th><?php echo $lang('take_off_time'); ?></th>
-                        <th><?php echo $lang('saudi_date'); ?></th>
-                        <th><?php echo $lang('saudi_time'); ?></th>
-                        <th><?php echo $lang('number_of_passengers'); ?></th>
-                        <th><?php echo $lang('status'); ?></th>
-                        <!-- <th><?php // echo $lang('source'); ?></th> -->
-                        <!-- <th><?php // echo $lang('destination'); ?></th> -->                        
-                        <th><?php echo $lang('action'); ?></th>
-                    </tr>
-                </tfoot>
+                
             </table>
         </div>
     </div>
@@ -182,8 +167,15 @@ $userM = Model::get(User::class);
             }
             });
         })
+
+        <?php if( count($flights) > 0 ): ?>
+            setTimeout(function() {
+                window.location.reload();
+            }, 30000);
+        <?php endif; ?>
     </script>
 </define>
+
 
 <define header_css>
     <style>

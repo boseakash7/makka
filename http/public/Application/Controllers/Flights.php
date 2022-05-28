@@ -307,6 +307,7 @@ class Flights extends AuthController
 
     public function add( Request $request, Response $response )
     {
+        $userInfo = $this->user->getInfo();
 
         $lang = Model::get(Language::class);
 
@@ -397,6 +398,7 @@ class Flights extends AuthController
         $view->set('Flights/add', [
             'airlines' => $airlines,
             'sAirports' => $sAirports,
+            'userInfo' => $userInfo
             // 'dAirports' => $dAirports
         ]);
         $view->prepend('header');

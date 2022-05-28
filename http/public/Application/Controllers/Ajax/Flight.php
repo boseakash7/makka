@@ -116,4 +116,31 @@ class Flight extends Controller
 
         $response->set($json);
     }
+
+    public function canScan( Request $request, Response $response )
+    {
+        $id = $request->post('flightId');
+
+        /**
+         * @var Flights
+         */
+        $flightM = Model::get(Flights::class);
+        $flight = $flightM->getById($id);
+        if ( empty($flight) ) throw new Error404();
+
+        $isValid = false;
+        switch( $flight['status'] )
+        {
+            case Flights::STATUS_CHECK_IN:
+            case Flights::STATUS_CHECK_OUT:
+            case Flights::STATUS_OPENED:
+                $isValid = true;
+                break;
+        }
+
+        $json = new JSON();
+        $json->set($isValid);
+
+        $response->set($json);
+    }
 }
