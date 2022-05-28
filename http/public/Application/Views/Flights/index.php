@@ -131,8 +131,10 @@ $userM = Model::get(User::class);
                                 <?php else: ?>
                                     -
                                 <?php endif; ?>
-                            <?php endif; ?>                                                        
+                            <?php endif; ?>              
+                            <?php if ( !isset($arrival) ): ?>                                          
                             <a href="<?php echo URL::full('flights/log/' . $flight['id']) ?>" class="btn btn-info m-2" target="_blank"><?php echo $lang('view_log') ?></a>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

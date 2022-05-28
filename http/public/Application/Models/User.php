@@ -2,6 +2,7 @@
 
 namespace Application\Models;
 
+use System\Core\Model;
 use System\Models\AbstractAuth;
 
 class User extends AbstractAuth
@@ -58,5 +59,23 @@ class User extends AbstractAuth
     {
         $user = $this->getInfo();
         return $user['type'] == self::TYPE_EMP;
+    }
+
+    public function fromSource()
+    {
+        $user = $this->getInfo();
+        $airport = $user['airport'];
+
+        /**
+         * @var Airport
+         */
+        $airportM = Model::get(Airport::class);
+        $airport = $airportM->getById($airport);
+        return isset($airport['type']) && $airport['type'] == Airport::TYPE_SOURCE;
+    }
+
+    public function fromDestination()
+    {
+        return !$this->fromSource();
     }
 }

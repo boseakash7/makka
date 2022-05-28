@@ -1,10 +1,7 @@
 <?php
 
-use Application\Models\Flights;
 use System\Core\Model;
-use System\Helpers\URL;
 use System\Models\Language;
-use System\Responses\View;
 
 $lang = Model::get(Language::class);
 ?>

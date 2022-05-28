@@ -61,10 +61,13 @@ $routes->set(array(
         '/form/arrival-assessment/(:num)' => 'Form::arrivalAssesment',
         '/arrival-assesment-form-success' => 'Form::arrivalAssesmentSuccess',
         '/departure-assesment-form-success' => 'Form::departureAssesmentSuccess',
+        '/arrival-assesment-form-success/(:num)' => 'Form::arrivalAssesmentSuccess',
+        '/departure-assesment-form-success/(:num)' => 'Form::departureAssesmentSuccess',
 
         '/ajax/flight/passenger-check' => "Ajax\Flight::check",
         '/ajax/flight/passenger-add' => "Ajax\Flight::add",
         '/ajax/flight/can-scan' => "Ajax\Flight::canScan",
+        '/ajax/form/get-airports-by-city' => "Ajax\Form::getAirportsByCity"
         
     ],
 

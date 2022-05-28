@@ -1,5 +1,6 @@
 <?php
 
+use Application\Models\Airport;
 use System\Core\Model;
 use System\Helpers\URL;
 use System\Libs\FormValidator;
@@ -48,18 +49,7 @@ $formValidator = FormValidator::instance("departure-form");
                                     <p class="text-danger"><?php echo $formValidator->getError('departure_city'); ?></p>
                                 <?php endif; ?>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="departure_airport"><?php echo $lang('departure_airport') ?><span class="text-danger">*</span></label>
-                            <select name="departure_airport" id="departure_airport" class="form-control">
-                                <?php foreach ($airports as $airport) : ?>
-                                    <option value="<?php echo $airport['id'] ?>" <?php  echo $formValidator->getValue('departure_airport') == $airport['id'] ? 'selected' : ''; ?>><?php echo $airport[$lang->current() . '_name'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <?php if ($formValidator->hasError('departure_airport')) : ?>
-                                <p class="text-danger"><?php echo $formValidator->getError('departure_airport'); ?></p>
-                            <?php endif; ?>
-                        </div>
+                        </div>                        
                         <div class="form-group">
                             <label for="flight_number"><?php echo $lang('flight_number') ?><span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="flight_number" id="flight_number" value="<?php echo $formValidator->getValue('flight_number', $flightInfo['number']); ?>"  />
@@ -87,6 +77,7 @@ $formValidator = FormValidator::instance("departure-form");
                             <div class="col form-group">
                                 <label for="arrival_city"><?php echo $lang('arrival_city') ?><span class="text-danger">*</span></label>
                                 <select name="arrival_city" id="arrival_city" class="form-control">
+                                    <option value=""><?php echo $lang('select_city') ?></option>
                                     <?php foreach ($cities as $city) : ?>
                                         <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('arrival_city') == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
@@ -100,6 +91,17 @@ $formValidator = FormValidator::instance("departure-form");
                                 <input type="time" class="form-control" name="arrival_time" id="date" value="<?php echo $formValidator->getValue('arrival_time'); ?>" />
                                 <?php if ($formValidator->hasError('arrival_time')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('arrival_time'); ?></p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="departure_airport"><?php echo $lang('departure_airport') ?><span class="text-danger">*</span></label>
+                                <select name="departure_airport" id="departure_airport" class="form-control">
+                                    <option value=""><?php echo $lang('select_airport'); ?></option>
+                                </select>
+                                <?php if ($formValidator->hasError('departure_airport')) : ?>
+                                    <p class="text-danger"><?php echo $formValidator->getError('departure_airport'); ?></p>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -260,3 +262,34 @@ $formValidator = FormValidator::instance("departure-form");
         </div>
     </div>
     </div>
+
+    <define footer_js>
+        <script>
+            $('#arrival_city').on('change', function() {
+
+                var val = $(this).val().trim();
+                if ( val == '' ) {
+                    $('#departure_airport').html('<option value=""><?php echo $lang('select_airport') ?></option>');
+                    return;
+                }
+
+                $.ajax({
+                    url: '<?php echo URL::full('ajax/form/get-airports-by-city') ?>',
+                    data: {
+                        city: $(this).val(),
+                        type: '<?php echo Airport::TYPE_DESTINATION ?>'
+                    },
+                    type: 'POST',
+                    dataType: 'JSON',
+                    accepts: 'JSON',
+                    beforeSend: function() {
+
+                    },
+                    success: function( data ) {
+                        var options = data.payload;
+                        $('#departure_airport').html(options);
+                    }
+                });
+            });
+        </script>
+    </define>

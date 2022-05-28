@@ -85,7 +85,7 @@ class Form extends Controller
                 'created_at' => time()
             ]);
 
-            throw new Redirect('departure-assesment-form-success');
+            throw new Redirect('departure-assesment-form-success/' . $flightId );
         }
 
         $view = new View();
@@ -161,7 +161,7 @@ class Form extends Controller
                 'created_at' => time()
             ]);
 
-            throw new Redirect('arrival-assesment-form-success');
+            throw new Redirect('arrival-assesment-form-success/' . $flightId);
         }
 
         $view = new View();
@@ -178,8 +178,12 @@ class Form extends Controller
     
     public function arrivalAssesmentSuccess( Request $request, Response $response )
     {
+        $id = $request->param(0);
+
         $view = new View();
-        $view->set('Form/arrival_assesment_success', []);
+        $view->set('Form/arrival_assesment_success', [
+            'id' => $id
+        ]);
         $view->prepend('header');
         $view->append('footer');
 
@@ -188,8 +192,12 @@ class Form extends Controller
 
     public function departureAssesmentSuccess( Request $request, Response $response )
     {
+        $id = $request->param(0);
+
         $view = new View();
-        $view->set('Form/departure_assesment_success', []);
+        $view->set('Form/departure_assesment_success', [
+            'id' => $id
+        ]);
         $view->prepend('header');
         $view->append('footer');
 

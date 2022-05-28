@@ -1,5 +1,6 @@
 <?php
 
+use Application\Models\User;
 use System\Core\Model;
 use System\Helpers\URL;
 use System\Libs\FormValidator;
@@ -8,6 +9,12 @@ use System\Models\Language;
 $lang = Model::get(Language::class);
 
 $formValidator = FormValidator::instance("flight");
+
+/**
+ * @var User
+ */
+$userM = Model::get(User::class);
+$userInfo = $userM->getInfo();
 ?>
 <define title>
     <?php echo $lang('add_flight') ?>
@@ -84,12 +91,13 @@ $formValidator = FormValidator::instance("flight");
                         </div>
                         <div class="form-group">
                             <label for="sairport"><?php echo $lang('source_airport'); ?></label>
-                            <select name="sairport" class="form-control">
+                            <select name="sairport" class="form-control" aria-readonly="true" disabled>
                                 <option value=""><?php echo $lang('select_airport'); ?></option>
                                 <?php foreach ( $sAirports as $item ): ?>
-                                    <option value="<?php echo $item['id'] ?>" <?php echo $formValidator->getValue('sairport') == $item['id'] || $userInfo['airport'] == $item['id'] ? 'selected' : ''; ?>><?php echo $item[$lang->current() . '_name']; ?></option>
+                                    <option value="<?php echo $item['id'] ?>" <?php echo $formValidator->getValue('sairport', $userInfo['airport']) == $item['id'] || $userInfo['airport'] == $item['id'] ? 'selected' : ''; ?>><?php echo $item[$lang->current() . '_name']; ?></option>
                                 <?php endforeach; ?>
                             </select>
+                            <input type="hidden" name="sairport" value="<?php echo $userInfo['airport'] ?>" />
                             <?php if ( $formValidator->hasError('sairport') ): ?>
                                 <p><?php echo $formValidator->getError('sairport'); ?></p>
                             <?php endif; ?>

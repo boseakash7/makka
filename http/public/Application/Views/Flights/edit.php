@@ -85,12 +85,13 @@ $formValidator = FormValidator::instance("flight");
                         </div>
                         <div class="form-group">
                             <label for="sairport"><?php echo $lang('source_airport'); ?></label>
-                            <select name="sairport" class="form-control">
+                            <select name="sairport" class="form-control" disabled>
                                 <option value=""><?php echo $lang('select_airport'); ?></option>
                                 <?php foreach ( $sAirports as $item ): ?>
                                     <option value="<?php echo $item['id'] ?>" <?php echo $formValidator->getValue('sairport', $flight['sairport']) == $item['id'] ? 'selected' : ''; ?>><?php echo $item[$lang->current() . '_name']; ?></option>
                                 <?php endforeach; ?>
                             </select>
+                            <input type="hidden" name="sairport" value="<?php echo $userInfo['airport'] ?>" />
                             <?php if ( $formValidator->hasError('sairport') ): ?>
                                 <p><?php echo $formValidator->getError('sairport'); ?></p>
                             <?php endif; ?>

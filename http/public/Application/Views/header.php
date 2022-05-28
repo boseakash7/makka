@@ -16,6 +16,7 @@ $lang = Model::get(Language::class);
  */
 $userM = Model::get(User::class);
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +25,9 @@ $userM = Model::get(User::class);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><call title /></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="<?php echo URL::asset('Application/Assets/css/main/app.css'); ?>">
     <link rel="stylesheet" href="<?php echo URL::asset('Application/Assets/css/main/app-dark.css'); ?>">
@@ -36,7 +40,7 @@ $userM = Model::get(User::class);
     <call header_css>
 </head>
 
-<body class="theme-light">
+<body class="theme-light <?php echo $lang->current(); ?>" >
     <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
@@ -96,7 +100,7 @@ $userM = Model::get(User::class);
                         </li>
                         <?php endif; ?>
 
-                        <?php if ( $userM->isSup() || $userM->isEmp() ):  ?>
+                        <?php if ( $userM->fromSource() ):  ?>
                         <li class="sidebar-item  <?php echo RouterHelper::has('flights') ? 'active' : ''; ?>">
                             <a href="<?php echo URL::full('flights'); ?>" class='sidebar-link'>
                                 <i class="bi bi-cloud-upload"></i>
@@ -105,7 +109,7 @@ $userM = Model::get(User::class);
                         </li>
                         <?php endif; ?>
 
-                        <?php if ( $userM->isSup() ):  ?>
+                        <?php if ( $userM->isSup() && $userM->fromDestination() ):  ?>
                         <li class="sidebar-item  <?php echo RouterHelper::has('arrivals') ? 'active' : ''; ?>">
                             <a href="<?php echo URL::full('arrivals'); ?>" class='sidebar-link'>
                                 <i class="bi bi-cloud-upload"></i>

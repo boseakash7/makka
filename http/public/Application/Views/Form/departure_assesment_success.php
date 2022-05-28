@@ -17,7 +17,7 @@ $lang = Model::get(Language::class);
                 <div class="card-body text-center">
                     <i class="bi bi-check-circle success-icon"></i>
                     <h2><?php echo $lang('departure_assesment_form_submitted') ?></h2>
-                    <a href="#!" class="go-back"><u><?php echo $lang('do_another_assessment') ?></u></a>
+                    <a href="<?php echo URL::full('form/departure-assessment/' . $id) ?>" class="go-back"><u><?php echo $lang('do_another_assessment') ?></u></a>
                 </div>
             </div>
         </div>
@@ -31,14 +31,4 @@ $lang = Model::get(Language::class);
             font-size: 50px;
         }
     </style>
-</define>
-
-<define footer_js>
-    <script>
-        $(".go-back").on('click', function(e) {
-            e.preventDefault();
-
-            window.history.back();
-        })
-    </script>
 </define>
