@@ -1,6 +1,11 @@
 <?php
 
+use Application\Controllers\Mode;
+use System\Core\Model;
 use System\Helpers\URL;
+use System\Models\Language;
+
+$lang = Model::get(Language::class);
 
 ?>
 <!DOCTYPE html>
@@ -9,7 +14,7 @@ use System\Helpers\URL;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Mazer Admin Dashboard</title>
+    <title><?php echo $lang('login'); ?></title>
     <link rel="stylesheet" href="<?php echo URL::asset('Application/Assets/css/main/app.css'); ?>">
     <link rel="stylesheet" href="<?php echo URL::asset('Application/Assets/css/pages/auth.css'); ?>">
     <link rel="shortcut icon" href="<?php echo URL::asset('Application/Assets/images/logo/favicon.svg" type="image/x-icon'); ?>">

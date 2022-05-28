@@ -45,11 +45,12 @@ $routes->set(array(
         '/flights/arrival-assessment/(:num)' => "Flights::arrivalAssessment",
         '/flights/departure-assessment/(:num)' => "Flights::departureAssessment",
         '/flights/departure-form/(:num)' => "Flights::departureForm",
-        '/flights/arrival-form/(:num)' => "Flights::arrivalForm",
-        '/flights/mode' => "Flights::mode",
+        '/flights/arrival-form/(:num)' => "Flights::arrivalForm",        
 
         '/account/change-password' => 'Account::changePassword',
         '/account/lang' => 'Account::lang',
+
+        '/mode' => "Mode::index",
 
         // forms
         '/form/departure/(:num)' => 'Form::departure',
