@@ -11,10 +11,10 @@ $formValidator = FormValidator::instance("password");
 
 ?>
 <define title>
-    Change Password
+    <?php echo $lang('change_password') ?>
 </define>
 <define page_desc>
-    Change your password
+    <?php echo $lang('change_your_password') ?>
 </define>
 <section class="section">
     <div class="row">

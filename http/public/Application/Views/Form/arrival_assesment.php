@@ -12,7 +12,7 @@ $formValidator = FormValidator::instance("arrival-assesment");
 
 ?>
 <define title>
-    Arrival Assesment Form
+    <?php echo $lang('arrival_assessment_form') ?>
 </define>
 <define page_desc>
     Complete the form

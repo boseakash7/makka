@@ -14,16 +14,16 @@ $userM = Model::get(User::class);
 
 ?>
 <define title>
-    Flights
+    <?php echo $lang('flights') ?>
 </define>
 <define page_desc>
-    Manage your flights from here
+    <?php echo $lang('manage_flights_from_here') ?>
 </define>
 <define right_header>
     <?php if ( !isset($arrival) && $userM->isSup() ): ?>
     <a href="<?php echo URL::full('flights/add') ?>" class="btn btn-primary"><?php echo $lang('add') ?></a>
     <?php endif; ?>
-    <a href="<?php echo URL::full('flights') ?>" class="btn btn-primary"><?php echo $lang('reload') ?></a>
+    <a href="<?php echo URL::current() ?>" class="btn btn-primary"><?php echo $lang('reload') ?></a>
 </define>
 <section class="section">
     <div class="card">
@@ -102,7 +102,7 @@ $userM = Model::get(User::class);
                                     <a href="<?php echo URL::full('flights/scan/' . $flight['id']) ?>/check-in" class="btn btn-danger" target="_blank"><?php echo $lang('start_scanning') ?></a>
                                 <?php endif; ?>
                                 <?php if ( $userM->isSup() ): ?>
-                                    <a href="<?php echo URL::full('flights/close/' . $flight['id']) ?>" class="btn btn-secondary m-2"><?php echo $lang('close_flight') ?></a>                                    
+                                    <a href="<?php echo URL::full('flights/close/' . $flight['id']) ?>" class="btn btn-secondary m-2 close-flight"><?php echo $lang('close_flight') ?></a>                                    
                                     <a href="<?php echo URL::full('/form/departure-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>
                                 <?php endif; ?>
                             <?php elseif ( $flight['status'] == Flights::STATUS_CLOSED ): ?>
@@ -136,7 +136,7 @@ $userM = Model::get(User::class);
                         </td>
                     </tr>
                 <?php endforeach; ?>
-                <thead>
+                <tfoot>
                     <tr>
                     <th><?php echo $lang('id'); ?></th>
                         <th><?php echo $lang('flight_number'); ?></th>
@@ -151,7 +151,7 @@ $userM = Model::get(User::class);
                         <!-- <th><?php // echo $lang('destination'); ?></th> -->                        
                         <th><?php echo $lang('action'); ?></th>
                     </tr>
-                </thead>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -164,13 +164,31 @@ $userM = Model::get(User::class);
                 responsive: true
             });
         } );
+
+        $(".close-flight").on('click', function(e) {
+            e.preventDefault();
+
+            var href = $(this).attr('href');
+
+            swal({
+                title: "<?php echo $lang('are_you_sure_close_flight') ?>",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+            .then((confirm) => {
+            if (confirm) {
+                window.location.href = href;
+            }
+            });
+        })
     </script>
 </define>
 
 <define header_css>
     <style>
-        .dataTables_wrapper {
+        /* .dataTables_wrapper {
             overflow-y: auto;
-        }
+        } */
     </style>
 </define>

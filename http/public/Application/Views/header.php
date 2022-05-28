@@ -32,7 +32,7 @@ $userM = Model::get(User::class);
 
     <link rel="stylesheet" href="<?php echo URL::asset('Application/Assets/css/shared/iconly.css'); ?>">
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css" >
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
     <call header_css>
 </head>
 
@@ -60,7 +60,7 @@ $userM = Model::get(User::class);
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
+                        <li class="sidebar-title"><?php echo $lang('menu') ?></li>
 
                         <!-- <li class="sidebar-item">
                             <a href="index.html" class='sidebar-link'>

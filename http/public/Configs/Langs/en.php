@@ -38,6 +38,7 @@ return [
     'average_pilgrim_waiting' => "Arrival Pilgrim Waiting",
     'average_pilgrim_service' => "Arrival Pilgrim Service",
     'close' => "Close",
+    'menu' => "Menu",
     'no_data_found' => "No data found",
 
     // Form Departure
@@ -118,11 +119,16 @@ return [
 
     // arrival assessment
     'arrival_assessment' => "Flight arrival assessment for (:flight)",
+    'arrival_assessment_form' => 'Arrival Assessment Form',
     'arrival_form' => "Flight arrival form for (:flight)",
+    'arrival_form_title' => "Arrival Form",
+    'complete_the_form' => "Complete the form",
 
     // Departure assessment
     'departure_assessment' => "Flight departure assessment for (:flight)",
+    'departure_assessment_form' => "Departure Assessment Form",
     'departure_form' => "Flight departure form for (:flight)",
+    'departure_form_title' => "Departure Form",
 
     'email_password_combination_wrong' => "Email/Password combination is wrong",
     'remember_password' => "Remember your password?",
@@ -132,6 +138,7 @@ return [
     'password_does_not_match' => "Password does not match",
     'password_reset_successful' => "Password reset is successful",
     'change_password' => "Change password",
+    'change_your_password' => "Change your password",
     'change_language_to_arabic' => "Change language to arabic",
     'change_language_to_english' => "Change language to english",
 
@@ -167,7 +174,7 @@ return [
     'close_flight' => "Close Flight",
     'already_checked_in' => "This id is already checked in",
     'already_checked_out' => "This id is already checked out",
-    'ok' => "Ok",
+    'ok' => "Okay",
 
     'arrival_flights' => "Arrival Flights",
     'completed_flights' => "Completed flights",
@@ -183,10 +190,40 @@ return [
     'no' => "No",
 
     'add_supervisor' => "Add Supervisor",
+    'edit_supervisor' => "Edit Supervisor",
     'add_scanner' => "Add Scanner",
 
+    'add_employee' => 'Add Employee',
+    'edit_employee' => 'Edit Employee',
+    'add_new_employee_from_here' => 'Add a new employee from here.',
+    'edit_new_employee_from_here' => 'Edit a employee from here.',
+
+    'add_airport' => 'Add Airport',
+    'edit_airport' => 'Edit Airport',
+    'edit_an_existing_airport_from_here' => 'Edit an existing airport from here.',
+    'add_a_new_airport_from_here' => 'Add a new airport from here.',
+
+    'add_flight' => 'Add Flight',
+    'add_new_flights_from_here' => 'Add new flights from here.',
     // 'ad'
 
-    'view_summery' => "View summery"
+    'en_name' => "En Name",
+    'aar_name' => "Ar Name",
+
+    'view_summery' => "View summary",
+    'employee_name' => "Employee Name",
+
+    // confirm messages
+    'are_you_sure_close_flight' => "Are you sure you want to close this flight?",
+
+    "id_scan_message" => "If you are unable to scan, you can put the id here",
+    "warning_scan_check_mode" => "Warning! Make sure the correct mode is selected",
+    "manage_flights_from_here" => " Manage your flights from here",
+
+    "manage_your_airport_from_here" => "Manage your airport from here",
+    "manage_your_employee_from_here" => "Manage your employees from here",
+    "manage_your_supervisor_from_here" => "Manage your supervisors from here",
+    "edit_an_existing_supervisor_from_here" => "Edit an existing supervisor from here",
+    "add_new_supervisor_from_here" => "Add a new supervisor from here.",
 ];
 

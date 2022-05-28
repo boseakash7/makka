@@ -9,13 +9,13 @@ $lang = Model::get(Language::class);
 
 ?>
 <define title>
-    Airports
+    <?php echo $lang('airports') ?>
 </define>
 <define page_desc>
-    Manage your airport from here
+    <?php echo $lang('manage_your_airport_from_here') ?>
 </define>
 <define right_header>
-    <a href="<?php echo URL::full('airports/add') ?>" class="btn btn-primary">Add</a>
+    <a href="<?php echo URL::full('airports/add') ?>" class="btn btn-primary"><?php echo $lang('add') ?></a>
 </define>
 <section class="section">
     <div class="card">

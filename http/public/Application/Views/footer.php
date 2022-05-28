@@ -21,6 +21,7 @@ use System\Helpers\URL;
     <script src="<?php echo URL::asset('Application/Assets/js/app.js'); ?>"></script>    
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>    
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 
     <call footer_js/>
 

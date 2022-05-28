@@ -12,14 +12,14 @@ $formValidator = FormValidator::instance("airport");
 
 ?>
 <define title>
-    Edit Airports
+    <?php echo $lang('edit_airport') ?>
 </define>
 <define page_desc>
-    Edit an existing airport from here.
+    <?php echo $lang('edit_an_existing_airport_from_here') ?>
 </define>
 <define right_header>
     <a href="<?php echo URL::full('airports') ?>">
-        < Back</a>
+        < <?php echo $lang('back') ?></a>
 </define>
 <section class="section">
     <div class="row">
@@ -31,14 +31,14 @@ $formValidator = FormValidator::instance("airport");
                 <div class="card-body">
                     <form action="<?php echo URL::current() ?>" method="POST">
                         <div class="form-group">
-                            <label for="name">En Name</label>
+                            <label for="name"><?php echo $lang('en_name') ?></label>
                             <input type="text" class="form-control" name="en_name" id="en_name" value="<?php echo $formValidator->getValue('en_name', $airport['en_name']); ?>"/>
                             <?php if ( $formValidator->hasError('en_name') ): ?>
                                 <p><?php echo $formValidator->getError('en_name'); ?></p>
                             <?php endif; ?>
                         </div>
                         <div class="form-group">
-                            <label for="name">Ar Name</label>
+                            <label for="name"><?php echo $lang('ar_name') ?></label>
                             <input type="text" class="form-control" name="ar_name" id="ar_name" value="<?php echo $formValidator->getValue('ar_name', $airport['ar_name']); ?>"/>
                             <?php if ( $formValidator->hasError('ar_name') ): ?>
                                 <p><?php echo $formValidator->getError('ar_name'); ?></p>

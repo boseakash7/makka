@@ -11,14 +11,14 @@ $formValidator = FormValidator::instance("flight");
 
 ?>
 <define title>
-    Add Flights
+    <?php echo $lang('add_flights') ?>
 </define>
 <define page_desc>
-    Add a new flights from here.
+    <?php echo $lang('add_new_flights_from_here') ?>
 </define>
 <define right_header>
     <a href="<?php echo URL::full('flights') ?>">
-        < Back</a>
+        < <?php echo $lang('back') ?></a>
 </define>
 <section class="section">
     <div class="row">

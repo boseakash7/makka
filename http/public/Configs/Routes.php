@@ -46,6 +46,7 @@ $routes->set(array(
         '/flights/departure-assessment/(:num)' => "Flights::departureAssessment",
         '/flights/departure-form/(:num)' => "Flights::departureForm",
         '/flights/arrival-form/(:num)' => "Flights::arrivalForm",
+        '/flights/mode' => "Flights::mode",
 
         '/account/change-password' => 'Account::changePassword',
         '/account/lang' => 'Account::lang',
@@ -54,7 +55,7 @@ $routes->set(array(
         '/form/departure/(:num)' => 'Form::departure',
         '/form/arrival/(:num)' => 'Form::arrival',
         '/departure-form-success' => 'Form::departureSuccess',
-        '/departure-form-success' => 'Form::departureSuccess',
+        '/arrival-form-success' => 'Form::arrivalSuccess',
         '/form/departure-assessment/(:num)' => 'Form::departureAssesment',
         '/form/arrival-assessment/(:num)' => 'Form::arrivalAssesment',
         '/arrival-assesment-form-success' => 'Form::arrivalAssesmentSuccess',

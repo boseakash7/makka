@@ -32,7 +32,7 @@ $lang = Model::get(Language::class);
                         </div>
                         <hr>
                         <div class="other-info clearfix">
-                            <p><strong>Employee Name</strong>: <?php echo $userInfo['name'] ?></p>
+                            <p><strong><?php echo $lang('employee_name') ?></strong>: <?php echo $userInfo['name'] ?></p>
                         </div>
                         <hr>
                         <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
@@ -48,6 +48,7 @@ $lang = Model::get(Language::class);
                             <a href="<?php echo !empty($ciClass) ? '#!' : URL::full('flights/scan/' . $flight['id'] . '/check-in') ?>" class="btn <?php echo $ciClass ?>"><?php echo $lang('check_in') ?></a>
                             <a href="<?php echo !empty($coClass) ? '#!' : URL::full('flights/scan/' . $flight['id'] . '/check-out') ?>" class="btn <?php echo $coClass ?>"><?php echo $lang('check_out') ?></a>
                         </div>
+                        <small class="mb-3 mt-3 text-danger d-block">(<?php echo $lang('warning_scan_check_mode') ?>)</small>
 
                         <div id="reader" class="mx-auto mt-5"></div>
 
@@ -57,6 +58,7 @@ $lang = Model::get(Language::class);
                                     <label for=""><?php echo $lang('id'); ?></label>
                                     <input type="text" name="qr_code" class="form-control" id="qr_input">
                                 </div>
+                                <small class="mb-3 d-block">(<?php echo $lang('id_scan_message') ?>)</small>
                                 <button type="submit" class="btn btn-primary"><?php echo $lang('submit'); ?></button>
                             </form>
                         </div>                        

@@ -12,14 +12,14 @@ $formValidator = FormValidator::instance("departure-assesment");
 
 ?>
 <define title>
-    Departure Assesment Form
+    <?php echo $lang('departure_assessment_form') ?>
 </define>
 <define page_desc>
-    Complete the form
+    <?php echo $lang('complete_the_form') ?>
 </define>
 <define right_header>
     <a href="<?php echo URL::full('flights') ?>">
-        < Back</a>
+        < <?php echo $lang('back') ?></a>
 </define>
 <section class="section">
     <div class="row">

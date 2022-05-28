@@ -20,7 +20,7 @@ $formValidator = FormValidator::instance("reset");
 
         <form action="<?php echo URL::current() ?>" method="POST">
             <div class="form-group position-relative has-icon-left mb-4">
-                <input type="email" class="form-control form-control-xl" placeholder="Email" name="email">
+                <input type="email" class="form-control form-control-xl" placeholder="<?php echo $lang('email') ?>" name="email">
                 <div class="form-control-icon">
                     <i class="bi bi-envelope"></i>
                 </div>

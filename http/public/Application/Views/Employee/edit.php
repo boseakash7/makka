@@ -11,14 +11,14 @@ $formValidator = FormValidator::instance("employee");
 
 ?>
 <define title>
-    Edit Employee
+    <?php echo $lang('edit_employee') ?>
 </define>
 <define page_desc>
-    Edit an existing employee from here.
+    <?php echo $lang('edit_new_employee_from_here') ?>
 </define>
 <define right_header>
     <a href="<?php echo URL::full('employee') ?>">
-        < Back</a>
+        < <?php echo $lang('back') ?></a>
 </define>
 <section class="section">
     <div class="row">
@@ -30,14 +30,14 @@ $formValidator = FormValidator::instance("employee");
                 <div class="card-body">
                     <form action="<?php echo URL::current() ?>" method="POST">
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name"><?php echo $lang('name') ?></label>
                             <input type="text" class="form-control" name="name" id="name" value="<?php echo $formValidator->getValue('name', $user['name']); ?>"/>
                             <?php if ( $formValidator->hasError('name') ): ?>
                                 <p><?php echo $formValidator->getError('name'); ?></p>
                             <?php endif; ?>
                         </div>
                         <div class="form-group">
-                            <label for="name">Email</label>
+                            <label for="name"><?php echo $lang('email') ?></label>
                             <input type="text" class="form-control" name="email" id="email" value="<?php echo $formValidator->getValue('email', $user['email']); ?>"/>
                             <?php if ( $formValidator->hasError('email') ): ?>
                                 <p><?php echo $formValidator->getError('email'); ?></p>
@@ -56,7 +56,7 @@ $formValidator = FormValidator::instance("employee");
                             <?php endif; ?>
                         </div>         
                         <div class="form-group">
-                            <label for="password">Password</label>
+                            <label for="password"><?php echo $lang('password') ?></label>
                             <input type="password" class="form-control" name="password" id="password" value="<?php echo $formValidator->getValue('password'); ?>"/>
                             <?php if ( $formValidator->hasError('password') ): ?>
                                 <p><?php echo $formValidator->getError('password'); ?></p>
