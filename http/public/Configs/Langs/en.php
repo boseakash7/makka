@@ -39,6 +39,7 @@ return [
     'average_pilgrim_service' => "Arrival Pilgrim Service",
     'close' => "Close",
     'menu' => "Menu",
+    'back' => "Back",
     'no_data_found' => "No data found",
 
     // Form Departure
@@ -208,7 +209,7 @@ return [
     // 'ad'
 
     'en_name' => "En Name",
-    'aar_name' => "Ar Name",
+    'ar_name' => "Ar Name",
 
     'view_summery' => "View summary",
     'employee_name' => "Employee Name",

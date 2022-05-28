@@ -91,7 +91,7 @@ return [
     'on_air' => "على الهواء مباشرة",
     'arrived' => "وصل",
     'complete' => "كامل",
-    
+    'back' => "ظهر",
     
     'arrival_assesment_form_submitted' => "تم تقديم نموذج تقييم الوصول",
     'departure_assesment_form_submitted' => "تم تقديم نموذج تقييم المغادرة",
@@ -206,7 +206,7 @@ return [
     // 'ad'
 
     'en_name' => "الاسم",
-    'aar_name' => "الاسم العربي",
+    'ar_name' => "الاسم العربي",
 
     'view_summery' => "عرض الملخص",
 
