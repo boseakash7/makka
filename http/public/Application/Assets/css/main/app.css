@@ -867,7 +867,7 @@ progress {
 }
 
 .blockquote-footer:before {
-    content: "— "
+    content: "â€”Â "
 }
 
 .img-fluid,.img-thumbnail {
@@ -9867,8 +9867,16 @@ textarea.form-control-lg {
         float:left!important
     }
 
+    .ar .float-lg-start {
+        float:right!important;
+    }
+
     .float-lg-end {
         float: right!important
+    }
+
+    .ar .float-lg-end {
+        float: left!important;
     }
 
     .float-lg-none {
@@ -19627,6 +19635,11 @@ textarea.form-control-lg {
 
 .sidebar-wrapper .menu .sidebar-link span {
     margin-left: 1rem
+}
+
+.ar .sidebar-wrapper .menu .sidebar-link span {
+    margin-left: 0;
+    margin-right: 1rem;
 }
 
 .sidebar-wrapper .menu .sidebar-link:hover {

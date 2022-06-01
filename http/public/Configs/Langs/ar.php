@@ -62,6 +62,7 @@ return [
     'number_of_cases' => 'عدد الحالات',
     'success' => "نجاح",
     'warning' => "تحذير",
+    'dashboard' => 'لوحه القياده',
     
     // Arrival Form
     'number_of_counter_custom_staffs' => 'عدد موظفي الكاونتر',
@@ -209,6 +210,9 @@ return [
     'ar_name' => "الاسم العربي",
 
     'invalid_qr_code' => "هذا غير صحيح",
+
+    'sorry_this_page_is_not_available' => "عذرا هذه الصفحة غير متوفرة",
+
     'view_summery' => "عرض الملخص",
 
     // confirm messages

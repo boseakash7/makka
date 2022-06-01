@@ -40,6 +40,7 @@ return [
     'back' => "Back",
     'no_data_found' => "No data found",
     'do_another_assessment' => "Do another assessment",
+    'dashboard' => "Dashboard",
 
     // Form Departure
     'counters_working_start_time' => 'Counters working start time',

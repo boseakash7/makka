@@ -203,10 +203,12 @@ class Auth extends Controller
                 throw new Redirect('airports');
                 break;
             case User::TYPE_SUP:
-                throw new Redirect('flights');
+                if ( $this->user->fromSource() ) throw new Redirect('flights');
+                else throw new Redirect('arrivals');
                 break;
-            case User::TYPE_EMP:
-                throw new Redirect('flights');
+            case User::TYPE_EMP:                
+                if ( $this->user->fromSource() ) throw new Redirect('flights');
+                else throw new Redirect('arrivals');
                 break;
         }
     }

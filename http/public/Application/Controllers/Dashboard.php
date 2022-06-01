@@ -13,6 +13,7 @@ class Dashboard extends AuthController
     public function index( Request $request, Response $response )
     {
         $view = new View();
+        $view->set('Dashboard/index');
         $view->prepend('header');
         $view->append('footer');
 

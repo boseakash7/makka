@@ -46,8 +46,8 @@ $lang = Model::get(Language::class);
                             <?php foreach ( $passengers as $passenger ): ?>
                                 <tr>
                                     <td><?php echo $passenger['info']; ?></td>
-                                    <td><?php echo $passenger['check_in_time'] != null ? date('Y-m-d H:m:s', $passenger['check_in_time']) : '-'; ?></td>
-                                    <td><?php echo $passenger['check_out_time'] != null ? date('Y-m-d H:m:s', $passenger['check_out_time']) : '-'; ?></td>
+                                    <td><?php echo $passenger['check_in_time'] != null ? date('Y-m-d H:i:s', $passenger['check_in_time']) : '-'; ?></td>
+                                    <td><?php echo $passenger['check_out_time'] != null ? date('Y-m-d H:i:s', $passenger['check_out_time']) : '-'; ?></td>
                                 </tr>
                             
                             <?php endforeach; ?>

@@ -40,7 +40,7 @@ $userM = Model::get(User::class);
     <call header_css>
 </head>
 
-<body class="theme-light <?php echo $lang->current(); ?>" >
+<body class="theme-light <?php echo $lang->current(); ?> <?php echo $lang->current() == 'ar' ? "rtl" : ''; ?>" <?php echo $lang->current() == 'ar' ? "dir='rtl'" : ''; ?>>
     <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
@@ -66,12 +66,12 @@ $userM = Model::get(User::class);
                     <ul class="menu">
                         <li class="sidebar-title"><?php echo $lang('menu') ?></li>
 
-                        <!-- <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
+                        <li class="sidebar-item <?php echo RouterHelper::has('dashboard') ? 'active' : '' ?>">
+                            <a href="<?php echo URL::full('dashboard'); ?>" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
-                                <span>Dashboard</span>
+                                <span><?php echo $lang('dashboard') ?></span>
                             </a>
-                        </li> -->
+                        </li>
 
                         <?php if ( $userM->isAdmin() ):  ?>
                             <li class="sidebar-item  <?php echo RouterHelper::has('airports') ? 'active' : ''; ?>">
@@ -109,7 +109,7 @@ $userM = Model::get(User::class);
                         </li>
                         <?php endif; ?>
 
-                        <?php if ( $userM->isSup() && $userM->fromDestination() ):  ?>
+                        <?php if ( $userM->fromDestination() ):  ?>
                         <li class="sidebar-item  <?php echo RouterHelper::has('arrivals') ? 'active' : ''; ?>">
                             <a href="<?php echo URL::full('arrivals'); ?>" class='sidebar-link'>
                                 <i class="bi bi-cloud-upload"></i>

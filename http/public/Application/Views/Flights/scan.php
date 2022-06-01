@@ -104,7 +104,7 @@ $lang = Model::get(Language::class);
             if (scan) {
                 console.log(decodedText);
                 scan = false;
-                if ( decodedText.search('#MK') == -1 ) {
+                if ( decodedText.search('#MR#') == -1 ) {
                     swal({
                         title: '<?php echo $lang('invalid_qr_code') ?>',                        
                         icon: "warning",
