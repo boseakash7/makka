@@ -405,6 +405,12 @@ class Form extends Controller
                 'average_luggage_arrive' => $formValidator->getValue('how_long_does_luggage_arrive_at')  * 60,
                 'average_bus_ride' => $formValidator->getValue('average_waiting_until_sorting_system')  * 60,
                 'duration_pilgrims' => $formValidator->getValue('duration_of_arrival_pilgrims') ,
+                'flight_delay' => $this->_getPositive($formValidator->getValue('flight_delay')),
+                'unmarked_buses' => $this->_getPositive($formValidator->getValue('are_there_unmarked_buses')),
+                'accidents' => $this->_getPositive($formValidator->getValue('are_there_any_accidents')),
+                'buses_ready_to_pilgrims' => $formValidator->getValue('number_of_buses_operated_to_transport_pilgrims'),
+                'buses_with_mecca_logo' => $formValidator->getValue('number_of_buses_operating_with_mecca_logo'),
+                'sick_cases' => $formValidator->getValue('number_of_cases'),
                 'created_at' => time()
             ]);
 
@@ -430,6 +436,7 @@ class Form extends Controller
     public function departure( Request $request, Response $response )
     {
         $lang = Model::get(Language::class);
+        
         
         $flightId = $request->param(0);
         $flightInfo = Model::get(Flights::class)->getById($flightId);
@@ -617,6 +624,18 @@ class Form extends Controller
                 'flight_id' => $flightId,
                 'json' => $json,
                 'passengers' => $formValidator->getValue('passengers'),
+                'working_counts' => $formValidator->getValue('working_counts'),
+                'non_working_counts' => $formValidator->getValue('non_working_counts'),
+                'number_of_men' => $formValidator->getValue('number_of_men'),
+                'number_of_women' => $formValidator->getValue('number_of_women'),
+                'number_of_seats' => $formValidator->getValue('number_of_seats'),
+                'number_of_cases' => $formValidator->getValue('number_of_cases'),
+                'number_of_bags' => $formValidator->getValue('number_of_bags'),
+                'number_of_fingerprint' => $formValidator->getValue('number_of_people_fingerprinted'),
+                'communication_speed' => $this->_getstatus($formValidator->getValue('speed_of_communication')),
+                'connection_status' => $this->_getstatus($formValidator->getValue('connection_status')),
+                'fingerprint_status' => $this->_getstatus($formValidator->getValue('fingerprint_status')),
+                'average_pilgrim_service' => $formValidator->getValue('average_pilgrim_service'),
                 'created_at' => time()
             ]);
 
@@ -666,6 +685,41 @@ class Form extends Controller
         }
 
         return $point;
+    }
+
+    private function _getstatus( $s )
+    {
+        $status = 0;
+
+        switch( $s )
+        {
+            case 'excellent':
+                $status = 2;
+                break;
+            case 'good':
+                $status = 1;
+                break;
+            default:
+                $status = 0;                
+        }
+
+        return $status;
+    }
+
+    private function _getPositive( $value )
+    {
+        $status = 0;
+        switch( $value )
+        {
+            case 'no_delay':
+            case 'yes':
+                $status = 1;
+                break;
+            default:
+                $status = 0;
+        }
+
+        return $status;
     }
 
 }

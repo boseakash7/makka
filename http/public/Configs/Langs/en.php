@@ -239,6 +239,15 @@ return [
     'avg_service_time' => "Average service time",
     'counter_working_time' => "Counter working time",
     'hajj_satisfaction_rate' => "Hajj satisfaction rate",
-    'baggage_arrival_time_to_accommodation' => "Baggage arrival time to accommodation"
+    'baggage_arrival_time_to_accommodation' => "Baggage arrival time to accommodation",
+    'number_working_counters' => "Number of working counters",
+    'number_non_operating_counters' => "Number of non working counters",
+    'average_waiting_hajj' => "Average waiting hajj",
+    'average_hajj_service' => "Average hajj service",
+    'number_of_males' => "Number of males",
+    'number_of_sick' => "Number of sick cases",
+    'number_of_blindfolded' => "Number of blindfolded",
+    'number_of_bag_used' => "Number of bag used",
+    'connection_speed' => "Connection speed"
 ];
 

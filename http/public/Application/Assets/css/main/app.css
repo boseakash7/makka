@@ -867,7 +867,7 @@ progress {
 }
 
 .blockquote-footer:before {
-    content: "â€”Â "
+    content: "Ã¢â‚¬â€Ã‚Â "
 }
 
 .img-fluid,.img-thumbnail {
@@ -19565,12 +19565,22 @@ textarea.form-control-lg {
     left: 0
 }
 
+.ar #sidebar.active .sidebar-wrapper {
+    left: auto;
+    right: 0;
+}
+
 #sidebar:not(.active) .sidebar-wrapper {
     left: -300px
 }
 
 #sidebar:not(.active)~#main {
-    margin-left: 0
+    margin-left: 0;
+}
+
+.ar #sidebar:not(.active)~#main {
+    margin-left: auto;
+    margin-right: 0;
 }
 
 .sidebar-wrapper {
@@ -19583,6 +19593,10 @@ textarea.form-control-lg {
     transition: left .5s ease-out;
     width: 300px;
     z-index: 10
+}
+
+.ar .sidebar-wrapper {
+    transition: right .5s ease-out;
 }
 
 .sidebar-wrapper .sidebar-header {
@@ -19727,6 +19741,12 @@ textarea.form-control-lg {
 @media screen and (max-width: 1199px) {
     .sidebar-wrapper {
         left:-300px;
+        position: absolute
+    }
+
+    .ar .sidebar-wrapper {
+        left: auto;
+        right:-300px;
         position: absolute
     }
 
@@ -20291,9 +20311,20 @@ textarea.form-control-lg {
     padding: 2rem
 }
 
+.ar #main {
+    margin-left: auto;
+    margin-right: 300px;
+    padding: 2rem
+}
+
 @media screen and (max-width: 1199px) {
     #main {
         margin-left:0
+    }
+
+    .ar #main {
+        margin-left: auto;
+        margin-right: 0;
     }
 }
 

@@ -12,14 +12,14 @@ $lang = Model::get(Language::class);
  */
 $db = Database::get();
 
-$SUBSQL1 = " SELECT `id` FROM `flights` WHERE `dairport` IS NOT NULL ";
+$SUBSQL1 = " SELECT `id` FROM `flights` ";
 
 // PREPARE SUB SQL
 $dbValues1 = [];
 $WHERE1 = [];
 
 if (!empty($cityId)) {
-    $WHERE1[] = " `dairport` IN (
+    $WHERE1[] = " `sairport` IN (
         SELECT `id` FROM `airports` WHERE `city` = ?
     ) ";
     $dbValues1[] = $cityId;
@@ -35,41 +35,61 @@ if (!empty($to)) {
     $dbValues1[] = $to;
 }
 
-$SUBSQL1 .= !empty($WHERE1) ?  " AND " . implode(" AND ", $WHERE1) : "";
+$SUBSQL1 .= !empty($WHERE1) ?  " WHERE " . implode(" AND ", $WHERE1) : "";
 // END PREPARE FILTER SQL
 
-$SQL1 = "SELECT COUNT(*) as `count` FROM `flights` WHERE `id` IN ( $SUBSQL1 )";
-$SQL2 = "SELECT SUM(`passengers`) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL3 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_waiting_to_sterile`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL4 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_waiting_inspection`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL5 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_luggage_arrive`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL6 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_bus_ride`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL7 = "SELECT SEC_TO_TIME(FLOOR(AVG(`duration_pilgrims`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL8 = "SELECT AVG(`avg_score`) as `count` FROM `arrival_assesment` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL1 = "SELECT SUM(`working_counts`) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL2 = "SELECT SUM(`non_working_counts`) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1)";
+$SQL3 = "SELECT SUM(`number_of_men`) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL4 = "SELECT SUM(`number_of_women`) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL5 = "SELECT SUM(`number_of_seats`) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL6 = "SELECT SUM(`number_of_cases`) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL7 = "SELECT SUM(`number_of_bags`) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL8 = "SELECT SUM(`number_of_fingerprint`) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL9 = "SELECT CONCAT(ROUND(AVG(`communication_speed`) / 3 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL10 = "SELECT CONCAT(ROUND(AVG(`connection_status`) / 3 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL11 = "SELECT CONCAT(ROUND(AVG(`fingerprint_status`) / 3 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL12 = "SELECT SEC_TO_TIME(FLOOR(AVG(`check_out_time` - `check_in_time`))) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL1 )";
+$SQL13 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_pilgrim_service`))) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 
-$flightsTotal = $db->query($SQL1, $dbValues1)->get();
-$flightsTotal = $flightsTotal['count'];
+$workingCounts = $db->query($SQL1, $dbValues1)->get();
+$workingCounts = $workingCounts['count'];
 
-$passengersTotal = $db->query($SQL2, $dbValues1)->get();
-$passengersTotal = $passengersTotal['count'];
+$nonWorkingCounts = $db->query($SQL2, $dbValues1)->get();
+$nonWorkingCounts = $nonWorkingCounts['count'];
 
-$avgWaitingTime = $db->query($SQL3, $dbValues1)->get();
-$avgWaitingTime = $avgWaitingTime['count'];
+$numberOfMen = $db->query($SQL3, $dbValues1)->get();
+$numberOfMen = $numberOfMen['count'];
 
-$inspectionTime = $db->query($SQL4, $dbValues1)->get();
-$inspectionTime = $inspectionTime['count'];
+$numberOfWomen = $db->query($SQL4, $dbValues1)->get();
+$numberOfWomen = $numberOfWomen['count'];
 
-$luggageArrive = $db->query($SQL5, $dbValues1)->get();
-$luggageArrive = $luggageArrive['count'];
+$numberOfSeats = $db->query($SQL5, $dbValues1)->get();
+$numberOfSeats = $numberOfSeats['count'];
 
-$busRide = $db->query($SQL6, $dbValues1)->get();
-$busRide = $busRide['count'];
+$numberOfCases = $db->query($SQL6, $dbValues1)->get();
+$numberOfCases = $numberOfCases['count'];
 
-$pilgrims = $db->query($SQL7, $dbValues1)->get();
-$pilgrims = $pilgrims['count'];
+$numberOfBags = $db->query($SQL7, $dbValues1)->get();
+$numberOfBags = $numberOfBags['count'];
 
-$score = $db->query($SQL8, $dbValues1)->get();
-$score = round($score['count']);
+$numberOfFinger = $db->query($SQL8, $dbValues1)->get();
+$numberOfFinger = $numberOfFinger['count'];
+
+$conSpeed = $db->query($SQL9, $dbValues1)->get();
+$conSpeed = $conSpeed['count'];
+
+$comSpeed = $db->query($SQL10, $dbValues1)->get();
+$comSpeed = $comSpeed['count'];
+
+$fingerSpeed = $db->query($SQL11, $dbValues1)->get();
+$fingerSpeed = $fingerSpeed['count'];
+
+$waitingTime = $db->query($SQL12, $dbValues1)->get();
+$waitingTime = $waitingTime['count'];
+
+$avgService = $db->query($SQL13, $dbValues1)->get();
+$avgService = $avgService['count'];
 
 
 
@@ -82,7 +102,7 @@ $score = round($score['count']);
                 <h3 class="text-center"><?php echo $lang('number_working_counters') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($workingCounts) ? $workingCounts : 0; ?></div>
             </div>
         </div>
     </div>
@@ -93,7 +113,7 @@ $score = round($score['count']);
                 <h3 class="text-center"><?php echo $lang('number_non_operating_counters') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($nonWorkingCounts) ? $nonWorkingCounts : 0; ?></div>
             </div>
         </div>
     </div>
@@ -104,7 +124,7 @@ $score = round($score['count']);
                 <h3 class="text-center"><?php echo $lang('average_waiting_hajj') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($waitingTime) ? $waitingTime : '00:00:00'; ?></div>
             </div>
         </div>
     </div>
@@ -115,7 +135,7 @@ $score = round($score['count']);
                 <h3 class="text-center"><?php echo $lang('average_hajj_service') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($avgService) ? $avgService : '00:00:00' ?></div>
             </div>
         </div>
     </div>
@@ -126,7 +146,7 @@ $score = round($score['count']);
                 <h3 class="text-center"><?php echo $lang('number_of_males') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($numberOfMen) ? $numberOfMen : 0; ?></div>
             </div>
         </div>
     </div>
@@ -137,7 +157,7 @@ $score = round($score['count']);
                 <h3 class="text-center"><?php echo $lang('number_of_women') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($numberOfWomen) ? $numberOfWomen : 0; ?></div>
             </div>
         </div>
     </div>
@@ -148,7 +168,7 @@ $score = round($score['count']);
                 <h3 class="text-center"><?php echo $lang('number_of_seats') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($numberOfSeats) ? $numberOfSeats : 0; ?></div>
             </div>
         </div>
     </div>
@@ -159,7 +179,7 @@ $score = round($score['count']);
                 <h3 class="text-center"><?php echo $lang('number_of_sick') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($numberOfCases) ? $numberOfCases : 0; ?></div>
             </div>
         </div>
     </div>
@@ -170,7 +190,7 @@ $score = round($score['count']);
                 <h3 class="text-center"><?php echo $lang('number_of_blindfolded') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($numberOfFinger) ? $numberOfFinger : 0 ?></div>
             </div>
         </div>
     </div>
@@ -178,10 +198,10 @@ $score = round($score['count']);
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-center"><?php echo $lang('number_of_used') ?></h3>
+                <h3 class="text-center"><?php echo $lang('number_of_bag_used') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($numberOfBags) ? $numberOfBags : 0; ?></div>
             </div>
         </div>
     </div>
@@ -192,7 +212,7 @@ $score = round($score['count']);
                 <h3 class="text-center"><?php echo $lang('fingerprint_status') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($fingerSpeed) ? $fingerSpeed : '0%'; ?></div>
             </div>
         </div>
     </div>
@@ -203,7 +223,7 @@ $score = round($score['count']);
                 <h3 class="text-center"><?php echo $lang('connection_status') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($conSpeed) ? $conSpeed : '0%'; ?></div>
             </div>
         </div>
     </div>
@@ -214,7 +234,7 @@ $score = round($score['count']);
                 <h3 class="text-center"><?php echo $lang('connection_speed') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($comSpeed) ? $comSpeed : '0%' ?></div>
             </div>
         </div>
     </div>

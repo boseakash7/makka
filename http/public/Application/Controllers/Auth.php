@@ -200,7 +200,7 @@ class Auth extends Controller
         
         switch ($userInfo['type']) {
             case User::TYPE_ADM:
-                throw new Redirect('airports');
+                throw new Redirect('dashboard');
                 break;
             case User::TYPE_SUP:
                 if ( $this->user->fromSource() ) throw new Redirect('flights');

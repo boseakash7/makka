@@ -124,14 +124,14 @@ $formValidator = FormValidator::instance("departure-form");
                         <div class="row">
                             <div class="col form-group">
                                 <label for="average_pilgrim_waiting"><?php echo $lang('average_pilgrim_waiting') ?><span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="average_pilgrim_waiting" id="average_pilgrim_waiting" value="<?php echo $formValidator->getValue('average_pilgrim_waiting'); ?>" />
+                                <input type="number" class="form-control" name="average_pilgrim_waiting" id="average_pilgrim_waiting" value="<?php echo $formValidator->getValue('average_pilgrim_waiting'); ?>" />
                                 <?php if ($formValidator->hasError('average_pilgrim_waiting')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('average_pilgrim_waiting'); ?></p>
                                 <?php endif; ?>
                             </div>
                             <div class="col form-group">
                                 <label for="average_pilgrim_service"><?php echo $lang('average_pilgrim_service') ?><span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="average_pilgrim_service" id="average_pilgrim_service" value="<?php echo $formValidator->getValue('average_pilgrim_service'); ?>" />
+                                <input type="number" class="form-control" name="average_pilgrim_service" id="average_pilgrim_service" value="<?php echo $formValidator->getValue('average_pilgrim_service'); ?>" />
                                 <?php if ($formValidator->hasError('average_pilgrim_service')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('average_pilgrim_service'); ?></p>
                                 <?php endif; ?>
@@ -235,7 +235,14 @@ $formValidator = FormValidator::instance("departure-form");
                             </div>
                             <div class="form-group">
                                 <label for="speed_of_communication"><?php echo $lang('speed_of_communication') ?><span class="text-danger">*</span></label>
-                                <textarea name="speed_of_communication" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('speed_of_communication'); ?></textarea>
+                                <select name="speed_of_communication" class="form-control" id="speed_of_communication">
+                                    <option value="excellent" <?php echo $formValidator->getValue('speed_of_communication') == 'excellent' ? 'selected' : ''; ?>><?php echo $lang('excellent') ?></option>
+                                    <option value="good" <?php echo $formValidator->getValue('speed_of_communication') == 'good' ? 'selected' : ''; ?>><?php echo $lang('good') ?></option>
+                                    <option value="weak" <?php echo $formValidator->getValue('speed_of_communication') == 'weak' ? 'selected' : ''; ?>><?php echo $lang('weak') ?></option>
+                                </select>
+                                <?php if ($formValidator->hasError('speed_of_communication')) : ?>
+                                    <p class="text-danger"><?php echo $formValidator->getError('speed_of_communication'); ?></p>
+                                <?php endif; ?>
                             </div>
                             <div class="form-group">
                                 <label for="challenges"><?php echo $lang('challenges') ?></label>

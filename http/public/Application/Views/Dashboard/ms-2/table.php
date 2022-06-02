@@ -1,6 +1,5 @@
 <?php
 
-
 use Application\Helpers\Number;
 use System\Core\Database;
 use System\Core\Model;
@@ -13,7 +12,7 @@ $lang = Model::get(Language::class);
  */
 $db = Database::get();
 
-$SUBSQL2 = " SELECT `id` FROM `flights` WHERE `dairport` IN (
+$SUBSQL2 = " SELECT `id` FROM `flights` WHERE `sairport` IN (
     SELECT `id` FROM `airports` WHERE `city` = `cities`.`id`
 ) ";
 
@@ -33,29 +32,37 @@ if (!empty($to)) {
 
 $SUBSQL2 .= !empty($WHERE2) ?  " AND " . implode(" AND ", $WHERE2) : "";
 // $SUBSQL3 .= !empty($WHERE2) ?  " AND " . implode(" AND ", $WHERE2) : "";
-
-$SQL1 = "SELECT COUNT(*) as `count` FROM `flights` WHERE `id` IN ( $SUBSQL2 )";
-$SQL2 = "SELECT SUM(`passengers`) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL2 )";
-$SQL3 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_waiting_to_sterile`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL2 )";
-$SQL4 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_waiting_inspection`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL2 )";
-$SQL5 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_luggage_arrive`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL2 )";
-$SQL6 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_bus_ride`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL2 )";
-$SQL7 = "SELECT SEC_TO_TIME(FLOOR(AVG(`duration_pilgrims`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL2 )";
-$SQL8 = "SELECT FLOOR(AVG(`avg_score`)) as `count` FROM `arrival_assesment` WHERE `flight_id` IN ( $SUBSQL2 )";
-
+$SQL1 = "SELECT SUM(`working_counts`) FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+$SQL2 = "SELECT SUM(`non_working_counts`) FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2)";
+$SQL3 = "SELECT SUM(`number_of_men`) FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+$SQL4 = "SELECT SUM(`number_of_women`) FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+$SQL5 = "SELECT SUM(`number_of_seats`) FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+$SQL6 = "SELECT SUM(`number_of_cases`) FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+$SQL7 = "SELECT SUM(`number_of_bags`) FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+$SQL8 = "SELECT SUM(`number_of_fingerprint`) FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+$SQL9 = "SELECT CONCAT(ROUND(AVG(`communication_speed`) / 3 * 100), '%') FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+$SQL10 = "SELECT CONCAT(ROUND(AVG(`connection_status`) / 3 * 100), '%') FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+$SQL11 = "SELECT CONCAT(ROUND(AVG(`fingerprint_status`) / 3 * 100), '%') FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+$SQL12 = "SELECT SEC_TO_TIME(FLOOR(AVG(`check_out_time` - `check_in_time`))) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL2 )";
+$SQL13 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_pilgrim_service`))) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
 
 $CITYSQL = "SELECT
             `id` AS `i`,
             `en_name`,
             `ar_name`,
-        ($SQL1) AS `totalFlights`,
-        ($SQL2) AS `passengers`,
-        ($SQL3) AS `avgWaitingTime`,
-        ($SQL4) AS `inspectionTime`,
-        ($SQL5) AS `luggageArrive`,
-        ($SQL6) AS `busRide`,
-        ($SQL7) AS `pilgrims`,
-        ($SQL8) AS `avg_core`
+        ($SQL1) AS `working_counts`,
+        ($SQL2) AS `non_working_counts`,
+        ($SQL3) AS `number_of_men`,
+        ($SQL4) AS `number_of_women`,
+        ($SQL5) AS `number_of_seats`,
+        ($SQL6) AS `number_of_cases`,
+        ($SQL7) AS `number_of_bags`,
+        ($SQL8) AS `number_of_fingerprint`,
+        ($SQL9) AS `communication_speed`,
+        ($SQL10) AS `connection_status`,
+        ($SQL11) AS `fingerprint_status`,
+        ($SQL12) AS `average_waiting_hajj`,
+        ($SQL13) AS `average_pilgrim_service`
         FROM
         `cities`
 ";
@@ -79,30 +86,40 @@ $cities = $db->query($CITYSQL, $dbValues2)->getAll();
                 <div class="card-body table-responsive">
                     <table class="table datatable">
                         <thead>
-                            <tr>
-                                <td><?php echo $lang('city') ?></td>
-                                <td><?php echo $lang('number_of_flights') ?></td>
-                                <td><?php echo $lang('passengers') ?></td>
-                                <td><?php echo $lang('average_waiting_time_unitil_access') ?></td>
-                                <td><?php echo $lang('average_waiting_time_unitil_end_of_inspection') ?></td>
-                                <td><?php echo $lang('average_waiting_until_sorting_system') ?></td>
-                                <td><?php echo $lang('baggage_arrival_time_to_accommodation') ?></td>
-                                <td><?php echo $lang('duration_of_arrival_pilgrims') ?></td>
-                                <td><?php echo $lang('hajj_satisfaction_rate') ?></td>
+                            <tr>                                
+                                <th><?php echo $lang('city') ?></th>
+                                <th><?php echo $lang('number_working_counters') ?></th>
+                                <th><?php echo $lang('number_non_operating_counters') ?></th>
+                                <th><?php echo $lang('average_waiting_hajj') ?></th>
+                                <th><?php echo $lang('average_hajj_service') ?></th>
+                                <th><?php echo $lang('number_of_males') ?></th>
+                                <th><?php echo $lang('number_of_women') ?></th>
+                                <th><?php echo $lang('number_of_seats') ?></th>
+                                <th><?php echo $lang('number_of_sick') ?></th>
+                                <th><?php echo $lang('number_of_blindfolded') ?></th>
+                                <th><?php echo $lang('number_of_bag_used') ?></th>
+                                <th><?php echo $lang('fingerprint_status') ?></th>
+                                <th><?php echo $lang('connection_status') ?></th>
+                                <th><?php echo $lang('connection_speed') ?></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ( $cities as $city ): ?>
                                 <tr>
-                                    <td><?php echo $city[$lang->current() . '_name']; ?></td>                        
-                                    <td><?php echo $city['totalFlights']; ?></td>
-                                    <td><?php echo isset($city['passengers']) ? $city['passengers'] : "0"; ?></td>
-                                    <td><?php echo isset($city['avgWaitingTime']) ? $city['avgWaitingTime'] : "00:00:00"; ?></td>
-                                    <td><?php echo isset($city['inspectionTime']) ? $city['inspectionTime'] : "00:00:00"; ?></td>
-                                    <td><?php echo isset($city['luggageArrive']) ? $city['luggageArrive'] : "00:00:00"; ?></td>
-                                    <td><?php echo isset($city['busRide']) ? $city['busRide'] : "00:00:00"; ?></td>
-                                    <td><?php echo isset($city['pilgrims']) ? $city['pilgrims'] : "00:00:00"; ?></td>
-                                    <td><?php echo isset($city['avg_core']) ? $city['avg_core'] : "0"; ?></td>
+                                    <td><?php echo $city[$lang->current() . '_name'] ;?></td>
+                                    <td><?php echo isset($city['working_counts']) ? $city['working_counts'] : 0 ?></td>
+                                    <td><?php echo isset($city['non_working_counts']) ? $city['non_working_counts'] : 0 ?></td>
+                                    <td><?php echo isset($city['average_waiting_hajj']) ? $city['average_waiting_hajj'] : '00:00:00' ?></td>
+                                    <td><?php echo isset($city['average_pilgrim_service']) ? $city['average_pilgrim_service'] : '00:00:00' ?></td>
+                                    <td><?php echo isset($city['number_of_men']) ? $city['number_of_men'] : 0 ?></td>
+                                    <td><?php echo isset($city['number_of_women']) ? $city['number_of_women'] : 0 ?></td>
+                                    <td><?php echo isset($city['number_of_seats']) ? $city['number_of_seats'] : 0 ?></td>
+                                    <td><?php echo isset($city['number_of_cases']) ? $city['number_of_cases'] : 0 ?></td>
+                                    <td><?php echo isset($city['number_of_bags']) ? $city['number_of_bags'] : 0 ?></td>
+                                    <td><?php echo isset($city['number_of_fingerprint']) ? $city['number_of_fingerprint'] : 0 ?></td>
+                                    <td><?php echo isset($city['communication_speed']) ? $city['communication_speed'] : 0 ?></td>
+                                    <td><?php echo isset($city['connection_status']) ? $city['connection_status'] : 0 ?></td>
+                                    <td><?php echo isset($city['fingerprint_status']) ? $city['fingerprint_status'] : 0 ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
