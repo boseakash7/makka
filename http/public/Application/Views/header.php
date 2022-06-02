@@ -109,7 +109,7 @@ $userM = Model::get(User::class);
                         </li>
                         <?php endif; ?>
 
-                        <?php if ( $userM->fromDestination() ):  ?>
+                        <?php if ( ($userM->isEmp() || $userM->isSup()) && $userM->fromDestination() ):  ?>
                         <li class="sidebar-item  <?php echo RouterHelper::has('arrivals') ? 'active' : ''; ?>">
                             <a href="<?php echo URL::full('arrivals'); ?>" class='sidebar-link'>
                                 <i class="bi bi-cloud-upload"></i>

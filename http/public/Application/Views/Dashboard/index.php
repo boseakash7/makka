@@ -1,103 +1,97 @@
 <?php
 
 use System\Core\Model;
+use System\Helpers\URL;
 use System\Models\Language;
+use System\Responses\View;
 
 $lang = Model::get(Language::class);
+
 ?>
 
 <div class="section">
     <div class="row">
-
-        <div class="col-md-4">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-center"><?php echo $lang('number_of_flights') ?></h3>
+                    <h4 class="card-title">Default</h4>
                 </div>
                 <div class="card-body">
-                    <div class="number text-center h1 text-primary">1,23,45</div>
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $page == 'ms' ? 'btn-primary text-white' :  '' ?>" aria-current="page" href="<?php echo URL::full('dashboard/ms') ?>">Source</a>
+                        </li>                
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $page == 'md' ? 'btn-primary text-white' :  '' ?>" href="<?php echo URL::full('dashboard/md') ?>">Destination</a>
+                        </li>                                
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $page == 'fs' ? 'btn-primary text-white' :  '' ?>" href="<?php echo URL::full('dashboard/fs') ?>">Flights</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-        
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="text-center"><?php echo $lang('number_of_flights') ?></h3>
-                </div>
-                <div class="card-body">
-                    <div class="number text-center h1 text-primary">1,23,45</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="text-center"><?php echo $lang('passengers') ?></h3>
-                </div>
-                <div class="card-body">
-                    <div class="number text-center h1 text-primary">1,23,45</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="text-center"><?php echo $lang('avg_service_time') ?></h3>
-                </div>
-                <div class="card-body">
-                    <div class="number text-center h1 text-primary">1,23,45</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="text-center"><?php echo $lang('counter_working_time') ?></h3>
-                </div>
-                <div class="card-body">
-                    <div class="number text-center h1 text-primary">1,23,45</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="text-center"><?php echo $lang('hajj_satisfaction_rate') ?></h3>
-                </div>
-                <div class="card-body">
-                    <div class="number text-center h1 text-primary">1,23,45</div>
-                </div>
-            </div>
-        </div>
-
     </div>
+    <div class="row">        
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="#" method="GET">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="form"><?php echo $lang('form'); ?></label>
+                                    <input type="date" class="form-control" name="from" id="form" value="<?php echo isset($from) ? $from : ''  ?>">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="to"><?php echo $lang('to'); ?></label>
+                                    <input type="date" class="form-control" name="to" id="to" value="<?php echo isset($to) ? $to : ''  ?>" min="<?php echo isset($from) ? $from : ''  ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><?php echo $lang('city') ?></label>      
+                            <select class="form-control" name="city">
+                                <option value=""><?php echo $lang('select_city') ?></option>
+                                <?php foreach ( $cities as $city ): ?>
+                                    <option value="<?php echo $city['id'] ?>" <?php echo $cityId == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name']; ?></option>
+                                <?php endforeach; ?>
+                            </select>                      
+                        </div>
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary"><?php echo $lang('submit'); ?></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>    
+    </div>
+    
+    <?php View::include('Dashboard/' . $page . '/top_widgets', [
+        'from' => $from,
+        'to' => $to,
+        'cityId' => $cityId
+    ]); ?>
 
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="details"><?php echo $lang('details'); ?></h3>
-        </div>        
-        <div class="col-md-12">
-            <table class="table datatable">
-                <thead>
-                    <tr>
-                        <td><?php echo $lang('asd') ?></td>
-                        <td><?php echo $lang('asd') ?></td>
-                        <td><?php echo $lang('asd') ?></td>
-                        <td><?php echo $lang('asd') ?></td>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    </div>    
+    <?php View::include('Dashboard/' . $page . '/table', [
+        'from' => $from,
+        'to' => $to,
+        'cityId' => $cityId
+    ]); ?>
+
 </div>
 
 <define footer_js>
     <script>
+        
+        $('#form').on('change', function() {            
+            $('#to').val('');
+            $('#to').attr('min', $('#form').val());
+        });
+
         $('.datatable').DataTable();
+
     </script>
 </define>

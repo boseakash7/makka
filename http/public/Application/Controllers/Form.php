@@ -74,6 +74,12 @@ class Form extends Controller
                 'service_provided' => $formValidator->getValue('service_provided'),
             ];
 
+            $point = $this->_getpoint($data['employment_interaction']);
+            $point += $this->_getpoint($data['clarity_procedure']);
+            $point += $this->_getpoint($data['service_provided']);
+
+            $point = round($point / 3);
+
             $json = json_encode($data);
 
             $arrivalAM = Model::get(DepartureAssesment::class);
@@ -81,6 +87,7 @@ class Form extends Controller
                 'flight_id' => $flightId,
                 'user_id' => $userInfo['id'],
                 'json' => $json,
+                'avg_score' =>  $point,
                 'lang' => $selectedLang,
                 'created_at' => time()
             ]);
@@ -598,6 +605,7 @@ class Form extends Controller
             $departureFM->create([
                 'flight_id' => $flightId,
                 'json' => $json,
+                'passengers' => $formValidator->getValue('passengers'),
                 'created_at' => time()
             ]);
 
@@ -619,6 +627,34 @@ class Form extends Controller
         $view->append('footer');
 
         $response->set($view);
+    }
+
+    private function _getpoint( $ans)
+    {
+        $point = 0;
+
+        switch( $ans )
+        {
+            case 'راضي':
+            case 'সন্তুষ্ট':
+            case 'Satisfactory':
+            case 'Puas':
+            case 'Memuaskan':
+            case 'مطمئن':
+                $point = 100;
+                break;
+            case 'نوعاً ما':
+            case 'ভালো':
+            case 'Unsatisfactory':
+            case 'Biasa':
+            case 'Tidak Memuaskan':
+            case 'کچھ بھی نہیں';
+                $point = 50;
+                break;
+
+        }
+
+        return $point;
     }
 
 }

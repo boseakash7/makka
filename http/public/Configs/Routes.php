@@ -14,6 +14,7 @@ $routes->set(array(
         '/reset-password/create/(:string)' => "Auth::createPassword",
 
         '/dashboard' => "Dashboard::index",
+        '/dashboard/(:string)' => "Dashboard::index",
 
         '/airports' => "Airports::index",
         '/airports/add' => "Airports::add",

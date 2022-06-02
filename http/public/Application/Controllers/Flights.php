@@ -9,6 +9,7 @@ use Application\Models\Airport;
 use Application\Models\ArrivalAssesment;
 use Application\Models\ArrivalForm;
 use Application\Models\City;
+use Application\Models\CounterTiming;
 use Application\Models\DepartureAssesment;
 use Application\Models\DepartureForm;
 use Application\Models\Flights as ModelsFlights;
@@ -525,6 +526,14 @@ class Flights extends AuthController
         $flightM->update($flight['id'], [
             'status' => ModelsFlights::STATUS_OPENED
         ]);
+        
+        $counM = Model::get(CounterTiming::class);
+        $counM->create([
+            'flight' => $flight['id'],
+            'date' => date('Y-m-d'),
+            'time' => time(),
+            'type' => CounterTiming::TYPE_OPEN
+        ]);
 
         throw new Redirect('flights');
     }
@@ -561,6 +570,14 @@ class Flights extends AuthController
         // Update the flight status to open
         $flightM->update($flight['id'], [
             'status' => ModelsFlights::STATUS_CLOSED
+        ]);
+
+        $counM = Model::get(CounterTiming::class);
+        $counM->create([
+            'flight' => $flight['id'],
+            'date' => date('Y-m-d'),
+            'time' => time(),
+            'type' => CounterTiming::TYPE_CLOSE
         ]);
 
         throw new Redirect('flights');
