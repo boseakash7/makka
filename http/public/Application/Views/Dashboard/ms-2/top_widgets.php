@@ -79,20 +79,21 @@ $score = round($score['count']);
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-center"><?php echo $lang('number_of_flights') ?></h3>
+                <h3 class="text-center"><?php echo $lang('number_working_counters') ?></h3>
             </div>
             <div class="card-body">
                 <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
             </div>
         </div>
     </div>
+
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-center"><?php echo $lang('passengers') ?></h3>
+                <h3 class="text-center"><?php echo $lang('number_non_operating_counters') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo Number::pretty($passengersTotal) ?></div>
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
             </div>
         </div>
     </div>
@@ -100,10 +101,10 @@ $score = round($score['count']);
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-center h5"><?php echo $lang('average_waiting_time_unitil_access') ?></h3>
+                <h3 class="text-center"><?php echo $lang('average_waiting_hajj') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo isset($avgWaitingTime) ? $avgWaitingTime : "00:00:00"; ?></div>
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
             </div>
         </div>
     </div>
@@ -111,10 +112,10 @@ $score = round($score['count']);
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-center h5"><?php echo $lang('average_waiting_time_unitil_end_of_inspection') ?></h3>
+                <h3 class="text-center"><?php echo $lang('average_hajj_service') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo isset($inspectionTime) ? $inspectionTime : "00:00:00"; ?></div>
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
             </div>
         </div>
     </div>
@@ -122,10 +123,10 @@ $score = round($score['count']);
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-center h5"><?php echo $lang('average_waiting_until_sorting_system') ?></h3>
+                <h3 class="text-center"><?php echo $lang('number_of_males') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo isset($busRide) ? $busRide : "00:00:00"; ?></div>
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
             </div>
         </div>
     </div>
@@ -133,10 +134,10 @@ $score = round($score['count']);
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-center h5"><?php echo $lang('duration_of_arrival_pilgrims') ?></h3>
+                <h3 class="text-center"><?php echo $lang('number_of_women') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo isset($pilgrims) ? $pilgrims : "00:00:00"; ?></div>
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
             </div>
         </div>
     </div>
@@ -144,10 +145,10 @@ $score = round($score['count']);
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-center h5"><?php echo $lang('baggage_arrival_time_to_accommodation') ?></h3>
+                <h3 class="text-center"><?php echo $lang('number_of_seats') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo isset($luggageArrive) ? $luggageArrive : "00:00:00"; ?></div>
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
             </div>
         </div>
     </div>
@@ -155,10 +156,65 @@ $score = round($score['count']);
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-center h5"><?php echo $lang('hajj_satisfaction_rate') ?></h3>
+                <h3 class="text-center"><?php echo $lang('number_of_sick') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo $score; ?></div>
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center"><?php echo $lang('number_of_blindfolded') ?></h3>
+            </div>
+            <div class="card-body">
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center"><?php echo $lang('number_of_used') ?></h3>
+            </div>
+            <div class="card-body">
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center"><?php echo $lang('fingerprint_status') ?></h3>
+            </div>
+            <div class="card-body">
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center"><?php echo $lang('connection_status') ?></h3>
+            </div>
+            <div class="card-body">
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center"><?php echo $lang('connection_speed') ?></h3>
+            </div>
+            <div class="card-body">
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($flightsTotal) ?></div>
             </div>
         </div>
     </div>

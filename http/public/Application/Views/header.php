@@ -100,6 +100,15 @@ $userM = Model::get(User::class);
                         </li>
                         <?php endif; ?>
 
+                        <?php if ( $userM->isAdmin() ):  ?>
+                        <li class="sidebar-item  <?php echo RouterHelper::has('all-f') ? 'active' : ''; ?>">
+                            <a href="<?php echo URL::full('all-f'); ?>" class='sidebar-link'>
+                                <i class="bi bi-cloud-upload"></i>
+                                <span><?php echo $lang('flights'); ?></span>
+                            </a>
+                        </li>
+                        <?php endif; ?>
+
                         <?php if ( $userM->fromSource() ):  ?>
                         <li class="sidebar-item  <?php echo RouterHelper::has('flights') ? 'active' : ''; ?>">
                             <a href="<?php echo URL::full('flights'); ?>" class='sidebar-link'>

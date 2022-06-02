@@ -31,6 +31,7 @@ $routes->set(array(
         '/supervisor/edit/(:num)' => "Supervisor::edit",
 
         '/flights' => "Flights::index",
+        '/all-f' => "Flights::all",
         '/arrivals' => "Flights::arrival",
         '/completed' => "Flights::completed",
         '/flights/add' => "Flights::add",

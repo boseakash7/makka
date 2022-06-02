@@ -157,6 +157,10 @@ class Form extends Controller
                 'service_provided' => $formValidator->getValue('service_provided'),
             ];
 
+            $point = $this->_getpoint($data['employment_interaction']);
+            $point += $this->_getpoint($data['clarity_procedure']);
+            $point += $this->_getpoint($data['service_provided']);
+
             $json = json_encode($data);
 
             $arrivalAM = Model::get(ArrivalAssesment::class);
@@ -165,6 +169,7 @@ class Form extends Controller
                 'user_id' => $userInfo['id'],
                 'json' => $json,
                 'lang' => $selectedLang,
+                'avg_score' => $point,
                 'created_at' => time()
             ]);
 
@@ -394,6 +399,12 @@ class Form extends Controller
             $departureFM->create([
                 'flight_id' => $flightId,
                 'json' => $json,
+                'passengers' => $formValidator->getValue('passengers'),
+                'average_waiting_to_sterile' => $formValidator->getValue('average_waiting_time_unitil_access') * 60,
+                'average_waiting_inspection' => $formValidator->getValue('average_waiting_time_unitil_end_of_inspection')  * 60,
+                'average_luggage_arrive' => $formValidator->getValue('how_long_does_luggage_arrive_at')  * 60,
+                'average_bus_ride' => $formValidator->getValue('average_waiting_until_sorting_system')  * 60,
+                'duration_pilgrims' => $formValidator->getValue('duration_of_arrival_pilgrims') ,
                 'created_at' => time()
             ]);
 

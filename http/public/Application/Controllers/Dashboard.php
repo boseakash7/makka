@@ -22,8 +22,8 @@ class Dashboard extends AuthController
         {
             case 'md':
             case 'ms':
-            case 'fs':
-            case 'fd':
+            case 'md-2':
+            case 'ms-2':
                 break;
             default:
             throw new Error404;

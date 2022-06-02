@@ -103,7 +103,7 @@ $cities = $db->query($CITYSQL, $dbValues2)->getAll();
         </div>
         <div class="col-md-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <table class="table datatable">
                         <thead>
                             <tr>

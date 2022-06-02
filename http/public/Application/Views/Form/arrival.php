@@ -51,7 +51,7 @@ $formValidator = FormValidator::instance("arrival-form");
                         </div>
                         <div class="form-group">
                             <label for="flight_number"><?php echo $lang('flight_number') ?><span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="flight_number" id="flight_number" value="<?php echo $formValidator->getValue('flight_number', $flightInfo['number']); ?>" />
+                            <input type="text" class="form-control" name="flight_number" id="flight_number" readonly value="<?php echo $formValidator->getValue('flight_number', $flightInfo['number']); ?>" />
                             <?php if ($formValidator->hasError('flight_number')) : ?>
                                 <p class="text-danger"><?php echo $formValidator->getError('flight_number'); ?></p>
                             <?php endif; ?>

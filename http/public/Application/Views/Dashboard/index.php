@@ -19,14 +19,17 @@ $lang = Model::get(Language::class);
                 <div class="card-body">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link <?php echo $page == 'ms' ? 'btn-primary text-white' :  '' ?>" aria-current="page" href="<?php echo URL::full('dashboard/ms') ?>">Source</a>
+                            <a class="nav-link <?php echo $page == 'ms' ? 'btn-primary text-white' :  '' ?>" aria-current="page" href="<?php echo URL::full('dashboard/ms') ?>">Source - 1</a>
                         </li>                
                         <li class="nav-item">
-                            <a class="nav-link <?php echo $page == 'md' ? 'btn-primary text-white' :  '' ?>" href="<?php echo URL::full('dashboard/md') ?>">Destination</a>
-                        </li>                                
+                            <a class="nav-link <?php echo $page == 'ms-2' ? 'btn-primary text-white' :  '' ?>" aria-current="page" href="<?php echo URL::full('dashboard/ms-2') ?>">Source - 2</a>
+                        </li>                
                         <li class="nav-item">
-                            <a class="nav-link <?php echo $page == 'fs' ? 'btn-primary text-white' :  '' ?>" href="<?php echo URL::full('dashboard/fs') ?>">Flights</a>
-                        </li>
+                            <a class="nav-link <?php echo $page == 'md' ? 'btn-primary text-white' :  '' ?>" href="<?php echo URL::full('dashboard/md') ?>">Destination - 1</a>
+                        </li>                
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $page == 'md-2' ? 'btn-primary text-white' :  '' ?>" href="<?php echo URL::full('dashboard/md-2') ?>">Destination - 2</a>
+                        </li>                
                     </ul>
                 </div>
             </div>
@@ -40,7 +43,7 @@ $lang = Model::get(Language::class);
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="form"><?php echo $lang('form'); ?></label>
+                                    <label for="form"><?php echo $lang('from'); ?></label>
                                     <input type="date" class="form-control" name="from" id="form" value="<?php echo isset($from) ? $from : ''  ?>">
                                 </div>
                             </div>
@@ -91,7 +94,9 @@ $lang = Model::get(Language::class);
             $('#to').attr('min', $('#form').val());
         });
 
-        $('.datatable').DataTable();
+        $('.datatable').DataTable({
+            responsive: true
+        });
 
     </script>
 </define>

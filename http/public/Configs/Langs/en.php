@@ -230,5 +230,15 @@ return [
     "manage_your_supervisor_from_here" => "Manage your supervisors from here",
     "edit_an_existing_supervisor_from_here" => "Edit an existing supervisor from here",
     "add_new_supervisor_from_here" => "Add a new supervisor from here.",
+
+    // New
+    'details' => "Details",
+    'from' => "From",
+    'to' => "To",
+    'number_of_flights' => "Number for Flights",
+    'avg_service_time' => "Average service time",
+    'counter_working_time' => "Counter working time",
+    'hajj_satisfaction_rate' => "Hajj satisfaction rate",
+    'baggage_arrival_time_to_accommodation' => "Baggage arrival time to accommodation"
 ];
 

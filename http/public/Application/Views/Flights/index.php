@@ -10,6 +10,9 @@ use System\Models\Language;
 
 $lang = Model::get(Language::class);
 
+/**
+ * @var User
+ */
 $userM = Model::get(User::class);
 
 ?>
@@ -45,7 +48,9 @@ $userM = Model::get(User::class);
                         <th><?php echo $lang('status'); ?></th>
                         <!-- <th><?php // echo $lang('source'); ?></th> -->
                         <!-- <th><?php // echo $lang('destination'); ?></th> -->
+                        <?php if ( !$userM->isAdmin() ): ?>
                         <th><?php echo $lang('action'); ?></th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <?php foreach ( $flights as $flight ): ?>
@@ -89,52 +94,54 @@ $userM = Model::get(User::class);
                         <td><span class="badge <?php echo $statusBg ?>"><?php echo $lang($flight['status']); ?></span></td>                        
                         <!-- <td><?php // echo $flight['sairport'][$lang->current() . '_name']; ?></td>       -->
                         <!-- <td><?php // echo $flight['dairport'][$lang->current() . '_name']; ?></td>       -->
-                        <td>
-                            <?php if ( $flight['status'] == Flights::STATUS_NOT_OPENED ): ?>
-                                <?php if ( $userM->isSup() ): ?>
-                                <a href="<?php echo URL::full('flights/open/' . $flight['id']) ?>" class="btn btn-primary"><?php echo $lang('open'); ?></a>
-                                <a href="<?php echo URL::full('flights/edit/' . $flight['id']); ?>" class="btn btn-primary"><?php echo $lang('edit') ?></a>
-                                <?php else: ?>
-                                    -
+                        <?php if ( !$userM->isAdmin() ): ?>
+                            <td>
+                                <?php if ( $flight['status'] == Flights::STATUS_NOT_OPENED ): ?>
+                                    <?php if ( $userM->isSup() ): ?>
+                                    <a href="<?php echo URL::full('flights/open/' . $flight['id']) ?>" class="btn btn-primary"><?php echo $lang('open'); ?></a>
+                                    <a href="<?php echo URL::full('flights/edit/' . $flight['id']); ?>" class="btn btn-primary"><?php echo $lang('edit') ?></a>
+                                    <?php else: ?>
+                                        -
+                                    <?php endif; ?>
+                                <?php elseif( $flight['status'] == Flights::STATUS_OPENED || $flight['status'] == Flights::STATUS_CHECK_IN || $flight['status'] == Flights::STATUS_CHECK_OUT ): ?>                                
+                                    <?php if ( $userM->isEmp() ): ?>
+                                        <a href="<?php echo URL::full('flights/scan/' . $flight['id']) ?>/check-in" class="btn btn-danger" target="_blank"><?php echo $lang('start_scanning') ?></a>
+                                    <?php endif; ?>
+                                    <?php if ( $userM->isSup() ): ?>
+                                        <a href="<?php echo URL::full('flights/close/' . $flight['id']) ?>" class="btn btn-secondary m-2 close-flight"><?php echo $lang('close_flight') ?></a>                                    
+                                    <?php endif; ?>
+                                        <a href="<?php echo URL::full('/form/departure-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>
+                                <?php elseif ( $flight['status'] == Flights::STATUS_CLOSED ): ?>
+                                    <?php if ( $userM->isSup() ): ?>
+                                        <a href="<?php echo URL::full('form/departure/' . $flight['id']) ?>" class="btn btn-primary"><?php echo $lang('departure_form_submit') ?></a>
+                                    <?php else: ?>
+                                        -
+                                    <?php endif; ?>
+                                <?php elseif ( $flight['status'] == Flights::STATUS_ON_AIR ): ?>
+                                    <?php if ( $userM->isSup() ): ?>
+                                        <a href="<?php echo URL::full('flights/arrived/' . $flight['id']) ?>" class="btn btn-primary m-2"><?php echo $lang('arrived') ?></a>        
+                                    <?php else: ?>
+                                        -
+                                        <?php endif; ?>                                    
+                                <?php elseif ( $flight['status'] == Flights::STATUS_ARRIVED ): ?>
+                                    <?php if ( $userM->isSup() ): ?>
+                                        <a href="<?php echo URL::full('/form/arrival-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>
+                                        <a href="<?php echo URL::full('form/arrival/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('arrival_form_submit') ?></a>
+                                    <?php else: ?>
+                                        -
+                                    <?php endif; ?>
+                                <?php elseif ( $flight['status'] == Flights::STATUS_COMPLETE ): ?>
+                                    <?php if ( $userM->isSup() ): ?>
+                                        <a href="<?php echo URL::full('flights/summary/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('view_summery') ?></a>
+                                    <?php else: ?>
+                                        -
+                                    <?php endif; ?>
+                                <?php endif; ?>              
+                                <?php if ( !isset($arrival) ): ?>                                          
+                                <a href="<?php echo URL::full('flights/log/' . $flight['id']) ?>" class="btn btn-info m-2" target="_blank"><?php echo $lang('view_log') ?></a>
                                 <?php endif; ?>
-                            <?php elseif( $flight['status'] == Flights::STATUS_OPENED || $flight['status'] == Flights::STATUS_CHECK_IN || $flight['status'] == Flights::STATUS_CHECK_OUT ): ?>                                
-                                <?php if ( $userM->isEmp() ): ?>
-                                    <a href="<?php echo URL::full('flights/scan/' . $flight['id']) ?>/check-in" class="btn btn-danger" target="_blank"><?php echo $lang('start_scanning') ?></a>
-                                <?php endif; ?>
-                                <?php if ( $userM->isSup() ): ?>
-                                    <a href="<?php echo URL::full('flights/close/' . $flight['id']) ?>" class="btn btn-secondary m-2 close-flight"><?php echo $lang('close_flight') ?></a>                                    
-                                <?php endif; ?>
-                                    <a href="<?php echo URL::full('/form/departure-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>
-                            <?php elseif ( $flight['status'] == Flights::STATUS_CLOSED ): ?>
-                                <?php if ( $userM->isSup() ): ?>
-                                    <a href="<?php echo URL::full('form/departure/' . $flight['id']) ?>" class="btn btn-primary"><?php echo $lang('departure_form_submit') ?></a>
-                                <?php else: ?>
-                                    -
-                                <?php endif; ?>
-                            <?php elseif ( $flight['status'] == Flights::STATUS_ON_AIR ): ?>
-                                <?php if ( $userM->isSup() ): ?>
-                                    <a href="<?php echo URL::full('flights/arrived/' . $flight['id']) ?>" class="btn btn-primary m-2"><?php echo $lang('arrived') ?></a>        
-                                <?php else: ?>
-                                    -
-                                    <?php endif; ?>                                    
-                            <?php elseif ( $flight['status'] == Flights::STATUS_ARRIVED ): ?>
-                                <?php if ( $userM->isSup() ): ?>
-                                    <a href="<?php echo URL::full('/form/arrival-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>
-                                    <a href="<?php echo URL::full('form/arrival/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('arrival_form_submit') ?></a>
-                                <?php else: ?>
-                                    -
-                                <?php endif; ?>
-                            <?php elseif ( $flight['status'] == Flights::STATUS_COMPLETE ): ?>
-                                <?php if ( $userM->isSup() ): ?>
-                                    <a href="<?php echo URL::full('flights/summary/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('view_summery') ?></a>
-                                <?php else: ?>
-                                    -
-                                <?php endif; ?>
-                            <?php endif; ?>              
-                            <?php if ( !isset($arrival) ): ?>                                          
-                            <a href="<?php echo URL::full('flights/log/' . $flight['id']) ?>" class="btn btn-info m-2" target="_blank"><?php echo $lang('view_log') ?></a>
-                            <?php endif; ?>
-                        </td>
+                            </td>
+                        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
                 

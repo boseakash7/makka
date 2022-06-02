@@ -257,6 +257,24 @@ class Flights extends AuthController
         $response->set($view);
     }
 
+    public function all( Request $request, Response $response )
+    {
+        $userInfo = $this->user->getInfo();
+
+        $flightM = Model::get(ModelsFlights::class);
+        $flights = $flightM->all();
+        $flights = FlightHelper::prepare($flights);
+
+        $view = new View();
+        $view->set('Flights/index', [
+            'flights' => $flights
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
     public function arrival( Request $request, Response $response )
     {
         $userInfo = $this->user->getInfo();
