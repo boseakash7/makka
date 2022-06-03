@@ -39,7 +39,7 @@ $SUBSQL1 .= !empty($WHERE1) ?  " AND " . implode(" AND ", $WHERE1) : "";
 // END PREPARE FILTER SQL
 
 $SQL1 = "SELECT CONCAT( COUNT(*) - SUM(`flight_delay`), '/', COUNT(*)) AS `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL2 = "SELECT CONCAT(ROUND(AVG(`unmarked_buses`) / COUNT(*) * 100), '%') AS `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1)";
+$SQL2 = "SELECT CONCAT(ROUND(SUM(`unmarked_buses`) / COUNT(*) * 100), '%') AS `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1)";
 $SQL3 = "SELECT CONCAT(SUM(`accidents`), '/', COUNT(*)) AS `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL4 = "SELECT SUM(`buses_ready_to_pilgrims`) AS `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL5 = "SELECT SUM(`buses_with_mecca_logo`) AS `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";

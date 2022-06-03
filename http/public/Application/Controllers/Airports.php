@@ -3,6 +3,7 @@
 namespace Application\Controllers;
 
 use Application\Helpers\AirportHelper;
+use Application\Main\AuthController;
 use Application\Models\Airport;
 use Application\Models\City;
 use System\Core\Controller;
@@ -14,7 +15,7 @@ use System\Libs\FormValidator;
 use System\Models\Language;
 use System\Responses\View;
 
-class Airports extends Controller
+class Airports extends AuthController
 {
     public function index( Request $request, Response $response )
     {

@@ -161,6 +161,8 @@ class Form extends Controller
             $point += $this->_getpoint($data['clarity_procedure']);
             $point += $this->_getpoint($data['service_provided']);
 
+            $point = round($point / 3);
+
             $json = json_encode($data);
 
             $arrivalAM = Model::get(ArrivalAssesment::class);
@@ -404,7 +406,7 @@ class Form extends Controller
                 'average_waiting_inspection' => $formValidator->getValue('average_waiting_time_unitil_end_of_inspection')  * 60,
                 'average_luggage_arrive' => $formValidator->getValue('how_long_does_luggage_arrive_at')  * 60,
                 'average_bus_ride' => $formValidator->getValue('average_waiting_until_sorting_system')  * 60,
-                'duration_pilgrims' => $formValidator->getValue('duration_of_arrival_pilgrims') ,
+                'duration_pilgrims' => $formValidator->getValue('duration_of_arrival_pilgrims')  * 60,
                 'flight_delay' => $this->_getPositive($formValidator->getValue('flight_delay')),
                 'unmarked_buses' => $this->_getPositive($formValidator->getValue('are_there_unmarked_buses')),
                 'accidents' => $this->_getPositive($formValidator->getValue('are_there_any_accidents')),
@@ -597,8 +599,8 @@ class Form extends Controller
                 'arrival_time' => $formValidator->getValue('arrival_time') ,
                 'working_counts' => $formValidator->getValue('working_counts') ,
                 'non_working_counts' => $formValidator->getValue('non_working_counts') ,
-                'average_pilgrim_waiting' => $formValidator->getValue('average_pilgrim_waiting') ,
-                'average_pilgrim_service' => $formValidator->getValue('average_pilgrim_service') ,
+                'average_pilgrim_waiting' => $formValidator->getValue('average_pilgrim_waiting') * 60 ,
+                'average_pilgrim_service' => $formValidator->getValue('average_pilgrim_service') * 60,
                 'counters_working_start_time' => $formValidator->getValue('counters_working_start_time') ,
                 'counters_working_end_time' => $formValidator->getValue('counters_working_end_time') ,
                 'number_of_men' => $formValidator->getValue('number_of_men') ,

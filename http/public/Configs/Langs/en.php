@@ -248,6 +248,7 @@ return [
     'number_of_sick' => "Number of sick cases",
     'number_of_blindfolded' => "Number of blindfolded",
     'number_of_bag_used' => "Number of bag used",
-    'connection_speed' => "Connection speed"
+    'connection_speed' => "Connection speed",
+    'in_minutes'  => "In minutes"
 ];
 

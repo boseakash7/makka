@@ -45,16 +45,7 @@ $lang = Model::get(Language::class);
                             <a href="<?php echo URL::full('employee/add/' . $airport['id']); ?>" class="btn btn-primary"><?php echo $lang('add_scanner') ?></a>
                         </td>
                     </tr>
-                <?php endforeach; ?>
-                <thead>
-                    <tr>
-                        <th><?php echo $lang('id'); ?></th>
-                        <th><?php echo $lang('name'); ?></th>
-                        <th><?php echo $lang('city'); ?></th> 
-                        <th><?php echo $lang('type'); ?></th>                    
-                        <th><?php echo $lang('action'); ?></th>
-                    </tr>
-                </thead>
+                <?php endforeach; ?>                
             </table>
         </div>
     </div>

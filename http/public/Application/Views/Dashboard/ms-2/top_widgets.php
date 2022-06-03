@@ -46,9 +46,9 @@ $SQL5 = "SELECT SUM(`number_of_seats`) AS `count` FROM `departure_form` WHERE `f
 $SQL6 = "SELECT SUM(`number_of_cases`) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL7 = "SELECT SUM(`number_of_bags`) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL8 = "SELECT SUM(`number_of_fingerprint`) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL9 = "SELECT CONCAT(ROUND(AVG(`communication_speed`) / 3 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL10 = "SELECT CONCAT(ROUND(AVG(`connection_status`) / 3 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL11 = "SELECT CONCAT(ROUND(AVG(`fingerprint_status`) / 3 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL9 = "SELECT CONCAT(ROUND(AVG(`communication_speed`) / 2 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL10 = "SELECT CONCAT(ROUND(AVG(`connection_status`) / 2 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL11 = "SELECT CONCAT(ROUND(AVG(`fingerprint_status`) / 2 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL12 = "SELECT SEC_TO_TIME(FLOOR(AVG(`check_out_time` - `check_in_time`))) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL1 )";
 $SQL13 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_pilgrim_service`))) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 

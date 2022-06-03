@@ -41,16 +41,7 @@ $lang = Model::get(Language::class);
                         <td><?php echo $item['airport'][$lang->current() . '_name'] ?> (<?php echo $lang($item['airport']['type']); ?>)</td>
                         <td><a href="<?php echo URL::full('supervisor/edit/' . $item['id']); ?>" class="btn btn-primary"><?php echo $lang('edit') ?></a></td>
                     </tr>
-                <?php endforeach; ?>
-                <tfoot>
-                    <tr>
-                        <th><?php echo $lang('id'); ?></th>
-                        <th><?php echo $lang('name'); ?></th>
-                        <th><?php echo $lang('email'); ?></th>
-                        <th><?php echo $lang('airport'); ?></th>
-                        <th><?php echo $lang('action'); ?></th>
-                    </tr>
-                </tfoot>
+                <?php endforeach; ?>                
             </table>
         </div>
     </div>

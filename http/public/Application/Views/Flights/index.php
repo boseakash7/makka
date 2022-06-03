@@ -48,9 +48,7 @@ $userM = Model::get(User::class);
                         <th><?php echo $lang('status'); ?></th>
                         <!-- <th><?php // echo $lang('source'); ?></th> -->
                         <!-- <th><?php // echo $lang('destination'); ?></th> -->
-                        <?php if ( !$userM->isAdmin() ): ?>
                         <th><?php echo $lang('action'); ?></th>
-                        <?php endif; ?>
                     </tr>
                 </thead>
                 <?php foreach ( $flights as $flight ): ?>
@@ -124,12 +122,10 @@ $userM = Model::get(User::class);
                                         -
                                         <?php endif; ?>                                    
                                 <?php elseif ( $flight['status'] == Flights::STATUS_ARRIVED ): ?>
-                                    <?php if ( $userM->isSup() ): ?>
-                                        <a href="<?php echo URL::full('/form/arrival-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>
-                                        <a href="<?php echo URL::full('form/arrival/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('arrival_form_submit') ?></a>
-                                    <?php else: ?>
-                                        -
+                                    <?php if ( $userM->isSup() ): ?>                                        
+                                        <a href="<?php echo URL::full('form/arrival/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('arrival_form_submit') ?></a>                                    
                                     <?php endif; ?>
+                                    <a href="<?php echo URL::full('/form/arrival-assessment/' . $flight['id']) ?>" class="btn btn-primary m-2" target="_blank"><?php echo $lang('assessment_form') ?></a>
                                 <?php elseif ( $flight['status'] == Flights::STATUS_COMPLETE ): ?>
                                     <?php if ( $userM->isSup() ): ?>
                                         <a href="<?php echo URL::full('flights/summary/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('view_summery') ?></a>
@@ -140,6 +136,14 @@ $userM = Model::get(User::class);
                                 <?php if ( !isset($arrival) ): ?>                                          
                                 <a href="<?php echo URL::full('flights/log/' . $flight['id']) ?>" class="btn btn-info m-2" target="_blank"><?php echo $lang('view_log') ?></a>
                                 <?php endif; ?>
+                            </td>
+                        <?php elseif ( !$userM->isExecutive() ): ?>
+                            <td>
+                                <a href="<?php echo URL::full('flights/summary/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('view_summery') ?></a>
+                            </td>
+                        <?php else: ?>
+                            <td>
+                                -
                             </td>
                         <?php endif; ?>
                     </tr>

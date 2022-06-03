@@ -51,14 +51,7 @@ $lang = Model::get(Language::class);
                                 </tr>
                             
                             <?php endforeach; ?>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th></th>
-                                    <th><?php echo $lang('check_in') ?></th>
-                                    <th><?php echo $lang('check_out') ?></th>
-                                </tr>
-                            </tfoot>
+                            </tbody>                            
                         </table>                        
                     <?php else: ?>
                         <?php echo $lang('no_data') ?>

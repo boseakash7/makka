@@ -49,6 +49,12 @@ class User extends AbstractAuth
         return $user['type'] == self::TYPE_ADM;
     }
 
+    public function isExecutive()
+    {
+        $user = $this->getInfo();
+        return $user['is_executive'] == 1;
+    }
+
     public function isSup()
     {
         $user = $this->getInfo();

@@ -10,6 +10,8 @@ $lang = Model::get(Language::class);
 
 $formValidator = FormValidator::instance("departure-form");
 
+// get source airport
+
 ?>
 <define title>
     <?php echo $lang('departure_form_title') ?>
@@ -42,7 +44,7 @@ $formValidator = FormValidator::instance("departure-form");
                                 <label for="city"><?php echo $lang('departure_city') ?><span class="text-danger">*</span></label>
                                 <select name="departure_city" id="departure_city" class="form-control">
                                     <?php foreach ($cities as $city) : ?>
-                                        <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('departure_city') == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
+                                        <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('departure_city', $flightInfo['sairport']['city']) == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <?php if ($formValidator->hasError('departure_city')) : ?>
@@ -124,14 +126,14 @@ $formValidator = FormValidator::instance("departure-form");
                         <div class="row">
                             <div class="col form-group">
                                 <label for="average_pilgrim_waiting"><?php echo $lang('average_pilgrim_waiting') ?><span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="average_pilgrim_waiting" id="average_pilgrim_waiting" value="<?php echo $formValidator->getValue('average_pilgrim_waiting'); ?>" />
+                                <input type="number" class="form-control" name="average_pilgrim_waiting" id="average_pilgrim_waiting" value="<?php echo $formValidator->getValue('average_pilgrim_waiting'); ?>" placeholder="<?php echo $lang('in_minutes') ?>"/>
                                 <?php if ($formValidator->hasError('average_pilgrim_waiting')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('average_pilgrim_waiting'); ?></p>
                                 <?php endif; ?>
                             </div>
                             <div class="col form-group">
                                 <label for="average_pilgrim_service"><?php echo $lang('average_pilgrim_service') ?><span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="average_pilgrim_service" id="average_pilgrim_service" value="<?php echo $formValidator->getValue('average_pilgrim_service'); ?>" />
+                                <input type="number" class="form-control" name="average_pilgrim_service" id="average_pilgrim_service" value="<?php echo $formValidator->getValue('average_pilgrim_service'); ?>" placeholder="<?php echo $lang('in_minutes') ?>" />
                                 <?php if ($formValidator->hasError('average_pilgrim_service')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('average_pilgrim_service'); ?></p>
                                 <?php endif; ?>

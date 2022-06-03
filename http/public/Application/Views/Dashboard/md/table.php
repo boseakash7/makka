@@ -102,7 +102,7 @@ $cities = $db->query($CITYSQL, $dbValues2)->getAll();
                                     <td><?php echo isset($city['luggageArrive']) ? $city['luggageArrive'] : "00:00:00"; ?></td>
                                     <td><?php echo isset($city['busRide']) ? $city['busRide'] : "00:00:00"; ?></td>
                                     <td><?php echo isset($city['pilgrims']) ? $city['pilgrims'] : "00:00:00"; ?></td>
-                                    <td><?php echo isset($city['avg_core']) ? $city['avg_core'] : "0"; ?></td>
+                                    <td><?php echo isset($city['avg_core']) ? $city['avg_core'] . '%' : "0%"; ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

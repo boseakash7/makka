@@ -66,14 +66,16 @@ $userM = Model::get(User::class);
                     <ul class="menu">
                         <li class="sidebar-title"><?php echo $lang('menu') ?></li>
 
+                        <?php if ( $userM->isAdmin() ): ?>
                         <li class="sidebar-item <?php echo RouterHelper::has('dashboard') ? 'active' : '' ?>">
                             <a href="<?php echo URL::full('dashboard'); ?>" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span><?php echo $lang('dashboard') ?></span>
                             </a>
                         </li>
+                        <?php endif; ?>
 
-                        <?php if ( $userM->isAdmin() ):  ?>
+                        <?php if ( $userM->isAdmin() && !$userM->isExecutive() ):  ?>
                             <li class="sidebar-item  <?php echo RouterHelper::has('airports') ? 'active' : ''; ?>">
                                 <a href="<?php echo URL::full('airports'); ?>" class='sidebar-link'>
                                     <i class="bi bi-flag-fill"></i>
@@ -82,7 +84,7 @@ $userM = Model::get(User::class);
                             </li>
                         <?php endif; ?>
 
-                        <?php if ( $userM->isAdmin() ):  ?>
+                        <?php if ( $userM->isAdmin() && !$userM->isExecutive() ):  ?>
                             <li class="sidebar-item  <?php echo RouterHelper::has('employee') ? 'active' : ''; ?>">
                                 <a href="<?php echo URL::full('employee'); ?>" class='sidebar-link'>
                                     <i class="bi bi-person-square"></i>
@@ -91,7 +93,7 @@ $userM = Model::get(User::class);
                             </li>
                         <?php endif; ?>
 
-                        <?php if ( $userM->isAdmin() ):  ?>
+                        <?php if ( $userM->isAdmin() && !$userM->isExecutive() ):  ?>
                         <li class="sidebar-item  <?php echo RouterHelper::has('supervisor') ? 'active' : ''; ?>">
                             <a href="<?php echo URL::full('supervisor'); ?>" class='sidebar-link'>
                                 <i class="bi bi-person-square"></i>

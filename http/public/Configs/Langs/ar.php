@@ -228,5 +228,25 @@ return [
     "edit_an_existing_supervisor_from_here" => "تحرير مشرف حالي من هنا",
     "add_new_supervisor_from_here" => "أضف مشرفا جديدا من هنا.",
     'employee_name' => "اسم الموظف",
+
+    // New
+    'details' => "تفاصيل",
+    'from' => "من",
+    'to' => "إلى",
+    'number_of_flights' => "رقم الرحلات",
+    'avg_service_time' => "متوسط ​​وقت الخدمة",
+    'counter_working_time' => "وقت العمل العداد",
+    'hajj_satisfaction_rate' => "معدل الرضا عن الحج",
+    'baggage_arrival_time_to_accommodation' => "وقت وصول الأمتعة إلى الإقامة",
+    'number_working_counters' => "عدد عدادات العمل",
+    'number_non_operating_counters' => "عدد العدادات غير العاملة",
+    'average_waiting_hajj' => "متوسط ​​انتظار الحج",
+    'average_hajj_service' => "خدمة الحج المتوسطة",
+    'number_of_males' => "عدد الذكور",
+    'number_of_sick' => "عدد الحالات المرضية",
+    'number_of_blindfolded' => "عدد معصوبي الأعين",
+    'number_of_bag_used' => "عدد الحقائب المستخدمة",
+    'connection_speed' => "سرعة الاتصال",
+    'in_minutes'  => "في دقائق"
 ];
 

@@ -37,6 +37,9 @@ $lang = Model::get(Language::class);
                 <div class="card-header">
 
                 </div>
+                <?php
+                    if ( !empty($departureInfo) ):
+                ?>
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
@@ -207,6 +210,15 @@ $lang = Model::get(Language::class);
 
                     </div>
                 </div>
+                <?php
+                else:
+                ?>
+                    <div class="card-body">
+                        <?php echo $lang('no_data'); ?>
+                    </div>
+                <?php
+                endif;
+                ?>
             </div>
         </div>
     </div>

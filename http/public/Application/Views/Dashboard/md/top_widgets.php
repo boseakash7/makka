@@ -158,7 +158,7 @@ $score = round($score['count']);
                 <h3 class="text-center h5"><?php echo $lang('hajj_satisfaction_rate') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo $score; ?></div>
+                <div class="number text-center h1 text-primary"><?php echo $score . '%'; ?></div>
             </div>
         </div>
     </div>
