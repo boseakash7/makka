@@ -1,5 +1,6 @@
 <?php
 
+use Application\Helpers\DateHelper;
 use Application\Helpers\Number;
 use System\Core\Database;
 use System\Core\Model;
@@ -43,8 +44,8 @@ $SQL8 = "SELECT SUM(`number_of_fingerprint`) FROM `departure_form` WHERE `flight
 $SQL9 = "SELECT CONCAT(ROUND(AVG(`communication_speed`) / 2 * 100), '%') FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
 $SQL10 = "SELECT CONCAT(ROUND(AVG(`connection_status`) / 2 * 100), '%') FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
 $SQL11 = "SELECT CONCAT(ROUND(AVG(`fingerprint_status`) / 2 * 100), '%') FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
-$SQL12 = "SELECT SEC_TO_TIME(FLOOR(AVG(`check_out_time` - `check_in_time`))) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL2 ) AND `check_out_time` - `check_in_time` >= 0";
-$SQL13 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_pilgrim_service`))) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+$SQL12 = "SELECT FLOOR(AVG(`check_out_time` - `check_in_time`)) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL2 ) AND `check_out_time` - `check_in_time` >= 0";
+$SQL13 = "SELECT FLOOR(AVG(`average_pilgrim_service`)) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
 
 $CITYSQL = "SELECT
             `id` AS `i`,
@@ -110,8 +111,8 @@ $cities = $db->query($CITYSQL, $dbValues2)->getAll();
                                     <td><?php echo $city[$lang->current() . '_name'] ;?></td>
                                     <td><?php echo isset($city['working_counts']) ? $city['working_counts'] : 0 ?></td>
                                     <td><?php echo isset($city['non_working_counts']) ? $city['non_working_counts'] : 0 ?></td>
-                                    <td><?php echo isset($city['average_waiting_hajj']) ? $city['average_waiting_hajj'] : '00:00:00' ?></td>
-                                    <td><?php echo isset($city['average_pilgrim_service']) ? $city['average_pilgrim_service'] : '00:00:00' ?></td>
+                                    <td><?php echo isset($city['average_waiting_hajj']) ? DateHelper::secToHR($city['average_waiting_hajj'] -  $city['average_pilgrim_service'])  : '00:00:00' ?></td>
+                                    <td><?php echo isset($city['average_pilgrim_service']) ? DateHelper::secToHR($city['average_pilgrim_service']) : '00:00:00' ?></td>
                                     <td><?php echo isset($city['number_of_men']) ? $city['number_of_men'] : 0 ?></td>
                                     <td><?php echo isset($city['number_of_women']) ? $city['number_of_women'] : 0 ?></td>
                                     <td><?php echo isset($city['number_of_seats']) ? $city['number_of_seats'] : 0 ?></td>

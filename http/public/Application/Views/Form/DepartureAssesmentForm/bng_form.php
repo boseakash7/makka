@@ -15,19 +15,19 @@ $formValidator = FormValidator::instance("departure-assesment");
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('employment_interaction') == 'সন্তুষ্ট' ) echo 'checked' ?> value="সন্তুষ্ট" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction1">
                 <label class="form-check-label" for="employment_interaction1">
-                সন্তুষ্ট 
+                সন্তুষ্ট   <i class="bi bi-emoji-laughing-fill"></i>
                 </label>
             </div>
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('employment_interaction') == 'ভালো' ) echo 'checked' ?> value="ভালো" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction2">
                 <label class="form-check-label" for="employment_interaction2">
-                ভালো
+                ভালো  <i class="bi bi-emoji-neutral-fill"></i>
                 </label>
             </div>
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('employment_interaction') == 'অসন্তুষ্ট' ) echo 'checked' ?> value="অসন্তুষ্ট" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction3">
                 <label class="form-check-label" for="employment_interaction3">
-                অসন্তুষ্ট
+                অসন্তুষ্ট <i class="bi bi-emoji-angry-fill"></i>
                 </label>
             </div>
             <?php if ($formValidator->hasError('employment_interaction')) : ?>
@@ -46,19 +46,19 @@ $formValidator = FormValidator::instance("departure-assesment");
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('clarity_procedure') == 'সন্তুষ্ট' ) echo 'checked' ?> value="সন্তুষ্ট" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure1">
                 <label class="form-check-label" for="clarity_procedure1">
-                সন্তুষ্ট 
+                সন্তুষ্ট  <i class="bi bi-emoji-laughing-fill"></i>
                 </label>
             </div>
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('clarity_procedure') == 'ভালো' ) echo 'checked' ?> value="ভালো" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure2">
                 <label class="form-check-label" for="clarity_procedure2">
-                ভালো
+                ভালো <i class="bi bi-emoji-neutral-fill"></i>
                 </label>
             </div>
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('clarity_procedure') == 'অসন্তুষ্ট' ) echo 'checked' ?> value="অসন্তুষ্ট" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure3">
                 <label class="form-check-label" for="clarity_procedure3">
-                অসন্তুষ্ট
+                অসন্তুষ্ট <i class="bi bi-emoji-angry-fill"></i>
                 </label>
             </div>
             <?php if ($formValidator->hasError('clarity_procedure')) : ?>
@@ -77,19 +77,19 @@ $formValidator = FormValidator::instance("departure-assesment");
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('service_provided') == 'সন্তুষ্ট' ) echo 'checked' ?> value="সন্তুষ্ট" class="form-check-input" type="radio" name="service_provided" id="service_provided1">
                 <label class="form-check-label" for="service_provided1">
-                সন্তুষ্ট 
+                সন্তুষ্ট  <i class="bi bi-emoji-laughing-fill"></i>
                 </label>
             </div>
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('service_provided') == 'ভালো' ) echo 'checked' ?> value="ভালো" class="form-check-input" type="radio" name="service_provided" id="service_provided2">
                 <label class="form-check-label" for="service_provided2">
-                ভালো
+                ভালো <i class="bi bi-emoji-neutral-fill"></i>
                 </label>
             </div>
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('service_provided') == 'অসন্তুষ্ট' ) echo 'checked' ?> value="অসন্তুষ্ট" class="form-check-input" type="radio" name="service_provided" id="service_provided3">
                 <label class="form-check-label" for="service_provided3">
-                অসন্তুষ্ট
+                অসন্তুষ্ট <i class="bi bi-emoji-angry-fill"></i>
                 </label>
             </div>
             <?php if ($formValidator->hasError('service_provided')) : ?>
@@ -98,4 +98,4 @@ $formValidator = FormValidator::instance("departure-assesment");
         </div>
     </div>
 </div>
-<button class="btn btn-primary">Submit</button>
+<button class="btn btn-primary"><?php echo $lang('submit'); ?></button>

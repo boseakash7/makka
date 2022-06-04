@@ -15,19 +15,19 @@ $formValidator = FormValidator::instance("arrival-assesment");
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('employment_interaction') == 'Memuaskan' ) echo 'checked' ?> value="Memuaskan" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction1">
                 <label class="form-check-label" for="employment_interaction1">
-                    Memuaskan
+                    Memuaskan <i class="bi bi-emoji-laughing-fill"></i>
                 </label>
             </div>
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('employment_interaction') == 'Tidak Memuaskan' ) echo 'checked' ?> value="Tidak Memuaskan" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction2">
                 <label class="form-check-label" for="employment_interaction2">
-                    Tidak Memuaskan
+                    Tidak Memuaskan <i class="bi bi-emoji-neutral-fill"></i>
                 </label>
             </div>
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('employment_interaction') == 'Kurang Memuaskan' ) echo 'checked' ?> value="Kurang Memuaskan" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction3">
                 <label class="form-check-label" for="employment_interaction3">
-                    Kurang Memuaskan
+                    Kurang Memuaskan <i class="bi bi-emoji-angry-fill"></i>
                 </label>
             </div>
             <?php if ($formValidator->hasError('employment_interaction')) : ?>
@@ -46,19 +46,19 @@ $formValidator = FormValidator::instance("arrival-assesment");
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('clarity_procedure') == 'Memuaskan' ) echo 'checked' ?> value="Memuaskan" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure1">
                 <label class="form-check-label" for="clarity_procedure1">
-                    Memuaskan
+                    Memuaskan <i class="bi bi-emoji-laughing-fill"></i>
                 </label>
             </div>
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('clarity_procedure') == 'Tidak Memuaskan' ) echo 'checked' ?> value="Tidak Memuaskan" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure2">
                 <label class="form-check-label" for="clarity_procedure2">
-                    Tidak Memuaskan
+                    Tidak Memuaskan <i class="bi bi-emoji-neutral-fill"></i>
                 </label>
             </div>
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('clarity_procedure') == 'Kurang Memuaskan' ) echo 'checked' ?> value="Kurang Memuaskan" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure3">
                 <label class="form-check-label" for="clarity_procedure3">
-                    Kurang Memuaskan
+                    Kurang Memuaskan <i class="bi bi-emoji-angry-fill"></i>
                 </label>
             </div>
             <?php if ($formValidator->hasError('clarity_procedure')) : ?>
@@ -77,19 +77,19 @@ $formValidator = FormValidator::instance("arrival-assesment");
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('service_provided') == 'Memuaskan' ) echo 'checked' ?> value="Memuaskan" class="form-check-input" type="radio" name="service_provided" id="service_provided1">
                 <label class="form-check-label" for="service_provided1">
-                    Memuaskan
+                    Memuaskan <i class="bi bi-emoji-laughing-fill"></i>
                 </label>
             </div>
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('service_provided') == 'Tidak Memuaskan' ) echo 'checked' ?> value="Tidak Memuaskan" class="form-check-input" type="radio" name="service_provided" id="service_provided2">
                 <label class="form-check-label" for="service_provided2">
-                    Tidak Memuaskan
+                    Tidak Memuaskan <i class="bi bi-emoji-neutral-fill"></i>
                 </label>
             </div>
             <div class="form-check">
                 <input <?php if( $formValidator->getValue('service_provided') == 'Kurang Memuaskan' ) echo 'checked' ?> value="Kurang Memuaskan" class="form-check-input" type="radio" name="service_provided" id="service_provided3">
                 <label class="form-check-label" for="service_provided3">
-                    Kurang Memuaskan
+                    Kurang Memuaskan <i class="bi bi-emoji-angry-fill"></i>
                 </label>
             </div>
             <?php if ($formValidator->hasError('service_provided')) : ?>
@@ -98,4 +98,4 @@ $formValidator = FormValidator::instance("arrival-assesment");
         </div>
     </div>
 </div>
-<button class="btn btn-primary">Submit</button>
+<button class="btn btn-primary"><?php echo $lang('submit'); ?></button>

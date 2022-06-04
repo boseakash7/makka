@@ -46,8 +46,8 @@ $userM = Model::get(User::class);
                         <th><?php echo $lang('saudi_time'); ?></th>
                         <th><?php echo $lang('number_of_passengers'); ?></th>
                         <th><?php echo $lang('status'); ?></th>
-                        <!-- <th><?php // echo $lang('source'); ?></th> -->
-                        <!-- <th><?php // echo $lang('destination'); ?></th> -->
+                        <th><?php echo $lang('source'); ?></th>
+                        <th><?php echo $lang('destination'); ?></th>
                         <th><?php echo $lang('action'); ?></th>
                     </tr>
                 </thead>
@@ -90,14 +90,16 @@ $userM = Model::get(User::class);
                         <td><?php echo $flight['saudi_time'] ?></td>
                         <td><?php echo $flight['passengers'] ?></td>                        
                         <td><span class="badge <?php echo $statusBg ?>"><?php echo $lang($flight['status']); ?></span></td>                        
-                        <!-- <td><?php // echo $flight['sairport'][$lang->current() . '_name']; ?></td>       -->
-                        <!-- <td><?php // echo $flight['dairport'][$lang->current() . '_name']; ?></td>       -->
+                        <td><?php echo $flight['sairport'][$lang->current() . '_name']; ?></td> 
+                        <td><?php echo isset($flight['dairport']) ? $flight['dairport'][$lang->current() . '_name'] : '-'; ?></td>      
                         <?php if ( !$userM->isAdmin() ): ?>
                             <td>
                                 <?php if ( $flight['status'] == Flights::STATUS_NOT_OPENED ): ?>
-                                    <?php if ( $userM->isSup() ): ?>
+                                    <?php if ( $userM->isSup() ): ?>                                        
                                     <a href="<?php echo URL::full('flights/open/' . $flight['id']) ?>" class="btn btn-primary"><?php echo $lang('open'); ?></a>
                                     <a href="<?php echo URL::full('flights/edit/' . $flight['id']); ?>" class="btn btn-primary"><?php echo $lang('edit') ?></a>
+                                    <?php elseif ( ( $userM->isAdmin() && !$userM->isExecutive() )  ): ?>
+                                        <a href="<?php echo URL::full('flights/edit/' . $flight['id']); ?>" class="btn btn-primary"><?php echo $lang('edit') ?></a>
                                     <?php else: ?>
                                         -
                                     <?php endif; ?>

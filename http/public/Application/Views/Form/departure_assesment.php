@@ -110,3 +110,13 @@ $formValidator = FormValidator::instance("departure-assesment");
         })
     </script>
 </define>
+
+<define header_css>
+    <style>
+    .form-check i{
+        color: #16cb16;
+        font-size: 21px;
+        vertical-align: top;
+    }
+    </style>
+</define>

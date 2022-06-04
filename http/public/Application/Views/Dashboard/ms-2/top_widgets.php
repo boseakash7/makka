@@ -1,5 +1,6 @@
 <?php
 
+use Application\Helpers\DateHelper;
 use Application\Helpers\Number;
 use System\Core\Database;
 use System\Core\Model;
@@ -49,8 +50,8 @@ $SQL8 = "SELECT SUM(`number_of_fingerprint`) AS `count` FROM `departure_form` WH
 $SQL9 = "SELECT CONCAT(ROUND(AVG(`communication_speed`) / 2 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL10 = "SELECT CONCAT(ROUND(AVG(`connection_status`) / 2 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL11 = "SELECT CONCAT(ROUND(AVG(`fingerprint_status`) / 2 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL12 = "SELECT SEC_TO_TIME(FLOOR(AVG(`check_out_time` - `check_in_time`))) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL1 ) AND `check_out_time` - `check_in_time` >= 0";
-$SQL13 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_pilgrim_service`))) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL12 = "SELECT FLOOR(AVG(`check_out_time` - `check_in_time`)) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL1 ) AND `check_out_time` - `check_in_time` >= 0";
+$SQL13 = "SELECT FLOOR(AVG(`average_pilgrim_service`)) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 
 $workingCounts = $db->query($SQL1, $dbValues1)->get();
 $workingCounts = $workingCounts['count'];
@@ -92,7 +93,6 @@ $avgService = $db->query($SQL13, $dbValues1)->get();
 $avgService = $avgService['count'];
 
 
-
 ?>
 <div class="row">
 
@@ -124,7 +124,7 @@ $avgService = $avgService['count'];
                 <h3 class="text-center"><?php echo $lang('average_waiting_hajj') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo isset($waitingTime) ? $waitingTime : '00:00:00'; ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($waitingTime) ? DateHelper::secToHR($waitingTime - $avgService) : '00:00:00';  ?></div>
             </div>
         </div>
     </div>
@@ -135,7 +135,7 @@ $avgService = $avgService['count'];
                 <h3 class="text-center"><?php echo $lang('average_hajj_service') ?></h3>
             </div>
             <div class="card-body">
-                <div class="number text-center h1 text-primary"><?php echo isset($avgService) ? $avgService : '00:00:00' ?></div>
+                <div class="number text-center h1 text-primary"><?php echo isset($avgService) ? DateHelper::secToHR($avgService) : '00:00:00' ?></div>
             </div>
         </div>
     </div>
