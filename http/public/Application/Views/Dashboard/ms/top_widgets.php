@@ -20,7 +20,7 @@ $WHERE1 = [];
 
 if (!empty($cityId)) {
     $WHERE1[] = " `sairport` IN (
-        SELECT `id` FROM `airports` WHERE `city` = ?
+        SELECT `id` FROM `airports` WHERE `city` = ? 
     ) ";
     $dbValues1[] = $cityId;
 }
@@ -40,22 +40,8 @@ $SUBSQL1 .= !empty($WHERE1) ?  "WHERE " . implode(" AND ", $WHERE1) : "";
 
 $SQL1 = "SELECT COUNT(*) as `count` FROM `flights` WHERE `id` IN ( $SUBSQL1 )";
 $SQL2 = "SELECT SUM(`passengers`) as `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL3 = "SELECT SEC_TO_TIME(FLOOR(AVG(`check_out_time` - `check_in_time`))) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL1 )";
-$SQL4 = "SELECT
-            SEC_TO_TIME(FLOOR(AVG(`x2`.`closed_at` - `x1`.`opened_at`))) as `count`
-            FROM (
-                SELECT
-                    `date`, MIN(`time`) as `opened_at`
-                FROM `counter_timing`
-                WHERE `type` = 'open' AND `flight` IN ( $SUBSQL1 ) GROUP BY `date`
-            ) AS `x1`
-            INNER JOIN (
-                SELECT `date`, MAX(`time`) AS `closed_at`
-                FROM `counter_timing`
-                WHERE `type` = 'close' AND `flight` IN ( $SUBSQL1 ) GROUP BY `date`
-            ) AS `x2`
-            ON (`x2`.`date` = `x1`.`date`)
-        ";
+$SQL3 = "SELECT SEC_TO_TIME(FLOOR(AVG(`check_out_time` - `check_in_time`))) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL1 ) AND `check_out_time` - `check_in_time` >= 0";
+$SQL4 = "SELECT SEC_TO_TIME(FLOOR(AVG(`counter_duration_in_sec`))) as `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 
 $SQL5 = "SELECT AVG(`avg_score`) as `count` FROM `departure_assesment` WHERE `flight_id` IN ( $SUBSQL1 )";
 
@@ -69,7 +55,7 @@ $serviceTime = $db->query($SQL3, $dbValues1)->get();
 $serviceTime = $serviceTime['count'];
 
 
-$counterTiming = $db->query($SQL4, array_merge($dbValues1, $dbValues1))->get();
+$counterTiming = $db->query($SQL4, $dbValues1)->get();
 $counterTiming = $counterTiming['count'];
 
 $score = $db->query($SQL5, $dbValues1)->get();

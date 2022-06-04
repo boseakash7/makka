@@ -18,12 +18,17 @@ class Dashboard extends AuthController
 
         $param = $request->param(0, 'ms');
 
+        $type = [ 'type' => City::TYPE_DESTINATION ];
+
         switch( $param )
         {
             case 'md':
-            case 'ms':
             case 'md-2':
+                $type = [ 'type' => City::TYPE_DESTINATION ];
+                break;
+            case 'ms':            
             case 'ms-2':
+                $type = [ 'type' => City::TYPE_SOURCE ];
                 break;
             default:
             throw new Error404;
@@ -37,7 +42,7 @@ class Dashboard extends AuthController
          * @var City
          */
         $cM = Model::get(City::class);
-        $cities = $cM->all();
+        $cities = $cM->findAll($type);
 
         $view = new View();
         $view->set('Dashboard/index', [

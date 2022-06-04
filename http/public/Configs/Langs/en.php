@@ -249,6 +249,16 @@ return [
     'number_of_blindfolded' => "Number of blindfolded",
     'number_of_bag_used' => "Number of bag used",
     'connection_speed' => "Connection speed",
-    'in_minutes'  => "In minutes"
+    'in_minutes'  => "In minutes",
+
+    // new 2
+    'edit_flight' => "Edit flight",
+    'edit_flight_desc' => "Edit flight from here",
+
+    'view_arrival_assessment' => 'View Arrival Assessment',
+    'view_departure_assessment' => 'View Departure Assessment',
+    'view_departure_form' => 'View Departure Form',
+    'view_arrival_form' => 'View Arrival Form',
+    'view_logs' => 'View Logs',
 ];
 

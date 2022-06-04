@@ -58,10 +58,11 @@ $CITYSQL = "SELECT
         ($SQL8) AS `avg_core`
         FROM
         `cities`
+        WHERE `type` = 'destination'
 ";
 
 if ( !empty($cityId) ) {
-    $CITYSQL .= " WHERE `id` = :c";
+    $CITYSQL .= " AND `id` = :c";
     $dbValues2[':c'] = $cityId;
 }
 

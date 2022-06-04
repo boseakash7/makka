@@ -1,5 +1,6 @@
 <?php
 
+use Application\Models\User;
 use System\Core\Model;
 use System\Helpers\URL;
 use System\Libs\FormValidator;
@@ -9,12 +10,17 @@ $lang = Model::get(Language::class);
 
 $formValidator = FormValidator::instance("flight");
 
+/**
+ * @var User
+ */
+$userM = Model::get(User::class);
+$userInfo = $userM->getInfo();
 ?>
 <define title>
-    Edit Airports
+    <?php echo $lang('edit_flight'); ?>
 </define>
 <define page_desc>
-    Edit an existing airport from here.
+    <?php echo $lang('edit_flight_desc') ?>
 </define>
 <define right_header>
     <a href="<?php echo URL::full('airports') ?>">

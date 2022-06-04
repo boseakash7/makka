@@ -46,7 +46,7 @@ $application->set([
             ],
 
             '\System\Models\Language' => [
-                'default_lang' => isset($_COOKIE['lang']) && $_COOKIE['lang'] == 'ar' ? 'ar' : 'en'
+                'default_lang' => isset($_COOKIE['lang']) && $_COOKIE['lang'] == 'en' ? 'en' : 'ar'
             ],
 
             '\Application\Models\User' => [

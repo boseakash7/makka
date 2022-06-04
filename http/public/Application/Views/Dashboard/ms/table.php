@@ -14,7 +14,7 @@ $lang = Model::get(Language::class);
 $db = Database::get();
 
 $SUBSQL2 = " SELECT `id` FROM `flights` WHERE `sairport` IN (
-    SELECT `id` FROM `airports` WHERE `city` = `cities`.`id`
+    SELECT `id` FROM `airports` WHERE `city` = `cities`.`id` 
 ) ";
 
 $SUBSQL3 = " SELECT `id` FROM `flights` WHERE `sairport` IN (
@@ -51,7 +51,7 @@ $CITYSQL = "SELECT
     WHERE
         `flight` IN (
             $SUBSQL2
-        )
+        ) AND `check_out_time` - `check_in_time` >= 0
 ) AS `serviceTime`,
 (
     SELECT
@@ -82,12 +82,21 @@ $CITYSQL = "SELECT
         `flight_id` IN (
             $SUBSQL2
         )
-) AS `avg_score`
+) AS `avg_score`,
+(
+    SELECT
+        SEC_TO_TIME(FLOOR(AVG(`counter_duration_in_sec`))) AS `count`
+    FROM `departure_form`
+    WHERE `flight_id` IN (
+        $SUBSQL2
+    )
+) AS `counter_duration`
 FROM
-`cities`";
+`cities`
+WHERE `type` = 'source'";
 
 if ( !empty($cityId) ) {
-    $CITYSQL .= " WHERE `id` = :c";
+    $CITYSQL .= " ANd `id` = :c";
     $dbValues2[':c'] = $cityId;
 }
 
@@ -121,27 +130,8 @@ $cities = $db->query($CITYSQL, $dbValues2)->getAll();
                                     <td><?php echo $city[$lang->current() . '_name']; ?></td>                        
                                     <td><?php echo $city['totalFlights']; ?></td>                        
                                     <td><?php echo isset($city['passengers']) ? $city['passengers'] : '0'; ?></td>                                                    
-                                    <td><?php echo isset($city['serviceTime']) ? $city['serviceTime'] : '00:00:00'; ?></td>
-                                    <?php                                        
-                                        $SQL = "SELECT
-                                                    SEC_TO_TIME(FLOOR(AVG(`x2`.`closed_at` - `x1`.`opened_at`))) as `count`
-                                                    FROM (
-                                                        SELECT
-                                                            `date`, MIN(`time`) as `opened_at`
-                                                        FROM `counter_timing`
-                                                        WHERE `type` = 'open' AND `flight` IN ( $SUBSQL3 ) GROUP BY `date`
-                                                    ) AS `x1`
-                                                    INNER JOIN (
-                                                        SELECT `date`, MAX(`time`) AS `closed_at`
-                                                        FROM `counter_timing`
-                                                        WHERE `type` = 'close' AND `flight` IN ( $SUBSQL3 ) GROUP BY `date`
-                                                    ) AS `x2`
-                                                ON (`x2`.`date` = `x1`.`date`)";        
-                                                $dbValues2[":c"] = $city['i'];                                                
-                                        $counter = $db->query($SQL, $dbValues2)->get();                                        
-                                        $counter = $counter['count'];
-                                    ?>
-                                    <td><?php echo isset($counter) ? $counter : '00:00:00'; ?></td>
+                                    <td><?php echo isset($city['serviceTime']) ? $city['serviceTime'] : '00:00:00'; ?></td>                                    
+                                    <td><?php echo isset($city['counter_duration']) ? $city['counter_duration'] : '00:00:00'; ?></td>
                                     <td><?php echo isset($city['avg_score']) ? round($city['avg_score']) : '0' ; ?></td>
                                 </tr>
                             <?php endforeach; ?>

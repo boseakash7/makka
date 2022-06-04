@@ -1,5 +1,6 @@
 <?php
 
+use Application\Models\City;
 use System\Core\Model;
 use System\Helpers\URL;
 use System\Libs\FormValidator;
@@ -41,6 +42,7 @@ $formValidator = FormValidator::instance("arrival-form");
                                 <label for="city"><?php echo $lang('arrival_city') ?><span class="text-danger">*</span></label>
                                 <select name="arrival_city" id="arrival_city" class="form-control">
                                     <?php foreach ($cities as $city) : ?>
+                                        <?php if ( $city['type'] != City::TYPE_DESTINATION ) continue; ?>
                                         <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('arrival_city', $flightInfo['dairport']['city']) == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -93,6 +95,7 @@ $formValidator = FormValidator::instance("arrival-form");
                                 <label for="take_off_place"><?php echo $lang('take_off_place') ?><span class="text-danger">*</span></label>
                                 <select name="take_off_place" id="take_off_place" class="form-control">                                    
                                     <?php foreach ($cities as $city) : ?>
+                                        <?php if ( $city['type'] != City::TYPE_SOURCE ) continue; ?>
                                         <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('take_off_place', $flightInfo['sairport']['city']) == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>

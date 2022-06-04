@@ -20,7 +20,7 @@ $WHERE1 = [];
 
 if (!empty($cityId)) {
     $WHERE1[] = " `sairport` IN (
-        SELECT `id` FROM `airports` WHERE `city` = ?
+        SELECT `id` FROM `airports` WHERE `city` = ? 
     ) ";
     $dbValues1[] = $cityId;
 }
@@ -49,7 +49,7 @@ $SQL8 = "SELECT SUM(`number_of_fingerprint`) AS `count` FROM `departure_form` WH
 $SQL9 = "SELECT CONCAT(ROUND(AVG(`communication_speed`) / 2 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL10 = "SELECT CONCAT(ROUND(AVG(`connection_status`) / 2 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL11 = "SELECT CONCAT(ROUND(AVG(`fingerprint_status`) / 2 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL12 = "SELECT SEC_TO_TIME(FLOOR(AVG(`check_out_time` - `check_in_time`))) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL1 )";
+$SQL12 = "SELECT SEC_TO_TIME(FLOOR(AVG(`check_out_time` - `check_in_time`))) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL1 ) AND `check_out_time` - `check_in_time` >= 0";
 $SQL13 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_pilgrim_service`))) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 
 $workingCounts = $db->query($SQL1, $dbValues1)->get();

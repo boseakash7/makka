@@ -599,8 +599,8 @@ class Form extends Controller
                 'arrival_time' => $formValidator->getValue('arrival_time') ,
                 'working_counts' => $formValidator->getValue('working_counts') ,
                 'non_working_counts' => $formValidator->getValue('non_working_counts') ,
-                'average_pilgrim_waiting' => $formValidator->getValue('average_pilgrim_waiting') * 60 ,
-                'average_pilgrim_service' => $formValidator->getValue('average_pilgrim_service') * 60,
+                'average_pilgrim_waiting' => $formValidator->getValue('average_pilgrim_waiting'),
+                'average_pilgrim_service' => $formValidator->getValue('average_pilgrim_service'),
                 'counters_working_start_time' => $formValidator->getValue('counters_working_start_time') ,
                 'counters_working_end_time' => $formValidator->getValue('counters_working_end_time') ,
                 'number_of_men' => $formValidator->getValue('number_of_men') ,
@@ -621,6 +621,10 @@ class Form extends Controller
 
             $json = json_encode($data);
 
+            $counterDuration = strtotime($formValidator->getValue('counters_working_end_time')) - strtotime($formValidator->getValue('counters_working_start_time'));
+            $counterDuration = $counterDuration < 0 ? 0 : $counterDuration;
+
+
             $departureFM = Model::get(DepartureForm::class);
             $departureFM->create([
                 'flight_id' => $flightId,
@@ -637,7 +641,8 @@ class Form extends Controller
                 'communication_speed' => $this->_getstatus($formValidator->getValue('speed_of_communication')),
                 'connection_status' => $this->_getstatus($formValidator->getValue('connection_status')),
                 'fingerprint_status' => $this->_getstatus($formValidator->getValue('fingerprint_status')),
-                'average_pilgrim_service' => $formValidator->getValue('average_pilgrim_service'),
+                'average_pilgrim_service' => $formValidator->getValue('average_pilgrim_service') * 60,
+                'counter_duration_in_sec' => $counterDuration,
                 'created_at' => time()
             ]);
 

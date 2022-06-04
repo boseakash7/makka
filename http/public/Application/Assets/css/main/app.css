@@ -867,7 +867,7 @@ progress {
 }
 
 .blockquote-footer:before {
-    content: "Ã¢â‚¬â€Ã‚Â "
+    content: "ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬ÂÃƒâ€šÃ‚Â "
 }
 
 .img-fluid,.img-thumbnail {
@@ -20491,3 +20491,16 @@ a {
 .icon-mid:before {
     vertical-align: middle
 }
+
+.ar table th {
+    text-align: right !important;
+}
+
+.ar table thead td {
+    text-align: right !important;
+}
+
+.ar .other-info .float-start {
+    float: right !important;
+}
+

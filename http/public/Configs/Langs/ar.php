@@ -19,7 +19,7 @@ return [
     'logout' => "تسجيل خروج",
     'account' => "حساب",
     'flight_number' => "رقم الرحلة",
-    'airlines' => "الخطوط الجويه",
+    'airlines' => "الخطوط الجوية",
     'select_airlines' => "اختر شركة الطيران",
     'take_off_date' => "تاريخ الإقلاع",
     'take_off_time' => "وقت الإقلاع",
@@ -44,29 +44,29 @@ return [
     // Form Departure
     'counters_working_start_time' => ' بداية التسجيل',
     'counters_working_end_time' => 'نهاية التسجيل',
-    'working_counts' => 'عدد الكونترات',
-    'non_working_counts' => 'الكونترات اللتي لا تعمل',
+    'working_counts' => 'عدد الكونترات العاملة',
+    'non_working_counts' => 'عددالكونترات اللتي لا تعمل',
     'number_of_men' => 'عدد الرجال',
     'number_of_women' => 'عدد النساء',
     'number_of_people_fingerprinted' => 'عدد الأشخاص الذين تم أخذ بصماتهم',
     'number_of_bags' => 'عدد الحقائب',
     'recommendations' => 'التوصيات',
     'reviews' => 'ملاحظات',
-    'treatment' => 'العلاج',
+    'treatment' => 'المعالجة',
     'challenges' => 'التحديات',
     'speed_of_communication' => 'سرعة الاتصال',
     'connection_status' => 'حالة الاتصال',
-    'fingerprint_status' => 'حالة بصمة الإصبع',
-    'departure_airport' => 'مطار الوجهة',
-    'number_of_seats' => 'عدد المقاعد',
-    'number_of_cases' => 'عدد الحالات',
+    'fingerprint_status' => 'حالة البصمة',
+    'departure_airport' => 'مطار الوصول',
+    'number_of_seats' => 'عدد المقعدين',
+    'number_of_cases' => 'عدد الحالات المرضية',
     'success' => "نجاح",
     'warning' => "تحذير",
-    'dashboard' => 'لوحه القياده',
+    'dashboard' => 'لوحه التحكم',
     
     // Arrival Form
-    'number_of_counter_custom_staffs' => 'عدد موظفي الكاونتر',
-    'number_of_staffs' => 'عدد الموظفين',
+    'number_of_counter_custom_staffs' => 'عدد موظفين الجمارك',
+    'number_of_staffs' => 'عدد موظفين حياك',
     'flight_delay' => 'تأخير الرحلة',
     'take_off_place' => 'مكان الإقلاع',
     'expected_arrival_time' => 'وقت الوصول المتوقع',
@@ -89,9 +89,9 @@ return [
     'check_in' => "التسجيل",
     'check_out' => "الخروج",
     'closed' => "مغلقة",
-    'on_air' => "على الهواء مباشرة",
+    'on_air' => "على الهواء",
     'arrived' => "تم الوصول",
-    'complete' => "كامل",
+    'complete' => "مكتملة",
     'back' => "الخلف",
     
     'arrival_assesment_form_submitted' => "تم تقديم نموذج تقييم الوصول",
@@ -129,7 +129,7 @@ return [
     'departure_form' => "نموذج مغادرة الرحلة ل (:flight)",
     'departure_form_title' => "نموذج المغادرة",
 
-    'email_password_combination_wrong' => "تركيبة البريد الإلكتروني/كلمة المرور خاطئة",
+    'email_password_combination_wrong' => "البريد الإلكتروني/كلمة المرور خاطئة",
     'remember_password' => "هل تتذكر كلمة المرور الخاصة بك؟",
     'email_not_found' => "لم يتم العثور على البريد الإلكتروني",
     'reset_password_email_subject' => "إعادة تعيين كلمة المرور",
@@ -247,6 +247,16 @@ return [
     'number_of_blindfolded' => "عدد معصوبي الأعين",
     'number_of_bag_used' => "عدد الحقائب المستخدمة",
     'connection_speed' => "سرعة الاتصال",
-    'in_minutes'  => "في دقائق"
+    'in_minutes'  => "بالدقائق",
+
+    // new 2
+    'edit_flight' => "تحرير الرحلة",
+    'edit_flight_desc' => "تحرير الرحلة من هنا",
+
+    'view_arrival_assessment' => 'عرض تقييم الوصول',
+    'view_departure_assessment' => 'عرض تقيم المغادرة',
+    'view_departure_form' => 'عرض نموذج المغادرة',
+    'view_arrival_form' => 'عرض نموذج الوصول',
+    'view_logs' => 'سجل الاحداث'
 ];
 

@@ -43,7 +43,7 @@ $SQL8 = "SELECT SUM(`number_of_fingerprint`) FROM `departure_form` WHERE `flight
 $SQL9 = "SELECT CONCAT(ROUND(AVG(`communication_speed`) / 2 * 100), '%') FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
 $SQL10 = "SELECT CONCAT(ROUND(AVG(`connection_status`) / 2 * 100), '%') FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
 $SQL11 = "SELECT CONCAT(ROUND(AVG(`fingerprint_status`) / 2 * 100), '%') FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
-$SQL12 = "SELECT SEC_TO_TIME(FLOOR(AVG(`check_out_time` - `check_in_time`))) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL2 )";
+$SQL12 = "SELECT SEC_TO_TIME(FLOOR(AVG(`check_out_time` - `check_in_time`))) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL2 ) AND `check_out_time` - `check_in_time` >= 0";
 $SQL13 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_pilgrim_service`))) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
 
 $CITYSQL = "SELECT
@@ -65,10 +65,11 @@ $CITYSQL = "SELECT
         ($SQL13) AS `average_pilgrim_service`
         FROM
         `cities`
+        WHERE `type` = 'source'
 ";
 
 if ( !empty($cityId) ) {
-    $CITYSQL .= " WHERE `id` = :c";
+    $CITYSQL .= " AND `id` = :c";
     $dbValues2[':c'] = $cityId;
 }
 

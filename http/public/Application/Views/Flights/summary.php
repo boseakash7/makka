@@ -31,11 +31,11 @@ $lang = Model::get(Language::class);
                     </div>
                     <hr>
                     <div class="other-info clearfix">
-                        <a target="_blank" href="<?php echo URL::full('flights/arrival-assessment/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Arrival Assessment</a>
-                        <a target="_blank" href="<?php echo URL::full('flights/departure-assessment/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Departure Assessment</a>
-                        <a target="_blank" href="<?php echo URL::full('flights/departure-form/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Departure Form</a>
-                        <a target="_blank" href="<?php echo URL::full('flights/arrival-form/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Arrival Form</a>
-                        <a target="_blank" href="<?php echo URL::full('flights/log/' . $flight['id']) ?>" class="btn btn-primary mb-2">View Logs</a>
+                        <a target="_blank" href="<?php echo URL::full('flights/arrival-assessment/' . $flight['id']) ?>" class="btn btn-primary mb-2"><?php echo $lang('view_arrival_assessment') ?>View Arrival Assessment</a>
+                        <a target="_blank" href="<?php echo URL::full('flights/departure-assessment/' . $flight['id']) ?>" class="btn btn-primary mb-2"><?php echo $lang('view_departure_assessment') ?>View Departure Assessment</a>
+                        <a target="_blank" href="<?php echo URL::full('flights/departure-form/' . $flight['id']) ?>" class="btn btn-primary mb-2"><?php echo $lang('view_departure_form') ?>View Departure Form</a>
+                        <a target="_blank" href="<?php echo URL::full('flights/arrival-form/' . $flight['id']) ?>" class="btn btn-primary mb-2"><?php echo $lang('view_arrival_form') ?>View Arrival Form</a>
+                        <a target="_blank" href="<?php echo URL::full('flights/log/' . $flight['id']) ?>" class="btn btn-primary mb-2"><?php echo $lang('view_logs') ?>View Logs</a>
                     </div>
                     <hr>
                 </div>

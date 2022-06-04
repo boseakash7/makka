@@ -12,7 +12,7 @@ $lang = Model::get(Language::class);
  */
 $db = Database::get();
 
-$SUBSQL2 = " SELECT `id` FROM `flights` WHERE `sairport` IN (
+$SUBSQL2 = " SELECT `id` FROM `flights` WHERE `dairport` IN (
     SELECT `id` FROM `airports` WHERE `city` = `cities`.`id`
 ) ";
 
@@ -51,10 +51,11 @@ $CITYSQL = "SELECT
         ($SQL6) AS `sick_cases`
         FROM
         `cities`
+        WHERE `type` = 'destination'
 ";
 
 if ( !empty($cityId) ) {
-    $CITYSQL .= " WHERE `id` = :c";
+    $CITYSQL .= " AND `id` = :c";
     $dbValues2[':c'] = $cityId;
 }
 
