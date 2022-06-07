@@ -85,7 +85,7 @@ $lang = Model::get(Language::class);
                     <div class="row">
                         <div class="col">
                             <h5><?php echo $lang('arrival_time') ?></h5>
-                            <p><?php echo $arrivalInfo['arr']['arrival_time'] ?></p>
+                            <p><?php echo date('Y-m-d H:i', strtotime($arrivalInfo['arr']['arrival_time'])) ?></p>
                         </div>
 
                         <div class="col">
@@ -133,7 +133,7 @@ $lang = Model::get(Language::class);
                     <div class="row">
                         <div class="col">
                             <h5><?php echo $lang('flight_delay') ?></h5>
-                            <p><?php echo $arrivalInfo['arr']['flight_delay'] ?></p>
+                            <p><?php echo $lang( $arrivalInfo['arr']['flight_delay']) ?></p>
                         </div>
 
                         <div class="col">
@@ -150,14 +150,14 @@ $lang = Model::get(Language::class);
 
                         <div class="col">
                             <h5><?php echo $lang('are_there_unmarked_buses') ?></h5>
-                            <p><?php echo $arrivalInfo['arr']['are_there_unmarked_buses'] ?></p>
+                            <p><?php echo $lang($arrivalInfo['arr']['are_there_unmarked_buses']) ?></p>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col">
                             <h5><?php echo $lang('are_there_any_accidents') ?></h5>
-                            <p><?php echo $arrivalInfo['arr']['are_there_any_accidents'] ?></p>
+                            <p><?php echo $lang($arrivalInfo['arr']['are_there_any_accidents'] )?></p>
                         </div>
 
                         <div class="col">

@@ -80,7 +80,7 @@ $lang = Model::get(Language::class);
                     <div class="row">
                         <div class="col">
                             <h5><?php echo $lang('departure_time') ?></h5>
-                            <p><?php echo $departureInfo['arr']['departure_time'] ?></p>
+                            <p><?php echo date('Y-m-d H:i', strtotime($departureInfo['arr']['departure_time'])) ?></p>
                         </div>
 
                         <div class="col">
@@ -171,19 +171,19 @@ $lang = Model::get(Language::class);
 
                         <div class="col">
                             <h5><?php echo $lang('fingerprint_status') ?></h5>
-                            <p><?php echo $departureInfo['arr']['fingerprint_status'] ?></p>
+                            <p><?php echo $lang($departureInfo['arr']['fingerprint_status']) ?></p>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col">
                             <h5><?php echo $lang('connection_status') ?></h5>
-                            <p><?php echo $departureInfo['arr']['connection_status'] ?></p>
+                            <p><?php echo $lang($departureInfo['arr']['connection_status']) ?></p>
                         </div>
 
                         <div class="col">
                             <h5><?php echo $lang('speed_of_communication') ?></h5>
-                            <p><?php echo $departureInfo['arr']['speed_of_communication'] ?></p>
+                            <p><?php echo $lang($departureInfo['arr']['speed_of_communication']) ?></p>
                         </div>
 
                     </div>
