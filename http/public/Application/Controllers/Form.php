@@ -2,6 +2,7 @@
 
 namespace Application\Controllers;
 
+use Application\Controllers\Ajax\Flight;
 use Application\Helpers\AirportHelper;
 use Application\Helpers\FlightHelper;
 use Application\Main\AuthController;
@@ -449,10 +450,223 @@ class Form extends Controller
         $response->set($view);
     }
 
+    public function arrivalEdit( Request $request, Response $response )
+    {
+        $userInfo = $this->user->getInfo();
+
+        $lang = Model::get(Language::class);
+
+        $param = $request->param(0);
+
+        $flightM = Model::get(Flights::class);
+
+        $cityM = Model::get(City::class);
+        $cities = $cityM->all();
+        
+        $flightM = Model::get(Flights::class);
+        $flight = $flightM->getById( $param );
+        $flight = FlightHelper::prepare([$flight]);
+        $flight = $flight[0];
+
+        $arrivalAM = Model::get(ArrivalForm::class);
+        $arrivalInfo = $arrivalAM->getByFlightId( $param );
+
+        if( !empty($arrivalInfo) )
+        {
+            $arrivalInfo['arr'] = json_decode($arrivalInfo['json'], true);
+        }
+        
+        $flightInfo = Model::get(Flights::class)->getById($arrivalInfo['flight_id']);
+        $flightInfo = FlightHelper::prepare([$flightInfo]);
+        $flightInfo = $flightInfo[0];
+        
+        $destinationAirports = Model::get(Airport::class)->findAll(['city' => $arrivalInfo['arr']['arrival_city'], 'type' => Airport::TYPE_DESTINATION]);
+
+        $formValidator = FormValidator::instance("edit-arrival-form");
+        $formValidator->setRules([
+            'date' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'flight_delay' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'arrival_city' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'flight_number' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'number_of_staffs' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'number_of_counter_custom_staffs' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'passengers' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'arrival_time' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'take_off_place' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'expected_arrival_time' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'average_waiting_time_unitil_access' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'average_waiting_time_unitil_end_of_inspection' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'average_waiting_until_sorting_system' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'how_long_does_luggage_arrive_at' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'duration_of_arrival_pilgrims' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'number_of_buses_operated_to_transport_pilgrims' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'number_of_buses_operating_with_mecca_logo' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'are_there_unmarked_buses' => [
+                'type' => 'string',
+            ],
+            'are_there_any_accidents' => [
+                'type' => 'string',
+            ],
+            'number_of_cases' => [
+                'type' => 'string',
+            ],
+            'challenges' => [
+                'type' => 'string',
+            ],
+            'solutions' => [
+                'type' => 'string',
+            ],
+            'recommendations' => [
+                'type' => 'string',
+            ],
+            'reviews' => [
+                'type' => 'string',
+            ],
+        ])->setErrors([
+            'flight_delay.required' => $lang('field_required'),
+            'date.required' => $lang('field_required'),
+            'arrival_city.required' => $lang('field_required'),
+            'flight_number.required' => $lang('field_required'),
+            'number_of_staffs.required' => $lang('field_required'),
+            'number_of_counter_custom_staffs.required' => $lang('field_required'),
+            'passengers.required' => $lang('field_required'),
+            'arrival_time.required' => $lang('field_required'),
+            'take_off_place.required' => $lang('field_required'),
+            'expected_arrival_time.required' => $lang('field_required'),
+            'average_waiting_time_unitil_access.required' => $lang('field_required'),
+            'average_waiting_time_unitil_end_of_inspection.required' => $lang('field_required'),
+            'average_waiting_until_sorting_system.required' => $lang('field_required'),
+            'how_long_does_luggage_arrive_at.required' => $lang('field_required'),
+            'duration_of_arrival_pilgrims.required' => $lang('field_required'),
+            'number_of_buses_operated_to_transport_pilgrims.required' => $lang('field_required'),
+            'number_of_buses_operating_with_mecca_logo.required' => $lang('field_required'),
+        ]);
+
+        if ( $request->getHTTPMethod() == 'POST' && $formValidator->validate() )
+        {
+            $data = [
+                'flight_delay' => $formValidator->getValue('flight_delay') ,
+                'date' => $formValidator->getValue('date') ,
+                'arrival_city' => $formValidator->getValue('arrival_city') ,
+                'flight_number' => $formValidator->getValue('flight_number') ,
+                'number_of_staffs' => $formValidator->getValue('number_of_staffs') ,
+                'number_of_counter_custom_staffs' => $formValidator->getValue('number_of_counter_custom_staffs') ,
+                'passengers' => $formValidator->getValue('passengers') ,
+                'arrival_time' => $formValidator->getValue('arrival_time') ,
+                'take_off_place' => $formValidator->getValue('take_off_place') ,
+                'expected_arrival_time' => $formValidator->getValue('expected_arrival_time') ,
+                'average_waiting_time_unitil_access' => $formValidator->getValue('average_waiting_time_unitil_access') ,
+                'average_waiting_time_unitil_end_of_inspection' => $formValidator->getValue('average_waiting_time_unitil_end_of_inspection') ,
+                'average_waiting_until_sorting_system' => $formValidator->getValue('average_waiting_until_sorting_system') ,
+                'how_long_does_luggage_arrive_at' => $formValidator->getValue('how_long_does_luggage_arrive_at') ,
+                'duration_of_arrival_pilgrims' => $formValidator->getValue('duration_of_arrival_pilgrims') ,
+                'number_of_buses_operated_to_transport_pilgrims' => $formValidator->getValue('number_of_buses_operated_to_transport_pilgrims') ,
+                'number_of_buses_operating_with_mecca_logo' => $formValidator->getValue('number_of_buses_operating_with_mecca_logo') ,
+                'are_there_unmarked_buses' => $formValidator->getValue('are_there_unmarked_buses') ,
+                'are_there_any_accidents' => $formValidator->getValue('are_there_any_accidents') ,
+                'number_of_cases' => $formValidator->getValue('number_of_cases') ,
+                'challenges' => $formValidator->getValue('challenges') ,
+                'solutions' => $formValidator->getValue('solutions') ,
+                'recommendations' => $formValidator->getValue('recommendations') ,
+                'reviews' => $formValidator->getValue('reviews') ,
+            ];
+
+            $json = json_encode($data);
+
+            $departureFM = Model::get(ArrivalForm::class);
+            $departureFM->update( $arrivalInfo['id'] ,[
+                'flight_id' => $arrivalInfo['flight_id'],
+                'json' => $json,
+                'passengers' => $formValidator->getValue('passengers'),
+                'average_waiting_to_sterile' => $formValidator->getValue('average_waiting_time_unitil_access') * 60,
+                'average_waiting_inspection' => $formValidator->getValue('average_waiting_time_unitil_end_of_inspection')  * 60,
+                'average_luggage_arrive' => $formValidator->getValue('how_long_does_luggage_arrive_at')  * 60,
+                'average_bus_ride' => $formValidator->getValue('average_waiting_until_sorting_system')  * 60,
+                'duration_pilgrims' => $formValidator->getValue('duration_of_arrival_pilgrims')  * 60,
+                'flight_delay' => $this->_getPositive($formValidator->getValue('flight_delay')),
+                'unmarked_buses' => $this->_getPositive($formValidator->getValue('are_there_unmarked_buses')),
+                'accidents' => $this->_getPositive($formValidator->getValue('are_there_any_accidents')),
+                'buses_ready_to_pilgrims' => $formValidator->getValue('number_of_buses_operated_to_transport_pilgrims'),
+                'buses_with_mecca_logo' => $formValidator->getValue('number_of_buses_operating_with_mecca_logo'),
+                'sick_cases' => $formValidator->getValue('number_of_cases'),
+                'created_at' => time()
+            ]);
+
+            Model::get(Flights::class)->update($arrivalInfo['flight_id'], [
+                'status' => Flights::STATUS_COMPLETE
+            ]);
+
+            throw new Redirect('flights/arrival-form/' . $arrivalInfo['flight_id']);
+        }
+
+        $view = new View();
+        $view->set('Form/edit_arrival', [
+            'flightInfo' => $flightInfo,
+            'cities' => $cities,
+            'arrivalInfo' => $arrivalInfo,
+            'destinationAirports' => $destinationAirports
+
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
     public function departure( Request $request, Response $response )
     {
         $lang = Model::get(Language::class);
-        
         
         $flightId = $request->param(0);
         $flightInfo = Model::get(Flights::class)->getById($flightId);
@@ -676,6 +890,256 @@ class Form extends Controller
             'flightInfo' => $flightInfo,
             'cities' => $cities,
             'airports' => $airports
+        ]);
+        $view->prepend('header');
+        $view->append('footer');
+
+        $response->set($view);
+    }
+
+    public function departureEdit( Request $request, Response $response )
+    {
+        $userInfo = $this->user->getInfo();
+
+        $lang = Model::get(Language::class);
+
+        $param = $request->param(0);
+
+        $flightM = Model::get(Flights::class);
+
+        $cityM = Model::get(City::class);
+        $cities = $cityM->all();
+        
+        $flightM = Model::get(Flights::class);
+        $flight = $flightM->getById( $param );
+        $flight = FlightHelper::prepare([$flight]);
+        $flightInfo = $flight[0];
+
+        $departureAM = Model::get(DepartureForm::class);
+        $departureInfo = $departureAM->getByFlightId( $param );
+
+        if( !empty($departureInfo) )
+        {
+            $departureInfo['arr'] = json_decode($departureInfo['json'], true);
+        }
+        
+        $flightInfo = Model::get(Flights::class)->getById($departureInfo['flight_id']);
+        $flightInfo = FlightHelper::prepare([$flightInfo]);
+        $flightInfo = $flightInfo[0];
+        
+        $destinationAirports = Model::get(Airport::class)->findAll(['city' => $departureInfo['arr']['arrival_city'], 'type' => Airport::TYPE_DESTINATION]);
+
+        $formValidator = FormValidator::instance("edit-departure-form");
+        $formValidator->setRules([
+            'date' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'departure_city' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'departure_airport' => [
+                'required' => true,
+                'type' => 'select'
+            ],
+            'flight_number' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'passengers' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'departure_time' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'arrival_city' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'arrival_time' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'working_counts' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'non_working_counts' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'average_pilgrim_waiting' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'average_pilgrim_service' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'counters_working_start_time' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'counters_working_end_time' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'number_of_men' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'number_of_women' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'number_of_seats' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'number_of_cases' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'number_of_people_fingerprinted' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'number_of_bags' => [
+                'type' => 'string',
+            ],
+            'fingerprint_status' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'fingerprint_status' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'connection_status' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'speed_of_communication' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'challenges' => [
+                'type' => 'string',
+            ],
+            'treatment' => [
+                'type' => 'string',
+            ],
+            'recommendations' => [
+                'type' => 'string',
+            ],
+            'reviews' => [
+                'type' => 'string',
+            ],
+        ])->setErrors([
+            'date.required' => $lang('field_required'),
+            'departure_city.required' => $lang('field_required'),
+            'flight_number.required' => $lang('field_required'),
+            'passengers.required' => $lang('field_required'),
+            'departure_time.required' => $lang('field_required'),
+            'arrival_city.required' => $lang('field_required'),
+            'arrival_time.required' => $lang('field_required'),
+            'working_counts.required' => $lang('field_required'),
+            'non_working_counts.required' => $lang('field_required'),
+            'average_pilgrim_waiting.required' => $lang('field_required'),
+            'average_pilgrim_service.required' => $lang('field_required'),
+            'counters_working_start_time.required' => $lang('field_required'),
+            'counters_working_end_time.required' => $lang('field_required'),
+            'number_of_men.required' => $lang('field_required'),
+            'number_of_women.required' => $lang('field_required'),
+            'number_of_seats.required' => $lang('field_required'),
+            'number_of_cases.required' => $lang('field_required'),
+            'number_of_people_fingerprinted.required' => $lang('field_required'),
+            'fingerprint_status.required' => $lang('field_required'),
+            'fingerprint_status.required' => $lang('field_required'),
+            'connection_status.required' => $lang('field_required'),
+            'speed_of_communication.required' => $lang('field_required'),
+        ]);
+
+        if ( $request->getHTTPMethod() == 'POST' && $formValidator->validate() )
+        {
+            $data = [
+                'date' => $formValidator->getValue('date') ,
+                'departure_city' => $formValidator->getValue('departure_city') ,
+                'flight_number' => $formValidator->getValue('flight_number') ,
+                'passengers' => $formValidator->getValue('passengers') ,
+                'departure_time' => $formValidator->getValue('departure_time') ,
+                'arrival_city' => $formValidator->getValue('arrival_city') ,
+                'arrival_time' => $formValidator->getValue('arrival_time') ,
+                'working_counts' => $formValidator->getValue('working_counts') ,
+                'non_working_counts' => $formValidator->getValue('non_working_counts') ,
+                'average_pilgrim_waiting' => $formValidator->getValue('average_pilgrim_waiting'),
+                'average_pilgrim_service' => $formValidator->getValue('average_pilgrim_service'),
+                'counters_working_start_time' => $formValidator->getValue('counters_working_start_time') ,
+                'counters_working_end_time' => $formValidator->getValue('counters_working_end_time') ,
+                'number_of_men' => $formValidator->getValue('number_of_men') ,
+                'number_of_women' => $formValidator->getValue('number_of_women') ,
+                'number_of_seats' => $formValidator->getValue('number_of_seats') ,
+                'number_of_cases' => $formValidator->getValue('number_of_cases') ,
+                'number_of_people_fingerprinted' => $formValidator->getValue('number_of_people_fingerprinted') ,
+                'number_of_bags' => $formValidator->getValue('number_of_bags') ,
+                'fingerprint_status' => $formValidator->getValue('fingerprint_status') ,
+                'fingerprint_status' => $formValidator->getValue('fingerprint_status') ,
+                'connection_status' => $formValidator->getValue('connection_status') ,
+                'speed_of_communication' => $formValidator->getValue('speed_of_communication') ,
+                'challenges' => $formValidator->getValue('challenges') ,
+                'treatment' => $formValidator->getValue('treatment') ,
+                'recommendations' => $formValidator->getValue('recommendations') ,
+                'reviews' => $formValidator->getValue('reviews') ,
+            ];
+
+            $json = json_encode($data);
+
+            $counterDuration = strtotime($formValidator->getValue('counters_working_end_time')) - strtotime($formValidator->getValue('counters_working_start_time'));
+            $counterDuration = $counterDuration < 0 ? 0 : $counterDuration;
+
+            $bags = $formValidator->getValue('number_of_bags', 0);
+            $bags = !empty($bags) ? $bags : 0;
+
+
+            $departureFM = Model::get(DepartureForm::class);
+            $departureFM->update($departureInfo['id'], [
+                'flight_id' => $flightInfo['id'],
+                'json' => $json,
+                'passengers' => $formValidator->getValue('passengers'),
+                'working_counts' => $formValidator->getValue('working_counts'),
+                'non_working_counts' => $formValidator->getValue('non_working_counts'),
+                'number_of_men' => $formValidator->getValue('number_of_men'),
+                'number_of_women' => $formValidator->getValue('number_of_women'),
+                'number_of_seats' => $formValidator->getValue('number_of_seats'),
+                'number_of_cases' => $formValidator->getValue('number_of_cases'),
+                'number_of_bags' => $bags,
+                'number_of_fingerprint' => $formValidator->getValue('number_of_people_fingerprinted'),
+                'communication_speed' => $this->_getstatus($formValidator->getValue('speed_of_communication')),
+                'connection_status' => $this->_getstatus($formValidator->getValue('connection_status')),
+                'fingerprint_status' => $this->_getstatus($formValidator->getValue('fingerprint_status')),
+                'average_pilgrim_service' => $formValidator->getValue('average_pilgrim_service') * 60,
+                'counter_duration_in_sec' => $counterDuration,
+                'created_at' => time()
+            ]);
+
+            Model::get(Flights::class)->update($flightInfo['id'], [
+                'status' => Flights::STATUS_ON_AIR,
+                'dairport' => $formValidator->getValue('departure_airport')
+            ]);
+
+            throw new Redirect('flights/departure-form/' . $param);
+        }
+
+        $view = new View();
+        $view->set('Form/edit_departure', [
+            'flightInfo' => $flightInfo,
+            'cities' => $cities,
+            'departureInfo' => $departureInfo,
+            'destinationAirports' => $destinationAirports
+
         ]);
         $view->prepend('header');
         $view->append('footer');

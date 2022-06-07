@@ -247,7 +247,7 @@ return [
     'average_hajj_service' => "متوسط وقت خدمة الحاج",
     'number_of_males' => "عدد الذكور",
     'number_of_sick' => "عدد الحالات المرضية",
-    'number_of_Passengers' => "عدد الركاب",
+    'number_of_blindfolded' => "عدد معصوبي الأعين",
     'number_of_bag_used' => "عدد الحقائب المستخدمة",
     'connection_speed' => "سرعة الاتصال",
     'in_minutes'  => "بالدقائق",
@@ -265,5 +265,10 @@ return [
     // new 3
     'counters_working_start_time_desc' => 'قم بادخال ساعة بداية العمل (حضور الموظفين)',
     'counters_working_end_time_desc' => 'قم بادخال ساعة نهاية العمل (نهاية اعمال اليوم)',
+
+    // Csv
+    'export_csv' => 'تصدير CSV',
+    'departure_date' => 'تاريخ المغادرة',
+    'arrival_date' => 'تاريخ الوصول',
 ];
 

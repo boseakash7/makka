@@ -1,6 +1,7 @@
 <?php
 
 use System\Core\Model;
+use System\Helpers\URL;
 use System\Models\Language;
 
 $lang = Model::get(Language::class);
@@ -18,7 +19,6 @@ $lang = Model::get(Language::class);
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-
                 </div>
                 <div class="card-body">
                     <h1><?php echo $lang('flight_num', ['num' => $flight['number']]) ?></h1>
@@ -35,7 +35,7 @@ $lang = Model::get(Language::class);
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-
+                    <a href="<?php echo URL::full('/form/departure/edit/' . $departureInfo['flight_id']) ?>" class="btn btn-primary">Edit</a>
                 </div>
                 <?php
                     if ( !empty($departureInfo) ):
@@ -49,7 +49,7 @@ $lang = Model::get(Language::class);
 
                         <div class="col">
                             <h5><?php echo $lang('departure_city') ?></h5>
-                            <p><?php echo $departureInfo['arr']['departure_city'] ?></p>
+                            <p><?php echo $departureCityInfo[$lang->current() . '_name']  ?></p>
                         </div>
 
                     </div>

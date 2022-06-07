@@ -14,6 +14,11 @@ class DepartureForm extends Model
         return $this->_db->insert($this->_table, $data);
     }
 
+    public function update( $id, $data )
+    {
+        return $this->_db->update($this->_table, $id, $data);
+    }
+
     public function getByFlightId( $id )
     {
         $SQL = "SELECT * FROM `{$this->_table}` WHERE `flight_id` = ?";

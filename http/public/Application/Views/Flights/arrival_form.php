@@ -40,7 +40,7 @@ $lang = Model::get(Language::class);
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-
+                    <a href="<?php echo URL::full('/form/arrival/edit/' . $arrivalInfo['flight_id']) ?>" class="btn btn-primary">Edit Form</a>
                 </div>
                 <?php
                     if ( !empty($arrivalInfo) ):
@@ -54,7 +54,7 @@ $lang = Model::get(Language::class);
 
                         <div class="col">
                             <h5><?php echo $lang('arrival_city') ?></h5>
-                            <p><?php echo $arrivalInfo['arr']['arrival_city'] ?></p>
+                            <p><?php echo $arrivalFlightInfo[$lang->current() . '_name'] ?></p>
                         </div>
 
                     </div>
@@ -66,14 +66,14 @@ $lang = Model::get(Language::class);
 
                         <div class="col">
                             <h5><?php echo $lang('number_of_staffs') ?></h5>
-                            <p><?php echo $arrivalInfo['arr']['flight_number'] ?></p>
+                            <p><?php echo $arrivalInfo['arr']['number_of_staffs'] ?></p>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col">
                             <h5><?php echo $lang('number_of_counter_custom_staffs') ?></h5>
-                            <p><?php echo $arrivalInfo['arr']['flight_number'] ?></p>
+                            <p><?php echo $arrivalInfo['arr']['number_of_counter_custom_staffs'] ?></p>
                         </div>
 
                         <div class="col">
@@ -90,7 +90,7 @@ $lang = Model::get(Language::class);
 
                         <div class="col">
                             <h5><?php echo $lang('take_off_place') ?></h5>
-                            <p><?php echo $arrivalInfo['arr']['take_off_place'] ?></p>
+                            <p><?php echo $takeOffPlace[$lang->current() . '_name'] ?></p>
                         </div>
 
                     </div>

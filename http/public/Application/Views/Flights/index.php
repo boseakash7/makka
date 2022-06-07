@@ -27,6 +27,7 @@ $userM = Model::get(User::class);
     <a href="<?php echo URL::full('flights/add') ?>" class="btn btn-primary"><?php echo $lang('add') ?></a>
     <?php endif; ?>
     <a href="<?php echo URL::current() ?>" class="btn btn-primary"><?php echo $lang('reload') ?></a>
+    <a target="_blank" href="<?php echo URL::full('flights/export') ?>" class="btn btn-primary"><?php echo $lang('export_csv') ?></a>
 </define>
 <section class="section">
     <div class="card">

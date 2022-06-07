@@ -54,9 +54,14 @@ $routes->set(array(
 
         '/mode' => "Mode::index",
 
+        // Export
+        '/flights/export' => "Flights::export",
+
         // forms
         '/form/departure/(:num)' => 'Form::departure',
         '/form/arrival/(:num)' => 'Form::arrival',
+        '/form/departure/edit/(:num)' => 'Form::departureEdit',
+        '/form/arrival/edit/(:num)' => 'Form::arrivalEdit',
         '/departure-form-success' => 'Form::departureSuccess',
         '/arrival-form-success' => 'Form::arrivalSuccess',
         '/form/departure-assessment/(:num)' => 'Form::departureAssesment',

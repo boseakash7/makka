@@ -263,6 +263,11 @@ return [
 
     // new 3
     'counters_working_start_time_desc' => 'Enter the work start hour (staff attendance)',
-    'counters_working_end_time_desc' => 'Enter the end of work hour (end of work of the day)'
+    'counters_working_end_time_desc' => 'Enter the end of work hour (end of work of the day)',
+
+    // Csv
+    'export_csv' => 'Export CSV',
+    'departure_date' => 'Departure Date',
+    'arrival_date' => 'Arrival Date',
 ];
 
