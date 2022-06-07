@@ -260,5 +260,9 @@ return [
     'view_departure_form' => 'View Departure Form',
     'view_arrival_form' => 'View Arrival Form',
     'view_logs' => 'View Logs',
+
+    // new 3
+    'counters_working_start_time_desc' => 'Enter the work start hour (staff attendance)',
+    'counters_working_end_time_desc' => 'Enter the end of work hour (end of work of the day)'
 ];
 

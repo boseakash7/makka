@@ -13,21 +13,21 @@ $formValidator = FormValidator::instance("arrival-assesment");
         <div class="form-group">
             <label class="mb-2" for="employment_interaction">عملے کا برتاؤ<span class="text-danger">*</span></label>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('employment_interaction') == 'مطمئن' ) echo 'checked' ?> value="مطمئن" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction1">
+                <input <?php if( $formValidator->getValue('employment_interaction') == 'Yes' ) echo 'checked' ?> value="Yes" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction1">
                 <label class="form-check-label" for="employment_interaction1">
-                    مطمئن  <i class="bi bi-emoji-laughing-fill"></i>
+                بہترین۔  <i class="bi bi-emoji-laughing-fill"></i>
                 </label>
             </div>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('employment_interaction') == 'کچھ بھی نہیں' ) echo 'checked' ?> value="کچھ بھی نہیں" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction2">
+                <input <?php if( $formValidator->getValue('employment_interaction') == 'Somewhat' ) echo 'checked' ?> value="Somewhat"" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction2">
                 <label class="form-check-label" for="employment_interaction2">
-                    کچھ بھی نہیں  <i class="bi bi-emoji-neutral-fill"></i>
+                مناسب۔  <i class="bi bi-emoji-neutral-fill"></i>
                 </label>
             </div>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('employment_interaction') == 'غير مطمئن، نا پسندی' ) echo 'checked' ?> value="غير مطمئن، نا پسندی" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction3">
+                <input <?php if( $formValidator->getValue('employment_interaction') == 'Not' ) echo 'checked' ?> value="Not" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction3">
                 <label class="form-check-label" for="employment_interaction3">
-                    غير مطمئن، نا پسندی  <i class="bi bi-emoji-angry-fill"></i>
+                غیر مناسب۔  <i class="bi bi-emoji-angry-fill"></i>
                 </label>
             </div>
             <?php if ($formValidator->hasError('employment_interaction')) : ?>
@@ -44,21 +44,21 @@ $formValidator = FormValidator::instance("arrival-assesment");
         <div class="form-group">
             <label class="mb-2" for="clarity_procedure"> طریقہ کار اور راستے کی آگاہی<span class="text-danger">*</span></label>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('clarity_procedure') == 'مطمئن' ) echo 'checked' ?> value="مطمئن" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure1">
+                <input <?php if( $formValidator->getValue('clarity_procedure') == 'Yes' ) echo 'checked' ?> value="Yes" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure1">
                 <label class="form-check-label" for="clarity_procedure1">
-                    مطمئن  <i class="bi bi-emoji-laughing-fill"></i>
+                بہترین۔  <i class="bi bi-emoji-laughing-fill"></i>
                 </label>
             </div>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('clarity_procedure') == 'کچھ بھی نہیں' ) echo 'checked' ?> value="کچھ بھی نہیں" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure2">
+                <input <?php if( $formValidator->getValue('clarity_procedure')== 'Somewhat' ) echo 'checked' ?> value="Somewhat" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure2">
                 <label class="form-check-label" for="clarity_procedure2">
-                    کچھ بھی نہیں  <i class="bi bi-emoji-neutral-fill"></i>
+                مناسب۔  <i class="bi bi-emoji-neutral-fill"></i>
                 </label>
             </div>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('clarity_procedure') == 'غير مطمئن، نا پسندی' ) echo 'checked' ?> value="غير مطمئن، نا پسندی" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure3">
+                <input <?php if( $formValidator->getValue('clarity_procedure') == 'Not' ) echo 'checked' ?> value="Not" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure3">
                 <label class="form-check-label" for="clarity_procedure3">
-                    غير مطمئن، نا پسندی  <i class="bi bi-emoji-angry-fill"></i>
+                غیر مناسب۔  <i class="bi bi-emoji-angry-fill"></i>
                 </label>
             </div>
             <?php if ($formValidator->hasError('clarity_procedure')) : ?>
@@ -75,21 +75,21 @@ $formValidator = FormValidator::instance("arrival-assesment");
         <div class="form-group">
             <label class="mb-2" for="service_provided">سروس فراہم کی<span class="text-danger">*</span></label>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('service_provided') == 'مطمئن' ) echo 'checked' ?> value="مطمئن" class="form-check-input" type="radio" name="service_provided" id="service_provided1">
+                <input <?php if( $formValidator->getValue('service_provided') == 'Yes' ) echo 'checked' ?> value="Yes" class="form-check-input" type="radio" name="service_provided" id="service_provided1">
                 <label class="form-check-label" for="service_provided1">
-                    مطمئن  <i class="bi bi-emoji-laughing-fill"></i>
+                بہترین۔  <i class="bi bi-emoji-laughing-fill"></i>
                 </label>
             </div>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('service_provided') == 'کچھ بھی نہیں' ) echo 'checked' ?> value="کچھ بھی نہیں" class="form-check-input" type="radio" name="service_provided" id="service_provided2">
+                <input <?php if( $formValidator->getValue('service_provided') == 'Somewhat' ) echo 'checked' ?> value="Somewhat" class="form-check-input" type="radio" name="service_provided" id="service_provided2">
                 <label class="form-check-label" for="service_provided2">
-                    کچھ بھی نہیں  <i class="bi bi-emoji-neutral-fill"></i>
+                مناسب۔  <i class="bi bi-emoji-neutral-fill"></i>
                 </label>
             </div>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('service_provided') == 'غير مطمئن، نا پسندی' ) echo 'checked' ?> value="غير مطمئن، نا پسندی" class="form-check-input" type="radio" name="service_provided" id="service_provided3">
+                <input <?php if( $formValidator->getValue('service_provided') == 'Not' ) echo 'checked' ?> value="Not" class="form-check-input" type="radio" name="service_provided" id="service_provided3">
                 <label class="form-check-label" for="service_provided3">
-                    غير مطمئن، نا پسندی  <i class="bi bi-emoji-angry-fill"></i>
+                غیر مناسب۔  <i class="bi bi-emoji-angry-fill"></i>
                 </label>
             </div>
             <?php if ($formValidator->hasError('service_provided')) : ?>

@@ -44,14 +44,12 @@ $CITYSQL = "SELECT
 `en_name`,
 `ar_name`,
 (
-    SELECT
-        SEC_TO_TIME(FLOOR(AVG(`check_out_time` - `check_in_time`))) as `count`
-    FROM
-        `passengers`
-    WHERE
-        `flight` IN (
-            $SUBSQL2
-        ) AND `check_out_time` - `check_in_time` >= 0
+    SELECT 
+        SEC_TO_TIME(FLOOR(AVG(`average_pilgrim_service`))) AS `count`
+    FROM `departure_form`
+    WHERE `flight_id` IN (
+        $SUBSQL2
+    )
 ) AS `serviceTime`,
 (
     SELECT

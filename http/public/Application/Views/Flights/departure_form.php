@@ -121,6 +121,7 @@ $lang = Model::get(Language::class);
 
                         <div class="col">
                             <h5><?php echo $lang('counters_working_start_time') ?></h5>
+                            <p class="small text-danger"><?php echo $lang('counters_working_start_time_desc') ?></p>
                             <p><?php echo $departureInfo['arr']['counters_working_start_time'] ?></p>
                         </div>
 
@@ -128,6 +129,7 @@ $lang = Model::get(Language::class);
                     <div class="row">
                         <div class="col">
                             <h5><?php echo $lang('counters_working_end_time') ?></h5>
+                            <p class="small text-danger"><?php echo $lang('counters_working_end_time_desc') ?></p>
                             <p><?php echo $departureInfo['arr']['counters_working_end_time'] ?></p>
                         </div>
 

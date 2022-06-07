@@ -59,10 +59,20 @@ class Form extends Controller
                 'required' => true,
                 'type' => 'string',
             ],
+            'awareness' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'makkah_hall' => [
+                'required' => true,
+                'type' => 'string',
+            ],
         ])->setErrors([
             'employment_interaction.required' => $lang('field_required'),
             'clarity_procedure.required' => $lang('field_required'),
             'service_provided.required' => $lang('field_required'),
+            'awareness.required' => $lang('field_required'),
+            'makkah_hall.required' => $lang('field_required'),
         ]);
 
         if ( $request->getHTTPMethod() == 'POST' && $formValidator->validate() )
@@ -72,13 +82,17 @@ class Form extends Controller
                 'employment_interaction' => $formValidator->getValue('employment_interaction'),
                 'clarity_procedure' => $formValidator->getValue('clarity_procedure'),
                 'service_provided' => $formValidator->getValue('service_provided'),
+                'awareness' => $formValidator->getValue('awareness'),
+                'makkah_hall' => $formValidator->getValue('makkah_hall'),
             ];
 
             $point = $this->_getpoint($data['employment_interaction']);
             $point += $this->_getpoint($data['clarity_procedure']);
             $point += $this->_getpoint($data['service_provided']);
+            $point += $this->_getpoint($data['awareness']);
+            $point += $this->_getpoint($data['makkah_hall']);
 
-            $point = round($point / 3);
+            $point = round($point / 5);
 
             $json = json_encode($data);
 
@@ -624,6 +638,9 @@ class Form extends Controller
             $counterDuration = strtotime($formValidator->getValue('counters_working_end_time')) - strtotime($formValidator->getValue('counters_working_start_time'));
             $counterDuration = $counterDuration < 0 ? 0 : $counterDuration;
 
+            $bags = $formValidator->getValue('number_of_bags', 0);
+            $bags = !empty($bags) ? $bags : 0;
+
 
             $departureFM = Model::get(DepartureForm::class);
             $departureFM->create([
@@ -636,7 +653,7 @@ class Form extends Controller
                 'number_of_women' => $formValidator->getValue('number_of_women'),
                 'number_of_seats' => $formValidator->getValue('number_of_seats'),
                 'number_of_cases' => $formValidator->getValue('number_of_cases'),
-                'number_of_bags' => $formValidator->getValue('number_of_bags'),
+                'number_of_bags' => $bags,
                 'number_of_fingerprint' => $formValidator->getValue('number_of_people_fingerprinted'),
                 'communication_speed' => $this->_getstatus($formValidator->getValue('speed_of_communication')),
                 'connection_status' => $this->_getstatus($formValidator->getValue('connection_status')),
@@ -678,6 +695,15 @@ class Form extends Controller
             case 'Puas':
             case 'Memuaskan':
             case 'مطمئن':
+            case 'Yes':
+            case 'Comfortable':
+            case 'Quick':
+            case 'Easy':
+            case 'بہترین۔':
+            case 'Saya tidak setuju':
+            case 'saya setuju':
+            case 'হ্যাঁ':
+            case 'Ya':
                 $point = 100;
                 break;
             case 'نوعاً ما':
@@ -685,7 +711,13 @@ class Form extends Controller
             case 'Unsatisfactory':
             case 'Biasa':
             case 'Tidak Memuaskan':
-            case 'کچھ بھی نہیں';
+            case 'کچھ بھی نہیں':
+            case 'Somewhat' : 
+            case 'مناسب۔':
+            case 'Tidak tahu':
+            case 'Semacam':
+            case 'কিছুটা':
+            case 'Agak':
                 $point = 50;
                 break;
 

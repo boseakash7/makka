@@ -13,21 +13,21 @@ $formValidator = FormValidator::instance("arrival-assesment");
         <div class="form-group">
             <label class="mb-2" for="employment_interaction">Employment Interaction?<span class="text-danger">*</span></label>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('employment_interaction') == 'Satisfactory' ) echo 'checked' ?> value="Satisfactory" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction1">
+                <input <?php if( $formValidator->getValue('employment_interaction') == 'Yes' ) echo 'checked' ?> value="Yes" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction1">
                 <label class="form-check-label" for="employment_interaction1">
-                    Satisfactory <i class="bi bi-emoji-laughing-fill"></i>
+                Comfortable <i class="bi bi-emoji-laughing-fill"></i>
                 </label>
             </div>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('employment_interaction') == 'Unsatisfactory' ) echo 'checked' ?> value="Unsatisfactory" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction2">
+                <input <?php if( $formValidator->getValue('employment_interaction') == 'Somewhat' ) echo 'checked' ?> value="Somewhat" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction2">
                 <label class="form-check-label" for="employment_interaction2">
-                    Unsatisfactory <i class="bi bi-emoji-neutral-fill"></i>
+                Somewhat <i class="bi bi-emoji-neutral-fill"></i>
                 </label>
             </div>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('employment_interaction') == 'Less Satisfying' ) echo 'checked' ?> value="Less Satisfying" class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction3">
+                <input <?php if( $formValidator->getValue('employment_interaction') == 'Not' ) echo 'checked' ?> value="Not"class="form-check-input" type="radio" name="employment_interaction" id="employment_interaction3">
                 <label class="form-check-label" for="employment_interaction3">
-                    Less Satisfying <i class="bi bi-emoji-angry-fill"></i>
+                Not <i class="bi bi-emoji-angry-fill"></i>
                 </label>
             </div>
             <?php if ($formValidator->hasError('employment_interaction')) : ?>
@@ -44,21 +44,21 @@ $formValidator = FormValidator::instance("arrival-assesment");
         <div class="form-group">
             <label class="mb-2" for="clarity_procedure">Clarity of work procedures and lines?<span class="text-danger">*</span></label>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('clarity_procedure') == 'Satisfactory' ) echo 'checked' ?> value="Satisfactory" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure1">
+                <input <?php if( $formValidator->getValue('clarity_procedure') == 'Yes' ) echo 'checked' ?> value="Yes" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure1">
                 <label class="form-check-label" for="clarity_procedure1">
-                    Satisfactory <i class="bi bi-emoji-laughing-fill"></i>
+                Comfortable <i class="bi bi-emoji-laughing-fill"></i>
                 </label>
             </div>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('clarity_procedure') == 'Unsatisfactory' ) echo 'checked' ?> value="Unsatisfactory" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure2">
+                <input <?php if( $formValidator->getValue('clarity_procedure') == 'Somewhat' ) echo 'checked' ?> value="Somewhat" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure2">
                 <label class="form-check-label" for="clarity_procedure2">
-                    Unsatisfactory <i class="bi bi-emoji-neutral-fill"></i>
+                Somewhat <i class="bi bi-emoji-neutral-fill"></i>
                 </label>
             </div>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('clarity_procedure') == 'Less Satisfying' ) echo 'checked' ?> value="Less Satisfying" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure3">
+                <input <?php if( $formValidator->getValue('clarity_procedure') == 'Not' ) echo 'checked' ?> value="Not" class="form-check-input" type="radio" name="clarity_procedure" id="clarity_procedure3">
                 <label class="form-check-label" for="clarity_procedure3">
-                    Less Satisfying <i class="bi bi-emoji-angry-fill"></i>
+                Not <i class="bi bi-emoji-angry-fill"></i>
                 </label>
             </div>
             <?php if ($formValidator->hasError('clarity_procedure')) : ?>
@@ -75,21 +75,21 @@ $formValidator = FormValidator::instance("arrival-assesment");
         <div class="form-group">
             <label class="mb-2" for="employment_interaction">Services Provided?<span class="text-danger">*</span></label>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('service_provided') == 'Satisfactory' ) echo 'checked' ?> value="Satisfactory" class="form-check-input" type="radio" name="service_provided" id="service_provided1">
+                <input <?php if( $formValidator->getValue('service_provided') == 'Yes' ) echo 'checked' ?> value="Yes" class="form-check-input" type="radio" name="service_provided" id="service_provided1">
                 <label class="form-check-label" for="service_provided1">
-                    Satisfactory <i class="bi bi-emoji-laughing-fill"></i>
+                Comfortable <i class="bi bi-emoji-laughing-fill"></i>
                 </label>
             </div>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('service_provided') == 'Unsatisfactory' ) echo 'checked' ?> value="Unsatisfactory" class="form-check-input" type="radio" name="service_provided" id="service_provided2">
+                <input <?php if( $formValidator->getValue('service_provided') == 'Somewhat' ) echo 'checked' ?> value="Somewhat" class="form-check-input" type="radio" name="service_provided" id="service_provided2">
                 <label class="form-check-label" for="service_provided2">
-                    Unsatisfactory <i class="bi bi-emoji-neutral-fill"></i>
+                Somewhat <i class="bi bi-emoji-neutral-fill"></i>
                 </label>
             </div>
             <div class="form-check">
-                <input <?php if( $formValidator->getValue('service_provided') == 'Less Satisfying' ) echo 'checked' ?> value="Less Satisfying" class="form-check-input" type="radio" name="service_provided" id="service_provided3">
+                <input <?php if( $formValidator->getValue('service_provided') == 'Not' ) echo 'checked' ?> value="Not" class="form-check-input" type="radio" name="service_provided" id="service_provided3">
                 <label class="form-check-label" for="service_provided3">
-                    Less Satisfying <i class="bi bi-emoji-angry-fill"></i>
+                Not <i class="bi bi-emoji-angry-fill"></i>
                 </label>
             </div>
             <?php if ($formValidator->hasError('service_provided')) : ?>
