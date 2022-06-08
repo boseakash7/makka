@@ -83,7 +83,7 @@ $CITYSQL = "SELECT
 ) AS `avg_score`,
 (
     SELECT
-        SEC_TO_TIME(FLOOR(AVG(`counter_duration_in_sec`))) AS `count`
+        SEC_TO_TIME(FLOOR(SUM(`counter_duration_in_sec`))) AS `count`
     FROM `departure_form`
     WHERE `flight_id` IN (
         $SUBSQL2

@@ -41,7 +41,7 @@ $SUBSQL1 .= !empty($WHERE1) ?  "WHERE " . implode(" AND ", $WHERE1) : "";
 $SQL1 = "SELECT COUNT(*) as `count` FROM `flights` WHERE `id` IN ( $SUBSQL1 )";
 $SQL2 = "SELECT SUM(`passengers`) as `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL3 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_pilgrim_service`))) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 ) ";
-$SQL4 = "SELECT SEC_TO_TIME(FLOOR(AVG(`counter_duration_in_sec`))) as `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL4 = "SELECT SEC_TO_TIME(FLOOR(SUM(`counter_duration_in_sec`))) as `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 
 $SQL5 = "SELECT AVG(`avg_score`) as `count` FROM `departure_assesment` WHERE `flight_id` IN ( $SUBSQL1 )";
 
