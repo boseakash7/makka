@@ -273,5 +273,7 @@ return [
 
     // new 4
     'invalid' => "غير صالح",
+    'success_update' => 'تم التحديث بنجاح',
+    'field_invalid' => 'هذا الحقل غير صالح'
 ];
 

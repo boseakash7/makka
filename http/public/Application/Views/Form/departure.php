@@ -129,14 +129,14 @@ $formValidator = FormValidator::instance("departure-form");
                         <div class="row">
                             <div class="col form-group">
                                 <label for="average_pilgrim_waiting"><?php echo $lang('average_pilgrim_waiting') ?><span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="average_pilgrim_waiting" id="average_pilgrim_waiting" value="<?php echo $formValidator->getValue('average_pilgrim_waiting'); ?>" placeholder="<?php echo $lang('in_minutes') ?>"/>
+                                <input type="text" class="form-control number-format" name="average_pilgrim_waiting" id="average_pilgrim_waiting" value="<?php echo $formValidator->getValue('average_pilgrim_waiting'); ?>" placeholder="hh:mm:ss"/>
                                 <?php if ($formValidator->hasError('average_pilgrim_waiting')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('average_pilgrim_waiting'); ?></p>
                                 <?php endif; ?>
                             </div>
                             <div class="col form-group">
                                 <label for="average_pilgrim_service"><?php echo $lang('average_pilgrim_service') ?><span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" name="average_pilgrim_service" id="average_pilgrim_service" value="<?php echo $formValidator->getValue('average_pilgrim_service'); ?>" placeholder="<?php echo $lang('in_minutes') ?>" />
+                                <input type="text" class="form-control number-format" name="average_pilgrim_service" id="average_pilgrim_service" value="<?php echo $formValidator->getValue('average_pilgrim_service'); ?>" placeholder="hh:mm:ss" />
                                 <?php if ($formValidator->hasError('average_pilgrim_service')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('average_pilgrim_service'); ?></p>
                                 <?php endif; ?>
@@ -277,6 +277,17 @@ $formValidator = FormValidator::instance("departure-form");
 
     <define footer_js>
         <script>
+
+        var cleave = new Cleave('#average_pilgrim_waiting', {
+            time: true,
+            timePattern: ['h', 'm', 's']
+        });
+
+        var cleave = new Cleave('#average_pilgrim_service', {
+            time: true,
+            timePattern: ['h', 'm', 's']
+        });
+
             $('#arrival_city').on('change', function() {
 
                 var val = $(this).val().trim();

@@ -19,4 +19,12 @@ class DateHelper
 
         return ($isInNegative ? '-' : '' ) . "$hours:$minutes:$seconds";
     }
+
+    public static function timeToSec( $time )
+    {
+        if ( empty($time) ) return '0';
+        $explode = explode(':' , $time);
+
+        return ($explode[0] * 3600) + ($explode[1] * 60) + $explode[2];
+    }
 }

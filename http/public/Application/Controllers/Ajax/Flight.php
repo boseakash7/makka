@@ -10,9 +10,48 @@ use System\Core\Model;
 use System\Core\Request;
 use System\core\Response;
 use System\Responses\JSON;
+use System\Responses\View;
 
 class Flight extends Controller
 {
+    public function logUpdate( Request $request, Response $response )
+    {
+        $passengerId = $request->post('id');
+        $check_in = $request->post('check_in');
+        $check_out = $request->post('check_out');
+
+        Model::get(Passenger::class)->update( $passengerId, [
+            'check_in_time' => strtotime($check_in),
+            'check_out_time' => strtotime($check_out)
+        ] );
+
+        $json = new JSON();
+        $json->set([
+            'check_in' => date('Y-m-d H:i:s', strtotime($check_in)),
+            'check_out' => date('Y-m-d H:i:s', strtotime($check_out))
+        ]);
+
+        $response->set($json);
+    }
+
+    public function logModal( Request $request, Response $response )
+    {
+        $passengerId = $request->post('id');
+
+        $passengerInfo = Model::get(Passenger::class)->find(['id' => $passengerId]);
+
+        $view = new View();
+        $view->set('Flights/Modal/log_update', [
+            'passengerInfo' => $passengerInfo
+        ]);
+        $output = $view->content();
+
+        $json = new JSON();
+        $json->set(['payload' => $output]);
+
+        $response->set($json);
+    }
+
     public function check( Request $request, Response $response )
     {
         $id = $request->post('id');

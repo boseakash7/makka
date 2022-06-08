@@ -74,7 +74,9 @@ $routes->set(array(
         '/ajax/flight/passenger-check' => "Ajax\Flight::check",
         '/ajax/flight/passenger-add' => "Ajax\Flight::add",
         '/ajax/flight/can-scan' => "Ajax\Flight::canScan",
-        '/ajax/form/get-airports-by-city' => "Ajax\Form::getAirportsByCity"
+        '/ajax/form/get-airports-by-city' => "Ajax\Form::getAirportsByCity",
+        '/ajax/flight/log/modal' => "Ajax\Flight::logModal",
+        '/ajax/flight/log/update' => "Ajax\Flight::logUpdate",
         
     ],
 

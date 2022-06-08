@@ -61,6 +61,12 @@ class User extends AbstractAuth
         return $user['type'] == self::TYPE_SUP;
     }
 
+    public function isSupAdmin()
+    {
+        $user = $this->getInfo();
+        return $user['type'] == self::TYPE_ADM && $user['is_super'];
+    }
+
     public function isEmp()
     {
         $user = $this->getInfo();

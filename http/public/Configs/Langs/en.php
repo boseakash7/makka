@@ -271,6 +271,8 @@ return [
     'arrival_date' => 'Arrival Date',
 
     // new 4
-    'invalid' => "Invalid",
+    'invalid' => "Invalid",    
+    'success_update' => 'Updated Successfully',
+    'field_invalid' => 'This field is invalid'
 ];
 
