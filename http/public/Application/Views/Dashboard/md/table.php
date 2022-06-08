@@ -2,11 +2,13 @@
 
 
 use Application\Helpers\Number;
+use Application\Models\Flights;
 use System\Core\Database;
 use System\Core\Model;
 use System\Models\Language;
 
 $lang = Model::get(Language::class);
+
 
 /**
  * @var Database
@@ -15,7 +17,7 @@ $db = Database::get();
 
 $SUBSQL2 = " SELECT `id` FROM `flights` WHERE `dairport` IN (
     SELECT `id` FROM `airports` WHERE `city` = `cities`.`id`
-) ";
+) AND `status` <> '" . Flights::STATUS_INVALID . "'";
 
 // PREPARE SUB SQL
 $dbValues2 = [];

@@ -2,6 +2,7 @@
 
 use Application\Helpers\DateHelper;
 use Application\Helpers\Number;
+use Application\Models\Flights;
 use System\Core\Database;
 use System\Core\Model;
 use System\Models\Language;
@@ -17,7 +18,7 @@ $SUBSQL1 = " SELECT `id` FROM `flights` ";
 
 // PREPARE SUB SQL
 $dbValues1 = [];
-$WHERE1 = [];
+$WHERE1 = [ " `status` <> '" . Flights::STATUS_INVALID . "'" ];
 
 if (!empty($cityId)) {
     $WHERE1[] = " `sairport` IN (

@@ -269,5 +269,8 @@ return [
     'export_csv' => 'Export CSV',
     'departure_date' => 'Departure Date',
     'arrival_date' => 'Arrival Date',
+
+    // new 4
+    'invalid' => "Invalid",
 ];
 

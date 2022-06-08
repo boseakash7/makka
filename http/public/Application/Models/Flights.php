@@ -14,6 +14,7 @@ class Flights extends Model
     const STATUS_ON_AIR = 'on_air';
     const STATUS_ARRIVED = 'arrived';
     const STATUS_COMPLETE = 'complete';
+    const STATUS_INVALID = 'invalid';
 
     private $_table = 'flights';
 

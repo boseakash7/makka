@@ -2,6 +2,7 @@
 
 
 use Application\Helpers\Number;
+use Application\Models\Flights;
 use System\Core\Database;
 use System\Core\Model;
 use System\Models\Language;
@@ -15,11 +16,11 @@ $db = Database::get();
 
 $SUBSQL2 = " SELECT `id` FROM `flights` WHERE `sairport` IN (
     SELECT `id` FROM `airports` WHERE `city` = `cities`.`id` 
-) ";
+) AND `status` <> '" . Flights::STATUS_INVALID . "'";
 
 $SUBSQL3 = " SELECT `id` FROM `flights` WHERE `sairport` IN (
     SELECT `id` FROM `airports` WHERE `city` = :c
-)";
+) AND `status` <> '" . Flights::STATUS_INVALID . "'";
 
 // PREPARE SUB SQL
 $dbValues2 = [];

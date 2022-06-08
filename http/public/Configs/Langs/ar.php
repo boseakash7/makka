@@ -270,5 +270,8 @@ return [
     'export_csv' => 'تصدير CSV',
     'departure_date' => 'تاريخ المغادرة',
     'arrival_date' => 'تاريخ الوصول',
+
+    // new 4
+    'invalid' => "غير صالح",
 ];
 
