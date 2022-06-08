@@ -247,7 +247,7 @@ return [
     'average_hajj_service' => "متوسط وقت خدمة الحاج",
     'number_of_males' => "عدد الذكور",
     'number_of_sick' => "عدد الحالات المرضية",
-    'number_of_blindfolded' => "عدد معصوبي الأعين",
+    'number_of_blindfolded' => "عدد الأشخاص المبصّمين",
     'number_of_bag_used' => "عدد الحقائب المستخدمة",
     'connection_speed' => "سرعة الاتصال",
     'in_minutes'  => "بالدقائق",
