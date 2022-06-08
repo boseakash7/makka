@@ -87,13 +87,15 @@ class Flights extends AuthController
         {
             $departureInfo['arr'] = json_decode($departureInfo['json'], true);
             $departureCityInfo = Model::get(City::class)->find(['id' => $departureInfo['arr']['departure_city']]);
+            $arrivalCityInfo = Model::get(City::class)->find(['id' => $departureInfo['arr']['arrival_city']]);
         }
 
         $view = new View();
         $view->set('Flights/departure_form', [
             'flight' => $flight,
             'departureInfo' => $departureInfo,
-            'departureCityInfo' => $departureCityInfo
+            'departureCityInfo' => $departureCityInfo,
+            'arrivalCityInfo' => $arrivalCityInfo,
 
         ]);
         $view->prepend('header');

@@ -1,12 +1,15 @@
 <?php
 
 use Application\Models\Flights;
+use Application\Models\User;
 use System\Core\Model;
 use System\Helpers\URL;
 use System\Models\Language;
 use System\Responses\View;
 
 $lang = Model::get(Language::class);
+
+$userM = Model::get(User::class);
 ?>
 <define title>
     <?php echo $lang('arrival_form', ['flight' => $flight['number']]) ?>
@@ -40,7 +43,9 @@ $lang = Model::get(Language::class);
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <a href="<?php echo URL::full('/form/arrival/edit/' . $arrivalInfo['flight_id']) ?>" class="btn btn-primary">Edit Form</a>
+                    <?php if( $userM->isSupAdmin() ) : ?>
+                        <a href="<?php echo URL::full('/form/arrival/edit/' . $arrivalInfo['flight_id']) ?>" class="btn btn-primary">Edit Form</a>
+                    <?php endif; ?>
                 </div>
                 <?php
                     if ( !empty($arrivalInfo) ):

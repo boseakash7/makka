@@ -269,5 +269,9 @@ return [
     'export_csv' => 'Export CSV',
     'departure_date' => 'Departure Date',
     'arrival_date' => 'Arrival Date',
+
+    // success
+    'success_update' => 'Updated Successfully',
+    'field_invalid' => 'This field is invalid'
 ];
 

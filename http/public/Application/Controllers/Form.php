@@ -4,6 +4,7 @@ namespace Application\Controllers;
 
 use Application\Controllers\Ajax\Flight;
 use Application\Helpers\AirportHelper;
+use Application\Helpers\DateHelper;
 use Application\Helpers\FlightHelper;
 use Application\Main\AuthController;
 use Application\Models\Airport;
@@ -315,22 +316,27 @@ class Form extends Controller
             'average_waiting_time_unitil_access' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'average_waiting_time_unitil_end_of_inspection' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'average_waiting_until_sorting_system' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'how_long_does_luggage_arrive_at' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'duration_of_arrival_pilgrims' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'number_of_buses_operated_to_transport_pilgrims' => [
                 'required' => true,
@@ -373,10 +379,15 @@ class Form extends Controller
             'take_off_place.required' => $lang('field_required'),
             'expected_arrival_time.required' => $lang('field_required'),
             'average_waiting_time_unitil_access.required' => $lang('field_required'),
+            'average_waiting_time_unitil_access.pattern' => $lang('field_invalid'),
             'average_waiting_time_unitil_end_of_inspection.required' => $lang('field_required'),
+            'average_waiting_time_unitil_end_of_inspection.pattern' => $lang('field_invalid'),
             'average_waiting_until_sorting_system.required' => $lang('field_required'),
+            'average_waiting_until_sorting_system.pattern' => $lang('field_invalid'),
             'how_long_does_luggage_arrive_at.required' => $lang('field_required'),
+            'how_long_does_luggage_arrive_at.pattern' => $lang('field_invalid'),
             'duration_of_arrival_pilgrims.required' => $lang('field_required'),
+            'duration_of_arrival_pilgrims.pattern' => $lang('field_invalid'),
             'number_of_buses_operated_to_transport_pilgrims.required' => $lang('field_required'),
             'number_of_buses_operating_with_mecca_logo.required' => $lang('field_required'),
         ]);
@@ -417,11 +428,11 @@ class Form extends Controller
                 'flight_id' => $flightId,
                 'json' => $json,
                 'passengers' => $formValidator->getValue('passengers'),
-                'average_waiting_to_sterile' => $formValidator->getValue('average_waiting_time_unitil_access') * 60,
-                'average_waiting_inspection' => $formValidator->getValue('average_waiting_time_unitil_end_of_inspection')  * 60,
-                'average_luggage_arrive' => $formValidator->getValue('how_long_does_luggage_arrive_at')  * 60,
-                'average_bus_ride' => $formValidator->getValue('average_waiting_until_sorting_system')  * 60,
-                'duration_pilgrims' => $formValidator->getValue('duration_of_arrival_pilgrims')  * 60,
+                'average_waiting_to_sterile' => DateHelper::timeToSec($formValidator->getValue('average_waiting_time_unitil_access')),
+                'average_waiting_inspection' => DateHelper::timeToSec( $formValidator->getValue('average_waiting_time_unitil_end_of_inspection') ),
+                'average_luggage_arrive' =>  DateHelper::timeToSec($formValidator->getValue('how_long_does_luggage_arrive_at') ),
+                'average_bus_ride' => DateHelper::timeToSec($formValidator->getValue('average_waiting_until_sorting_system') ),
+                'duration_pilgrims' => DateHelper::timeToSec($formValidator->getValue('duration_of_arrival_pilgrims') ),
                 'flight_delay' => $this->_getPositive($formValidator->getValue('flight_delay')),
                 'unmarked_buses' => $this->_getPositive($formValidator->getValue('are_there_unmarked_buses')),
                 'accidents' => $this->_getPositive($formValidator->getValue('are_there_any_accidents')),
@@ -527,22 +538,27 @@ class Form extends Controller
             'average_waiting_time_unitil_access' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'average_waiting_time_unitil_end_of_inspection' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'average_waiting_until_sorting_system' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'how_long_does_luggage_arrive_at' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'duration_of_arrival_pilgrims' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'number_of_buses_operated_to_transport_pilgrims' => [
                 'required' => true,
@@ -585,10 +601,15 @@ class Form extends Controller
             'take_off_place.required' => $lang('field_required'),
             'expected_arrival_time.required' => $lang('field_required'),
             'average_waiting_time_unitil_access.required' => $lang('field_required'),
+            'average_waiting_time_unitil_access.pattern' => $lang('field_invalid'),
             'average_waiting_time_unitil_end_of_inspection.required' => $lang('field_required'),
+            'average_waiting_time_unitil_end_of_inspection.pattern' => $lang('field_invalid'),
             'average_waiting_until_sorting_system.required' => $lang('field_required'),
+            'average_waiting_until_sorting_system.pattern' => $lang('field_invalid'),
             'how_long_does_luggage_arrive_at.required' => $lang('field_required'),
+            'how_long_does_luggage_arrive_at.pattern' => $lang('field_invalid'),
             'duration_of_arrival_pilgrims.required' => $lang('field_required'),
+            'duration_of_arrival_pilgrims.pattern' => $lang('field_invalid'),
             'number_of_buses_operated_to_transport_pilgrims.required' => $lang('field_required'),
             'number_of_buses_operating_with_mecca_logo.required' => $lang('field_required'),
         ]);
@@ -629,11 +650,11 @@ class Form extends Controller
                 'flight_id' => $arrivalInfo['flight_id'],
                 'json' => $json,
                 'passengers' => $formValidator->getValue('passengers'),
-                'average_waiting_to_sterile' => $formValidator->getValue('average_waiting_time_unitil_access') * 60,
-                'average_waiting_inspection' => $formValidator->getValue('average_waiting_time_unitil_end_of_inspection')  * 60,
-                'average_luggage_arrive' => $formValidator->getValue('how_long_does_luggage_arrive_at')  * 60,
-                'average_bus_ride' => $formValidator->getValue('average_waiting_until_sorting_system')  * 60,
-                'duration_pilgrims' => $formValidator->getValue('duration_of_arrival_pilgrims')  * 60,
+                'average_waiting_to_sterile' => DateHelper::timeToSec($formValidator->getValue('average_waiting_time_unitil_access')),
+                'average_waiting_inspection' =>DateHelper::timeToSec( $formValidator->getValue('average_waiting_time_unitil_end_of_inspection') ),
+                'average_luggage_arrive' => DateHelper::timeToSec($formValidator->getValue('how_long_does_luggage_arrive_at') ),
+                'average_bus_ride' => DateHelper::timeToSec($formValidator->getValue('average_waiting_until_sorting_system') ),
+                'duration_pilgrims' => DateHelper::timeToSec($formValidator->getValue('duration_of_arrival_pilgrims') ),
                 'flight_delay' => $this->_getPositive($formValidator->getValue('flight_delay')),
                 'unmarked_buses' => $this->_getPositive($formValidator->getValue('are_there_unmarked_buses')),
                 'accidents' => $this->_getPositive($formValidator->getValue('are_there_any_accidents')),
@@ -730,6 +751,7 @@ class Form extends Controller
             'average_pilgrim_service' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'counters_working_start_time' => [
                 'required' => true,
@@ -802,6 +824,7 @@ class Form extends Controller
             'non_working_counts.required' => $lang('field_required'),
             'average_pilgrim_waiting.required' => $lang('field_required'),
             'average_pilgrim_service.required' => $lang('field_required'),
+            'average_pilgrim_service.pattern' => $lang('field_invalid'),
             'counters_working_start_time.required' => $lang('field_required'),
             'counters_working_end_time.required' => $lang('field_required'),
             'number_of_men.required' => $lang('field_required'),
@@ -855,7 +878,6 @@ class Form extends Controller
             $bags = $formValidator->getValue('number_of_bags', 0);
             $bags = !empty($bags) ? $bags : 0;
 
-
             $departureFM = Model::get(DepartureForm::class);
             $departureFM->create([
                 'flight_id' => $flightId,
@@ -872,7 +894,7 @@ class Form extends Controller
                 'communication_speed' => $this->_getstatus($formValidator->getValue('speed_of_communication')),
                 'connection_status' => $this->_getstatus($formValidator->getValue('connection_status')),
                 'fingerprint_status' => $this->_getstatus($formValidator->getValue('fingerprint_status')),
-                'average_pilgrim_service' => $formValidator->getValue('average_pilgrim_service') * 60,
+                'average_pilgrim_service' => DateHelper::timeToSec($formValidator->getValue('average_pilgrim_service')),
                 'counter_duration_in_sec' => $counterDuration,
                 'created_at' => time()
             ]);
@@ -978,6 +1000,7 @@ class Form extends Controller
             'average_pilgrim_service' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'counters_working_start_time' => [
                 'required' => true,
@@ -1050,6 +1073,7 @@ class Form extends Controller
             'non_working_counts.required' => $lang('field_required'),
             'average_pilgrim_waiting.required' => $lang('field_required'),
             'average_pilgrim_service.required' => $lang('field_required'),
+            'average_pilgrim_service.pattern' => $lang('field_invalid'),
             'counters_working_start_time.required' => $lang('field_required'),
             'counters_working_end_time.required' => $lang('field_required'),
             'number_of_men.required' => $lang('field_required'),
@@ -1120,7 +1144,7 @@ class Form extends Controller
                 'communication_speed' => $this->_getstatus($formValidator->getValue('speed_of_communication')),
                 'connection_status' => $this->_getstatus($formValidator->getValue('connection_status')),
                 'fingerprint_status' => $this->_getstatus($formValidator->getValue('fingerprint_status')),
-                'average_pilgrim_service' => $formValidator->getValue('average_pilgrim_service') * 60,
+                'average_pilgrim_service' => DateHelper::timeToSec($formValidator->getValue('average_pilgrim_service')),
                 'counter_duration_in_sec' => $counterDuration,
                 'created_at' => time()
             ]);

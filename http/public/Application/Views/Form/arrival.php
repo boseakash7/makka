@@ -28,8 +28,8 @@ $formValidator = FormValidator::instance("arrival-form");
                 <div class="card-header">
 
                 </div>
-                <div class="card-body">
-                    <form action="<?php echo URL::current() ?>" method="POST">
+                <form action="<?php echo URL::current() ?>" method="POST">
+                    <div class="card-body">
                         <div class="row">
                             <div class="col form-group">
                                 <label for="date"><?php echo $lang('date') ?><span class="text-danger">*</span></label>
@@ -42,7 +42,7 @@ $formValidator = FormValidator::instance("arrival-form");
                                 <label for="city"><?php echo $lang('arrival_city') ?><span class="text-danger">*</span></label>
                                 <select name="arrival_city" id="arrival_city" class="form-control">
                                     <?php foreach ($cities as $city) : ?>
-                                        <?php if ( $city['type'] != City::TYPE_DESTINATION ) continue; ?>
+                                        <?php if ($city['type'] != City::TYPE_DESTINATION) continue; ?>
                                         <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('arrival_city', $flightInfo['dairport']['city']) == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -93,9 +93,9 @@ $formValidator = FormValidator::instance("arrival-form");
                         <div class="row">
                             <div class="col form-group">
                                 <label for="take_off_place"><?php echo $lang('take_off_place') ?><span class="text-danger">*</span></label>
-                                <select name="take_off_place" id="take_off_place" class="form-control">                                    
+                                <select name="take_off_place" id="take_off_place" class="form-control">
                                     <?php foreach ($cities as $city) : ?>
-                                        <?php if ( $city['type'] != City::TYPE_SOURCE ) continue; ?>
+                                        <?php if ($city['type'] != City::TYPE_SOURCE) continue; ?>
                                         <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('take_off_place', $flightInfo['sairport']['city']) == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -113,35 +113,35 @@ $formValidator = FormValidator::instance("arrival-form");
                         </div>
                         <div class="form-group">
                             <label for="average_waiting_time_unitil_access"><?php echo $lang('average_waiting_time_unitil_access') ?><span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="average_waiting_time_unitil_access" id="average_waiting_time_unitil_access" value="<?php echo $formValidator->getValue('average_waiting_time_unitil_access'); ?>" placeholder="<?php echo $lang('in_minutes') ?>"/>
+                            <input type="text" class="form-control" name="average_waiting_time_unitil_access" id="average_waiting_time_unitil_access" value="<?php echo $formValidator->getValue('average_waiting_time_unitil_access'); ?>" placeholder="hh:mm:ss" />
                             <?php if ($formValidator->hasError('average_waiting_time_unitil_access')) : ?>
                                 <p class="text-danger"><?php echo $formValidator->getError('average_waiting_time_unitil_access'); ?></p>
                             <?php endif; ?>
                         </div>
                         <div class="form-group">
                             <label for="average_waiting_time_unitil_end_of_inspection"><?php echo $lang('average_waiting_time_unitil_end_of_inspection') ?><span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="average_waiting_time_unitil_end_of_inspection" id="average_waiting_time_unitil_end_of_inspection" value="<?php echo $formValidator->getValue('average_waiting_time_unitil_end_of_inspection'); ?>" placeholder="<?php echo $lang('in_minutes') ?>"/>
+                            <input type="text" class="form-control" name="average_waiting_time_unitil_end_of_inspection" id="average_waiting_time_unitil_end_of_inspection" value="<?php echo $formValidator->getValue('average_waiting_time_unitil_end_of_inspection'); ?>" placeholder="hh:mm:ss" />
                             <?php if ($formValidator->hasError('average_waiting_time_unitil_end_of_inspection')) : ?>
                                 <p class="text-danger"><?php echo $formValidator->getError('average_waiting_time_unitil_end_of_inspection'); ?></p>
                             <?php endif; ?>
                         </div>
                         <div class="form-group">
                             <label for="average_waiting_until_sorting_system"><?php echo $lang('average_waiting_until_sorting_system') ?><span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="average_waiting_until_sorting_system" id="average_waiting_until_sorting_system" value="<?php echo $formValidator->getValue('average_waiting_until_sorting_system'); ?>" placeholder="<?php echo $lang('in_minutes') ?>"/>
+                            <input type="text" class="form-control" name="average_waiting_until_sorting_system" id="average_waiting_until_sorting_system" value="<?php echo $formValidator->getValue('average_waiting_until_sorting_system'); ?>" placeholder="hh:mm:ss" />
                             <?php if ($formValidator->hasError('average_waiting_until_sorting_system')) : ?>
                                 <p class="text-danger"><?php echo $formValidator->getError('average_waiting_until_sorting_system'); ?></p>
                             <?php endif; ?>
                         </div>
                         <div class="form-group">
                             <label for="how_long_does_luggage_arrive_at"><?php echo $lang('how_long_does_luggage_arrive_at') ?><span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="how_long_does_luggage_arrive_at" id="how_long_does_luggage_arrive_at" value="<?php echo $formValidator->getValue('how_long_does_luggage_arrive_at'); ?>" placeholder="<?php echo $lang('in_minutes') ?>"/>
+                            <input type="text" class="form-control" name="how_long_does_luggage_arrive_at" id="how_long_does_luggage_arrive_at" value="<?php echo $formValidator->getValue('how_long_does_luggage_arrive_at'); ?>" placeholder="hh:mm:ss" />
                             <?php if ($formValidator->hasError('how_long_does_luggage_arrive_at')) : ?>
                                 <p class="text-danger"><?php echo $formValidator->getError('how_long_does_luggage_arrive_at'); ?></p>
                             <?php endif; ?>
                         </div>
                         <div class="form-group">
                             <label for="duration_of_arrival_pilgrims"><?php echo $lang('duration_of_arrival_pilgrims') ?><span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="duration_of_arrival_pilgrims" id="duration_of_arrival_pilgrims" value="<?php echo $formValidator->getValue('duration_of_arrival_pilgrims'); ?>" placeholder="<?php echo $lang('in_minutes') ?>"/>
+                            <input type="text" class="form-control" name="duration_of_arrival_pilgrims" id="duration_of_arrival_pilgrims" value="<?php echo $formValidator->getValue('duration_of_arrival_pilgrims'); ?>" placeholder="hh:mm:ss" />
                             <?php if ($formValidator->hasError('duration_of_arrival_pilgrims')) : ?>
                                 <p class="text-danger"><?php echo $formValidator->getError('duration_of_arrival_pilgrims'); ?></p>
                             <?php endif; ?>
@@ -182,7 +182,7 @@ $formValidator = FormValidator::instance("arrival-form");
                                 <?php endif; ?>
                             </div>
                             <div class="col form-group">
-                                <label for=""><?php echo $lang('are_there_any_accidents') ?><span class="text-danger">*</span></label>                                
+                                <label for=""><?php echo $lang('are_there_any_accidents') ?><span class="text-danger">*</span></label>
                                 <select name="are_there_any_accidents" class="form-control" id="are_there_any_accidents">
                                     <option value="yes" <?php echo $formValidator->getValue('are_there_any_accidents') == 'yes' ? 'selected' : '' ?>><?php echo $lang('yes') ?></option>
                                     <option value="no" <?php echo $formValidator->getValue('are_there_any_accidents') == 'no' ? 'selected' : '' ?>><?php echo $lang('no') ?></option>
@@ -200,30 +200,59 @@ $formValidator = FormValidator::instance("arrival-form");
                                     <p class="text-danger"><?php echo $formValidator->getError('number_of_cases'); ?></p>
                                 <?php endif; ?>
                             </div>
-                            
+
                         </div>
-                            <div class="form-group">
-                                <label for="challenges"><?php echo $lang('challenges') ?></label>
-                                <textarea name="challenges" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('challenges'); ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="solutions"><?php echo $lang('solutions') ?></label>
-                                <textarea name="solutions" class="form-control" id="solutions" cols="30" rows="3"><?php echo $formValidator->getValue('solutions'); ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="recommendations"><?php echo $lang('recommendations') ?></label>
-                                <textarea name="recommendations" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('recommendations'); ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="reviews"><?php echo $lang('reviews') ?></label>
-                                <textarea name="reviews" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('reviews'); ?></textarea>
-                            </div>
-                            
+                        <div class="form-group">
+                            <label for="challenges"><?php echo $lang('challenges') ?></label>
+                            <textarea name="challenges" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('challenges'); ?></textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="solutions"><?php echo $lang('solutions') ?></label>
+                            <textarea name="solutions" class="form-control" id="solutions" cols="30" rows="3"><?php echo $formValidator->getValue('solutions'); ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="recommendations"><?php echo $lang('recommendations') ?></label>
+                            <textarea name="recommendations" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('recommendations'); ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviews"><?php echo $lang('reviews') ?></label>
+                            <textarea name="reviews" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('reviews'); ?></textarea>
+                        </div>
+
                         <button type="submit" class="btn btn-primary"><?php echo $lang('submit'); ?></button>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     </div>
+</section>
+
+<define footer_js>
+    <script>
+        var cleave = new Cleave('#average_waiting_time_unitil_access', {
+            time: true,
+            timePattern: ['h', 'm', 's']
+        });
+
+        var cleave = new Cleave('#average_waiting_time_unitil_end_of_inspection', {
+            time: true,
+            timePattern: ['h', 'm', 's']
+        });
+
+        var cleave = new Cleave('#average_waiting_until_sorting_system', {
+            time: true,
+            timePattern: ['h', 'm', 's']
+        });
+
+        var cleave = new Cleave('#how_long_does_luggage_arrive_at', {
+            time: true,
+            timePattern: ['h', 'm', 's']
+        });
+
+        var cleave = new Cleave('#duration_of_arrival_pilgrims', {
+            time: true,
+            timePattern: ['h', 'm', 's']
+        });
+    </script>
+</define>
