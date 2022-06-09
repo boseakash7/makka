@@ -130,8 +130,20 @@ $userM = Model::get(User::class);
                         </div>
 
                         <div class="col">
-                            <h5><?php echo $lang('duration_of_arrival_pilgrims') ?></h5>
-                            <p><?php echo $arrivalInfo['arr']['duration_of_arrival_pilgrims'] ?></p>
+                            <h5><?php echo $lang('first_hajji_arrived_time') ?></h5>
+                            <p><?php echo $arrivalInfo['arr']['first_hajji_arrived_time'] ?></p>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h5><?php echo $lang('last_hajji_arrived_time') ?></h5>
+                            <p><?php echo $arrivalInfo['arr']['last_hajji_arrived_time'] ?></p>
+                        </div>
+
+                        <div class="col">
+                            <h5><?php echo $lang('first_bus_leave_time') ?></h5>
+                            <p><?php echo $arrivalInfo['arr']['first_bus_leave_time'] ?></p>
                         </div>
 
                     </div>

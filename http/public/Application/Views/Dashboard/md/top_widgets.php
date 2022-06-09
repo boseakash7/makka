@@ -45,7 +45,7 @@ $SQL3 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_waiting_to_sterile`))) as `count`
 $SQL4 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_waiting_inspection`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL5 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_luggage_arrive`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL6 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_bus_ride`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
-$SQL7 = "SELECT SEC_TO_TIME(FLOOR(AVG(`duration_pilgrims`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+// $SQL7 = "SELECT SEC_TO_TIME(FLOOR(AVG(`duration_pilgrims`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL8 = "SELECT AVG(`avg_score`) as `count` FROM `arrival_assesment` WHERE `flight_id` IN ( $SUBSQL1 )";
 
 $flightsTotal = $db->query($SQL1, $dbValues1)->get();
@@ -66,8 +66,8 @@ $luggageArrive = $luggageArrive['count'];
 $busRide = $db->query($SQL6, $dbValues1)->get();
 $busRide = $busRide['count'];
 
-$pilgrims = $db->query($SQL7, $dbValues1)->get();
-$pilgrims = $pilgrims['count'];
+// $pilgrims = $db->query($SQL7, $dbValues1)->get();
+// $pilgrims = $pilgrims['count'];
 
 $score = $db->query($SQL8, $dbValues1)->get();
 $score = round($score['count']);
@@ -131,7 +131,7 @@ $score = round($score['count']);
         </div>
     </div>
 
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
         <div class="card">
             <div class="card-header">
                 <h3 class="text-center h5"><?php echo $lang('duration_of_arrival_pilgrims') ?></h3>
@@ -140,7 +140,7 @@ $score = round($score['count']);
                 <div class="number text-center h1 text-primary"><?php echo isset($pilgrims) ? $pilgrims : "00:00:00"; ?></div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="col-md-4">
         <div class="card">

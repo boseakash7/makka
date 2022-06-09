@@ -273,6 +273,10 @@ return [
     // new 4
     'invalid' => "Invalid",    
     'success_update' => 'Updated Successfully',
-    'field_invalid' => 'This field is invalid'
+    'field_invalid' => 'This field is invalid',
+
+    'first_hajji_arrived_time' => 'First hajji arrive time',
+    'last_hajji_arrived_time' => 'Last hajji arrive time',
+    'first_bus_leave_time' => 'First bus leave time',
 ];
 

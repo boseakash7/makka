@@ -243,11 +243,7 @@ $formValidator = FormValidator::instance("edit-departure-form");
                             </div>
                             <div class="form-group">
                                 <label for="speed_of_communication"><?php echo $lang('speed_of_communication') ?><span class="text-danger">*</span></label>
-                                <select name="speed_of_communication" class="form-control" id="speed_of_communication">
-                                    <option value="excellent" <?php echo $formValidator->getValue('speed_of_communication', $departureInfo['arr']['speed_of_communication']) == 'excellent' ? 'selected' : ''; ?>><?php echo $lang('excellent') ?></option>
-                                    <option value="good" <?php echo $formValidator->getValue('speed_of_communication', $departureInfo['arr']['speed_of_communication']) == 'good' ? 'selected' : ''; ?>><?php echo $lang('good') ?></option>
-                                    <option value="weak" <?php echo $formValidator->getValue('speed_of_communication', $departureInfo['arr']['speed_of_communication']) == 'weak' ? 'selected' : ''; ?>><?php echo $lang('weak') ?></option>
-                                </select>
+                                <input type="number" name="speed_of_communication" value="<?php echo $formValidator->getValue('speed_of_communication') ?>" class="form-control" id="speed_of_communication">
                                 <?php if ($formValidator->hasError('speed_of_communication')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('speed_of_communication'); ?></p>
                                 <?php endif; ?>

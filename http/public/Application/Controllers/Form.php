@@ -333,10 +333,17 @@ class Form extends Controller
                 'type' => 'string',
                 'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
-            'duration_of_arrival_pilgrims' => [
+            'first_hajji_arrived_time' => [
                 'required' => true,
                 'type' => 'string',
-                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
+            ],
+            'last_hajji_arrived_time' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'first_bus_leave_time' => [
+                'required' => true,
+                'type' => 'string',
             ],
             'number_of_buses_operated_to_transport_pilgrims' => [
                 'required' => true,
@@ -386,8 +393,9 @@ class Form extends Controller
             'average_waiting_until_sorting_system.pattern' => $lang('field_invalid'),
             'how_long_does_luggage_arrive_at.required' => $lang('field_required'),
             'how_long_does_luggage_arrive_at.pattern' => $lang('field_invalid'),
-            'duration_of_arrival_pilgrims.required' => $lang('field_required'),
-            'duration_of_arrival_pilgrims.pattern' => $lang('field_invalid'),
+            'first_hajji_arrived_time.required' => $lang('field_required'),
+            'last_hajji_arrived_time.required' => $lang('field_required'),
+            'first_bus_leave_time.required' => $lang('field_required'),
             'number_of_buses_operated_to_transport_pilgrims.required' => $lang('field_required'),
             'number_of_buses_operating_with_mecca_logo.required' => $lang('field_required'),
         ]);
@@ -409,7 +417,9 @@ class Form extends Controller
                 'average_waiting_time_unitil_end_of_inspection' => $formValidator->getValue('average_waiting_time_unitil_end_of_inspection') ,
                 'average_waiting_until_sorting_system' => $formValidator->getValue('average_waiting_until_sorting_system') ,
                 'how_long_does_luggage_arrive_at' => $formValidator->getValue('how_long_does_luggage_arrive_at') ,
-                'duration_of_arrival_pilgrims' => $formValidator->getValue('duration_of_arrival_pilgrims') ,
+                'first_hajji_arrived_time' => $formValidator->getValue('first_hajji_arrived_time') ,
+                'last_hajji_arrived_time' => $formValidator->getValue('last_hajji_arrived_time') ,
+                'first_bus_leave_time' => $formValidator->getValue('first_bus_leave_time') ,
                 'number_of_buses_operated_to_transport_pilgrims' => $formValidator->getValue('number_of_buses_operated_to_transport_pilgrims') ,
                 'number_of_buses_operating_with_mecca_logo' => $formValidator->getValue('number_of_buses_operating_with_mecca_logo') ,
                 'are_there_unmarked_buses' => $formValidator->getValue('are_there_unmarked_buses') ,
@@ -432,7 +442,6 @@ class Form extends Controller
                 'average_waiting_inspection' => DateHelper::timeToSec( $formValidator->getValue('average_waiting_time_unitil_end_of_inspection') ),
                 'average_luggage_arrive' =>  DateHelper::timeToSec($formValidator->getValue('how_long_does_luggage_arrive_at') ),
                 'average_bus_ride' => DateHelper::timeToSec($formValidator->getValue('average_waiting_until_sorting_system') ),
-                'duration_pilgrims' => DateHelper::timeToSec($formValidator->getValue('duration_of_arrival_pilgrims') ),
                 'flight_delay' => $this->_getPositive($formValidator->getValue('flight_delay')),
                 'unmarked_buses' => $this->_getPositive($formValidator->getValue('are_there_unmarked_buses')),
                 'accidents' => $this->_getPositive($formValidator->getValue('are_there_any_accidents')),
@@ -555,10 +564,17 @@ class Form extends Controller
                 'type' => 'string',
                 'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
-            'duration_of_arrival_pilgrims' => [
+            'first_hajji_arrived_time' => [
                 'required' => true,
                 'type' => 'string',
-                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
+            ],
+            'last_hajji_arrived_time' => [
+                'required' => true,
+                'type' => 'string',
+            ],
+            'first_bus_leave_time' => [
+                'required' => true,
+                'type' => 'string',
             ],
             'number_of_buses_operated_to_transport_pilgrims' => [
                 'required' => true,
@@ -608,8 +624,9 @@ class Form extends Controller
             'average_waiting_until_sorting_system.pattern' => $lang('field_invalid'),
             'how_long_does_luggage_arrive_at.required' => $lang('field_required'),
             'how_long_does_luggage_arrive_at.pattern' => $lang('field_invalid'),
-            'duration_of_arrival_pilgrims.required' => $lang('field_required'),
-            'duration_of_arrival_pilgrims.pattern' => $lang('field_invalid'),
+            'first_hajji_arrived_time.required' => $lang('field_required'),
+            'last_hajji_arrived_time.required' => $lang('field_required'),
+            'first_bus_leave_time.required' => $lang('field_required'),
             'number_of_buses_operated_to_transport_pilgrims.required' => $lang('field_required'),
             'number_of_buses_operating_with_mecca_logo.required' => $lang('field_required'),
         ]);
@@ -631,7 +648,9 @@ class Form extends Controller
                 'average_waiting_time_unitil_end_of_inspection' => $formValidator->getValue('average_waiting_time_unitil_end_of_inspection') ,
                 'average_waiting_until_sorting_system' => $formValidator->getValue('average_waiting_until_sorting_system') ,
                 'how_long_does_luggage_arrive_at' => $formValidator->getValue('how_long_does_luggage_arrive_at') ,
-                'duration_of_arrival_pilgrims' => $formValidator->getValue('duration_of_arrival_pilgrims') ,
+                'first_hajji_arrived_time' => $formValidator->getValue('first_hajji_arrived_time') ,
+                'last_hajji_arrived_time' => $formValidator->getValue('last_hajji_arrived_time') ,
+                'first_bus_leave_time' => $formValidator->getValue('first_bus_leave_time') ,
                 'number_of_buses_operated_to_transport_pilgrims' => $formValidator->getValue('number_of_buses_operated_to_transport_pilgrims') ,
                 'number_of_buses_operating_with_mecca_logo' => $formValidator->getValue('number_of_buses_operating_with_mecca_logo') ,
                 'are_there_unmarked_buses' => $formValidator->getValue('are_there_unmarked_buses') ,
@@ -654,7 +673,6 @@ class Form extends Controller
                 'average_waiting_inspection' =>DateHelper::timeToSec( $formValidator->getValue('average_waiting_time_unitil_end_of_inspection') ),
                 'average_luggage_arrive' => DateHelper::timeToSec($formValidator->getValue('how_long_does_luggage_arrive_at') ),
                 'average_bus_ride' => DateHelper::timeToSec($formValidator->getValue('average_waiting_until_sorting_system') ),
-                'duration_pilgrims' => DateHelper::timeToSec($formValidator->getValue('duration_of_arrival_pilgrims') ),
                 'flight_delay' => $this->_getPositive($formValidator->getValue('flight_delay')),
                 'unmarked_buses' => $this->_getPositive($formValidator->getValue('are_there_unmarked_buses')),
                 'accidents' => $this->_getPositive($formValidator->getValue('are_there_any_accidents')),
@@ -891,7 +909,7 @@ class Form extends Controller
                 'number_of_cases' => $formValidator->getValue('number_of_cases'),
                 'number_of_bags' => $bags,
                 'number_of_fingerprint' => $formValidator->getValue('number_of_people_fingerprinted'),
-                'communication_speed' => $this->_getstatus($formValidator->getValue('speed_of_communication')),
+                'communication_speed' => $formValidator->getValue('speed_of_communication'),
                 'connection_status' => $this->_getstatus($formValidator->getValue('connection_status')),
                 'fingerprint_status' => $this->_getstatus($formValidator->getValue('fingerprint_status')),
                 'average_pilgrim_service' => DateHelper::timeToSec($formValidator->getValue('average_pilgrim_service')),

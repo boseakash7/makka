@@ -42,7 +42,7 @@ $SQL3 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_waiting_to_sterile`))) as `count`
 $SQL4 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_waiting_inspection`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL2 )";
 $SQL5 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_luggage_arrive`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL2 )";
 $SQL6 = "SELECT SEC_TO_TIME(FLOOR(AVG(`average_bus_ride`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL2 )";
-$SQL7 = "SELECT SEC_TO_TIME(FLOOR(AVG(`duration_pilgrims`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+// $SQL7 = "SELECT SEC_TO_TIME(FLOOR(AVG(`duration_pilgrims`))) as `count` FROM `arrival_form` WHERE `flight_id` IN ( $SUBSQL2 )";
 $SQL8 = "SELECT FLOOR(AVG(`avg_score`)) as `count` FROM `arrival_assesment` WHERE `flight_id` IN ( $SUBSQL2 )";
 
 
@@ -56,7 +56,6 @@ $CITYSQL = "SELECT
         ($SQL4) AS `inspectionTime`,
         ($SQL5) AS `luggageArrive`,
         ($SQL6) AS `busRide`,
-        ($SQL7) AS `pilgrims`,
         ($SQL8) AS `avg_core`
         FROM
         `cities`
@@ -90,7 +89,7 @@ $cities = $db->query($CITYSQL, $dbValues2)->getAll();
                                 <td><?php echo $lang('average_waiting_time_unitil_end_of_inspection') ?></td>
                                 <td><?php echo $lang('average_waiting_until_sorting_system') ?></td>
                                 <td><?php echo $lang('baggage_arrival_time_to_accommodation') ?></td>
-                                <td><?php echo $lang('duration_of_arrival_pilgrims') ?></td>
+                                <!-- <td><?php echo $lang('duration_of_arrival_pilgrims') ?></td> -->
                                 <td><?php echo $lang('hajj_satisfaction_rate') ?></td>
                             </tr>
                         </thead>
@@ -104,7 +103,7 @@ $cities = $db->query($CITYSQL, $dbValues2)->getAll();
                                     <td><?php echo isset($city['inspectionTime']) ? $city['inspectionTime'] : "00:00:00"; ?></td>
                                     <td><?php echo isset($city['luggageArrive']) ? $city['luggageArrive'] : "00:00:00"; ?></td>
                                     <td><?php echo isset($city['busRide']) ? $city['busRide'] : "00:00:00"; ?></td>
-                                    <td><?php echo isset($city['pilgrims']) ? $city['pilgrims'] : "00:00:00"; ?></td>
+                                    <!-- <td><?php // echo isset($city['pilgrims']) ? $city['pilgrims'] : "00:00:00"; ?></td> -->
                                     <td><?php echo isset($city['avg_core']) ? $city['avg_core'] . '%' : "0%"; ?></td>
                                 </tr>
                             <?php endforeach; ?>

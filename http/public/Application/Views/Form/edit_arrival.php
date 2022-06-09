@@ -147,10 +147,24 @@ $formValidator = FormValidator::instance("edit-arrival-form");
                             <?php endif; ?>
                         </div>
                         <div class="form-group">
-                            <label for="duration_of_arrival_pilgrims"><?php echo $lang('duration_of_arrival_pilgrims') ?><span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="duration_of_arrival_pilgrims" id="duration_of_arrival_pilgrims" value="<?php echo $formValidator->getValue('duration_of_arrival_pilgrims', $arrivalInfo['arr']['duration_of_arrival_pilgrims']); ?>" placeholder="<?php echo $lang('in_minutes') ?>"/>
-                            <?php if ($formValidator->hasError('duration_of_arrival_pilgrims')) : ?>
-                                <p class="text-danger"><?php echo $formValidator->getError('duration_of_arrival_pilgrims'); ?></p>
+                            <label for="first_hajji_arrived_time"><?php echo $lang('first_hajji_arrived_time') ?><span class="text-danger">*</span></label>
+                            <input type="time" class="form-control" name="first_hajji_arrived_time" id="first_hajji_arrived_time" value="<?php echo $formValidator->getValue('first_hajji_arrived_time', $arrivalInfo['arr']['first_hajji_arrived_time']); ?>" />
+                            <?php if ($formValidator->hasError('first_hajji_arrived_time')) : ?>
+                                <p class="text-danger"><?php echo $formValidator->getError('first_hajji_arrived_time'); ?></p>
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_hajji_arrived_time"><?php echo $lang('last_hajji_arrived_time') ?><span class="text-danger">*</span></label>
+                            <input type="time" class="form-control" name="last_hajji_arrived_time" id="last_hajji_arrived_time" value="<?php echo $formValidator->getValue('last_hajji_arrived_time', $arrivalInfo['arr']['last_hajji_arrived_time']); ?>" />
+                            <?php if ($formValidator->hasError('last_hajji_arrived_time')) : ?>
+                                <p class="text-danger"><?php echo $formValidator->getError('last_hajji_arrived_time'); ?></p>
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="first_bus_leave_time"><?php echo $lang('first_bus_leave_time') ?><span class="text-danger">*</span></label>
+                            <input type="time" class="form-control" name="first_bus_leave_time" id="first_bus_leave_time" value="<?php echo $formValidator->getValue('first_bus_leave_time', $arrivalInfo['arr']['first_bus_leave_time']); ?>" />
+                            <?php if ($formValidator->hasError('first_bus_leave_time')) : ?>
+                                <p class="text-danger"><?php echo $formValidator->getError('first_bus_leave_time'); ?></p>
                             <?php endif; ?>
                         </div>
                         <div class="form-group">

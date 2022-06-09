@@ -274,6 +274,10 @@ return [
     // new 4
     'invalid' => "غير صالح",
     'success_update' => 'تم التحديث بنجاح',
-    'field_invalid' => 'هذا الحقل غير صالح'
+    'field_invalid' => 'هذا الحقل غير صالح',
+
+    'first_hajji_arrived_time' => 'وقت وصول الحاج الأول',
+    'last_hajji_arrived_time' => 'وقت وصول الحج الأخير',
+    'first_bus_leave_time' => 'أول حافلة تغادر الوقت',
 ];
 
