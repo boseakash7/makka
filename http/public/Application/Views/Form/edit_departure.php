@@ -46,7 +46,7 @@ $formValidator = FormValidator::instance("edit-departure-form");
                                 <select name="departure_city" id="departure_city" class="form-control">
                                     <?php foreach ($cities as $city) : ?>
                                         <?php if ( $city['type'] != City::TYPE_SOURCE ) continue; ?>
-                                        <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('departure_city', $flightInfo['sairport']['city']) == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
+                                        <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('departure_city', $flightInfo['id']) == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <?php if ($formValidator->hasError('departure_city')) : ?>
@@ -132,14 +132,14 @@ $formValidator = FormValidator::instance("edit-departure-form");
                         <div class="row">
                             <div class="col form-group">
                                 <label for="average_pilgrim_waiting"><?php echo $lang('average_pilgrim_waiting') ?><span class="text-danger">*</span></label>
-                                <input type="text" class="form-control number-format" name="average_pilgrim_waiting" id="average_pilgrim_waiting" value="<?php echo $formValidator->getValue('average_pilgrim_waiting'); ?>" placeholder="hh:mm:ss"/>
+                                <input type="text" class="form-control number-format" name="average_pilgrim_waiting" id="average_pilgrim_waiting" value="<?php echo $formValidator->getValue('average_pilgrim_waiting', $departureInfo['arr']['average_pilgrim_waiting']); ?>" placeholder="hh:mm:ss"/>
                                 <?php if ($formValidator->hasError('average_pilgrim_waiting')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('average_pilgrim_waiting'); ?></p>
                                 <?php endif; ?>
                             </div>
                             <div class="col form-group">
                                 <label for="average_pilgrim_service"><?php echo $lang('average_pilgrim_service') ?><span class="text-danger">*</span></label>
-                                <input type="text" class="form-control number-format" name="average_pilgrim_service" id="average_pilgrim_service" value="<?php echo $formValidator->getValue('average_pilgrim_service'); ?>" placeholder="hh:mm:ss" />
+                                <input type="text" class="form-control number-format" name="average_pilgrim_service" id="average_pilgrim_service" value="<?php echo $formValidator->getValue('average_pilgrim_service', $departureInfo['arr']['average_pilgrim_service']); ?>" placeholder="hh:mm:ss" />
                                 <?php if ($formValidator->hasError('average_pilgrim_service')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('average_pilgrim_service'); ?></p>
                                 <?php endif; ?>
@@ -243,7 +243,7 @@ $formValidator = FormValidator::instance("edit-departure-form");
                             </div>
                             <div class="form-group">
                                 <label for="speed_of_communication"><?php echo $lang('speed_of_communication') ?><span class="text-danger">*</span></label>
-                                <input type="number" name="speed_of_communication" value="<?php echo $formValidator->getValue('speed_of_communication') ?>" class="form-control" id="speed_of_communication">
+                                <input type="number" name="speed_of_communication" value="<?php echo $formValidator->getValue('speed_of_communication', $departureInfo['arr']['speed_of_communication']) ?>" class="form-control" id="speed_of_communication">
                                 <?php if ($formValidator->hasError('speed_of_communication')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('speed_of_communication'); ?></p>
                                 <?php endif; ?>
