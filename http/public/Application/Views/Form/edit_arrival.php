@@ -251,6 +251,27 @@ $formValidator = FormValidator::instance("edit-arrival-form");
 
 <define footer_js>
     <script>
+
+        var cleave = new Cleave('#average_waiting_time_unitil_access', {
+            time: true,
+            timePattern: ['h', 'm', 's']
+        });
+
+        var cleave = new Cleave('#average_waiting_time_unitil_end_of_inspection', {
+            time: true,
+            timePattern: ['h', 'm', 's']
+        });
+
+        var cleave = new Cleave('#average_waiting_until_sorting_system', {
+            time: true,
+            timePattern: ['h', 'm', 's']
+        });
+
+        var cleave = new Cleave('#how_long_does_luggage_arrive_at', {
+            time: true,
+            timePattern: ['h', 'm', 's']
+        });
+
         $('#arrival_city').on('change', function() {
 
             var val = $(this).val().trim();
