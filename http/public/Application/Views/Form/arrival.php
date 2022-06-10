@@ -264,9 +264,5 @@ $formValidator = FormValidator::instance("arrival-form");
             timePattern: ['h', 'm', 's']
         });
 
-        var cleave = new Cleave('#duration_of_arrival_pilgrims', {
-            time: true,
-            timePattern: ['h', 'm', 's']
-        });
     </script>
 </define>

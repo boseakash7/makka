@@ -765,6 +765,7 @@ class Form extends Controller
             'average_pilgrim_waiting' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'average_pilgrim_service' => [
                 'required' => true,
@@ -841,6 +842,7 @@ class Form extends Controller
             'working_counts.required' => $lang('field_required'),
             'non_working_counts.required' => $lang('field_required'),
             'average_pilgrim_waiting.required' => $lang('field_required'),
+            'average_pilgrim_waiting.pattern' => $lang('field_invalid'),
             'average_pilgrim_service.required' => $lang('field_required'),
             'average_pilgrim_service.pattern' => $lang('field_invalid'),
             'counters_working_start_time.required' => $lang('field_required'),
@@ -1014,6 +1016,7 @@ class Form extends Controller
             'average_pilgrim_waiting' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'average_pilgrim_service' => [
                 'required' => true,
@@ -1090,6 +1093,7 @@ class Form extends Controller
             'working_counts.required' => $lang('field_required'),
             'non_working_counts.required' => $lang('field_required'),
             'average_pilgrim_waiting.required' => $lang('field_required'),
+            'average_pilgrim_waiting.pattern' => $lang('field_invalid'),
             'average_pilgrim_service.required' => $lang('field_required'),
             'average_pilgrim_service.pattern' => $lang('field_invalid'),
             'counters_working_start_time.required' => $lang('field_required'),
