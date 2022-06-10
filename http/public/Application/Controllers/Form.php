@@ -1181,7 +1181,7 @@ class Form extends Controller
                 'number_of_cases' => $formValidator->getValue('number_of_cases'),
                 'number_of_bags' => $bags,
                 'number_of_fingerprint' => $formValidator->getValue('number_of_people_fingerprinted'),
-                'communication_speed' => $this->_getstatus($formValidator->getValue('speed_of_communication')),
+                'communication_speed' => $formValidator->getValue('speed_of_communication'),
                 'connection_status' => $this->_getstatus($formValidator->getValue('connection_status')),
                 'fingerprint_status' => $this->_getstatus($formValidator->getValue('fingerprint_status')),
                 'average_pilgrim_service' => DateHelper::timeToSec($formValidator->getValue('average_pilgrim_service')),
