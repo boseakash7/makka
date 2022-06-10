@@ -1,12 +1,13 @@
 <?php
 
+use System\Core\Application;
 use System\Helpers\URL;
 
 ?>
 <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2021 &copy;</p>
+                        <p>2021 &copy; (<?php echo Application::config()->version ?>)</p>
                     </div>
                     <!-- <div class="float-end">
                         <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a

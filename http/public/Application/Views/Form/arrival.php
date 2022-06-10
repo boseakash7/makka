@@ -161,6 +161,13 @@ $formValidator = FormValidator::instance("arrival-form");
                             <?php endif; ?>
                         </div>
                         <div class="form-group">
+                            <label for="last_bus_leave_time"><?php echo $lang('last_bus_leave_time') ?><span class="text-danger">*</span></label>
+                            <input type="time" class="form-control" name="last_bus_leave_time" id="last_bus_leave_time" value="<?php echo $formValidator->getValue('last_bus_leave_time'); ?>" />
+                            <?php if ($formValidator->hasError('last_bus_leave_time')) : ?>
+                                <p class="text-danger"><?php echo $formValidator->getError('last_bus_leave_time'); ?></p>
+                            <?php endif; ?>
+                        </div>
+                        <div class="form-group">
                             <label for="flight_delay"><?php echo $lang('flight_delay') ?><span class="text-danger">*</span></label>
                             <select name="flight_delay" id="flight_delay" class="form-control">
                                 <option value="no_delay" <?php echo $formValidator->getValue('flight_delay') == 'no_delay' ? 'selected' : '' ?>><?php echo $lang('no_delay'); ?></option>

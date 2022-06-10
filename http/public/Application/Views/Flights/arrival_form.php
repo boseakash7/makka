@@ -145,7 +145,12 @@ $userM = Model::get(User::class);
                             <h5><?php echo $lang('first_bus_leave_time') ?></h5>
                             <p><?php echo $arrivalInfo['arr']['first_bus_leave_time'] ?></p>
                         </div>
-
+                    </div>
+                    <div class="row">                        
+                    <div class="col">
+                            <h5><?php echo $lang('last_bus_leave_time') ?></h5>
+                            <p><?php echo isset($arrivalInfo['arr']['last_bus_leave_time']) ? $arrivalInfo['arr']['last_bus_leave_time'] : ''; ?></p>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col">

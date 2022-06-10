@@ -284,5 +284,7 @@ return [
     'source_2' => 'Source - 2',
     'destination_1' => 'Destination - 1',
     'destination_2' => 'Destination - 2',
+
+    'last_bus_leave_time' => "Last bus leave time"
 ];
 

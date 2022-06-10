@@ -278,12 +278,14 @@ return [
 
     'first_hajji_arrived_time' => 'وقت وصول الحاج الأول',
     'last_hajji_arrived_time' => 'وقت وصول الحج الأخير',
-    'first_bus_leave_time' => 'أول حافلة تغادر الوقت',
+    'first_bus_leave_time' => 'وقت مغادرة اول حافلة',
 
     // new 5
     'source_1' => 'تقرير مطارات المغادرة',
     'source_2' => 'تقرير مطارات المغادرة التفصيلي ',
     'destination_1' => 'تقرير مطارات القدوم ',
     'destination_2' => 'تقرير مطارات القدوم التفصيلي',
+
+    'last_bus_leave_time' => "وقت مغادرة آخر حافلة"
 ];
 

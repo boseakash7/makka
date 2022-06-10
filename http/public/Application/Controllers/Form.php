@@ -345,6 +345,10 @@ class Form extends Controller
                 'required' => true,
                 'type' => 'string',
             ],
+            'last_bus_leave_time' => [
+                'required' => true,
+                'type' => 'string',
+            ],
             'number_of_buses_operated_to_transport_pilgrims' => [
                 'required' => true,
                 'type' => 'string',
@@ -360,6 +364,7 @@ class Form extends Controller
                 'type' => 'string',
             ],
             'number_of_cases' => [
+                'required' => true,
                 'type' => 'string',
             ],
             'challenges' => [
@@ -396,8 +401,10 @@ class Form extends Controller
             'first_hajji_arrived_time.required' => $lang('field_required'),
             'last_hajji_arrived_time.required' => $lang('field_required'),
             'first_bus_leave_time.required' => $lang('field_required'),
+            'last_bus_leave_time.required' => $lang('field_required'),
             'number_of_buses_operated_to_transport_pilgrims.required' => $lang('field_required'),
             'number_of_buses_operating_with_mecca_logo.required' => $lang('field_required'),
+            'number_of_cases.required' => $lang('field_required')
         ]);
 
         if ( $request->getHTTPMethod() == 'POST' && $formValidator->validate() )
@@ -420,6 +427,7 @@ class Form extends Controller
                 'first_hajji_arrived_time' => $formValidator->getValue('first_hajji_arrived_time') ,
                 'last_hajji_arrived_time' => $formValidator->getValue('last_hajji_arrived_time') ,
                 'first_bus_leave_time' => $formValidator->getValue('first_bus_leave_time') ,
+                'last_bus_leave_time' => $formValidator->getValue('last_bus_leave_time'),
                 'number_of_buses_operated_to_transport_pilgrims' => $formValidator->getValue('number_of_buses_operated_to_transport_pilgrims') ,
                 'number_of_buses_operating_with_mecca_logo' => $formValidator->getValue('number_of_buses_operating_with_mecca_logo') ,
                 'are_there_unmarked_buses' => $formValidator->getValue('are_there_unmarked_buses') ,
@@ -442,6 +450,7 @@ class Form extends Controller
                 'average_waiting_inspection' => DateHelper::timeToSec( $formValidator->getValue('average_waiting_time_unitil_end_of_inspection') ),
                 'average_luggage_arrive' =>  DateHelper::timeToSec($formValidator->getValue('how_long_does_luggage_arrive_at') ),
                 'average_bus_ride' => DateHelper::timeToSec($formValidator->getValue('average_waiting_until_sorting_system') ),
+                'duration_pilgrims' => 0,
                 'flight_delay' => $this->_getPositive($formValidator->getValue('flight_delay')),
                 'unmarked_buses' => $this->_getPositive($formValidator->getValue('are_there_unmarked_buses')),
                 'accidents' => $this->_getPositive($formValidator->getValue('are_there_any_accidents')),
@@ -576,6 +585,10 @@ class Form extends Controller
                 'required' => true,
                 'type' => 'string',
             ],
+            'last_bus_leave_time' => [
+                'required' => true,
+                'type' => 'string',
+            ],
             'number_of_buses_operated_to_transport_pilgrims' => [
                 'required' => true,
                 'type' => 'string',
@@ -591,6 +604,7 @@ class Form extends Controller
                 'type' => 'string',
             ],
             'number_of_cases' => [
+                'required' => true,
                 'type' => 'string',
             ],
             'challenges' => [
@@ -627,30 +641,33 @@ class Form extends Controller
             'first_hajji_arrived_time.required' => $lang('field_required'),
             'last_hajji_arrived_time.required' => $lang('field_required'),
             'first_bus_leave_time.required' => $lang('field_required'),
+            'last_bus_leave_time.required' => $lang('field_required'),
             'number_of_buses_operated_to_transport_pilgrims.required' => $lang('field_required'),
             'number_of_buses_operating_with_mecca_logo.required' => $lang('field_required'),
+            'number_of_cases.required' => $lang('field_required')
         ]);
 
         if ( $request->getHTTPMethod() == 'POST' && $formValidator->validate() )
         {
             $data = [
-                'flight_delay' => $formValidator->getValue('flight_delay') ,
-                'date' => $formValidator->getValue('date') ,
-                'arrival_city' => $formValidator->getValue('arrival_city') ,
-                'flight_number' => $formValidator->getValue('flight_number') ,
-                'number_of_staffs' => $formValidator->getValue('number_of_staffs') ,
-                'number_of_counter_custom_staffs' => $formValidator->getValue('number_of_counter_custom_staffs') ,
-                'passengers' => $formValidator->getValue('passengers') ,
-                'arrival_time' => $formValidator->getValue('arrival_time') ,
-                'take_off_place' => $formValidator->getValue('take_off_place') ,
-                'expected_arrival_time' => $formValidator->getValue('expected_arrival_time') ,
-                'average_waiting_time_unitil_access' => $formValidator->getValue('average_waiting_time_unitil_access') ,
-                'average_waiting_time_unitil_end_of_inspection' => $formValidator->getValue('average_waiting_time_unitil_end_of_inspection') ,
-                'average_waiting_until_sorting_system' => $formValidator->getValue('average_waiting_until_sorting_system') ,
-                'how_long_does_luggage_arrive_at' => $formValidator->getValue('how_long_does_luggage_arrive_at') ,
-                'first_hajji_arrived_time' => $formValidator->getValue('first_hajji_arrived_time') ,
-                'last_hajji_arrived_time' => $formValidator->getValue('last_hajji_arrived_time') ,
-                'first_bus_leave_time' => $formValidator->getValue('first_bus_leave_time') ,
+                'flight_delay' => $formValidator->getValue('flight_delay'),
+                'date' => $formValidator->getValue('date'),
+                'arrival_city' => $formValidator->getValue('arrival_city'),
+                'flight_number' => $formValidator->getValue('flight_number'),
+                'number_of_staffs' => $formValidator->getValue('number_of_staffs'),
+                'number_of_counter_custom_staffs' => $formValidator->getValue('number_of_counter_custom_staffs'),
+                'passengers' => $formValidator->getValue('passengers'),
+                'arrival_time' => $formValidator->getValue('arrival_time'),
+                'take_off_place' => $formValidator->getValue('take_off_place'),
+                'expected_arrival_time' => $formValidator->getValue('expected_arrival_time'),
+                'average_waiting_time_unitil_access' => $formValidator->getValue('average_waiting_time_unitil_access'),
+                'average_waiting_time_unitil_end_of_inspection' => $formValidator->getValue('average_waiting_time_unitil_end_of_inspection'),
+                'average_waiting_until_sorting_system' => $formValidator->getValue('average_waiting_until_sorting_system'),
+                'how_long_does_luggage_arrive_at' => $formValidator->getValue('how_long_does_luggage_arrive_at'),
+                'first_hajji_arrived_time' => $formValidator->getValue('first_hajji_arrived_time'),
+                'last_hajji_arrived_time' => $formValidator->getValue('last_hajji_arrived_time'),
+                'first_bus_leave_time' => $formValidator->getValue('first_bus_leave_time'),
+                'last_bus_leave_time' => $formValidator->getValue('last_bus_leave_time'),
                 'number_of_buses_operated_to_transport_pilgrims' => $formValidator->getValue('number_of_buses_operated_to_transport_pilgrims') ,
                 'number_of_buses_operating_with_mecca_logo' => $formValidator->getValue('number_of_buses_operating_with_mecca_logo') ,
                 'are_there_unmarked_buses' => $formValidator->getValue('are_there_unmarked_buses') ,

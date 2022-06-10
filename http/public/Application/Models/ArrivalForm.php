@@ -11,7 +11,7 @@ class ArrivalForm extends Model
 
     public function create( $data )
     {
-        return $this->_db->insert($this->_table, $data);
+        return $this->_db->insert($this->_table, $data, true);
     }
 
     public function update( $id, $data )
