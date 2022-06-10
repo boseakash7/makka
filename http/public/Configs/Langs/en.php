@@ -271,12 +271,18 @@ return [
     'arrival_date' => 'Arrival Date',
 
     // new 4
-    'invalid' => "Invalid",    
+    'invalid' => "Invalid flights",    
     'success_update' => 'Updated Successfully',
     'field_invalid' => 'This field is invalid',
 
     'first_hajji_arrived_time' => 'First hajji arrive time',
     'last_hajji_arrived_time' => 'Last hajji arrive time',
     'first_bus_leave_time' => 'First bus leave time',
+
+    // new 5
+    'source_1' => 'Source - 1',
+    'source_2' => 'Source - 2',
+    'destination_1' => 'Destination - 1',
+    'destination_2' => 'Destination - 2',
 ];
 

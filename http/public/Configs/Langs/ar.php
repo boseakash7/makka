@@ -32,7 +32,7 @@ return [
     'date' => "التاريخ",
     'passengers' => "الركاب",
     'arrival_city' => "مدينة الوصول",
-    'arrival_time' => "وقت الوصول",
+    'arrival_time' => "وقت الوصول الفعلي",
     'departure_city' => "مدينة المغادرة",
     'departure_time' => "وقت المغادرة",
     'average_pilgrim_waiting' => "متوسط وقت انتظار الحجاج",
@@ -44,10 +44,10 @@ return [
     // Form Departure
 
 
-    'counters_working_start_time' => 'وقت بداية عمل الكاونتر',
-    'counters_working_end_time' => 'وقت نهاية عمل الكاونتر',
-    'working_counts' => 'عدد الكونترات العاملة',
-    'non_working_counts' => 'عددالكونترات التي لا تعمل',
+    'counters_working_start_time' => 'وقت بداية عمل الكاونترات',
+    'counters_working_end_time' => 'وقت نهاية عمل الكاونترات',
+    'working_counts' => 'عدد الكاونترات العاملة',
+    'non_working_counts' => 'عددالكاونترات التي لا تعمل',
     'number_of_men' => 'عدد الرجال',
     'number_of_women' => 'عدد النساء',
     'number_of_people_fingerprinted' => 'عدد الأشخاص الذين تم أخذ بصماتهم',
@@ -64,7 +64,7 @@ return [
     'number_of_cases' => 'عدد الحالات المرضية',
     'success' => "نجاح",
     'warning' => "تحذير",
-    'dashboard' => 'لوحه التحكم',
+    'dashboard' => 'احصائيات الرحلات',
     
 
     // Arrival Form
@@ -72,11 +72,11 @@ return [
     'number_of_staffs' => 'عدد موظفين حياك',
     'flight_delay' => 'تأخير الرحلة',
     'take_off_place' => 'مكان الإقلاع',
-    'expected_arrival_time' => 'وقت الوصول المتوقع',
+    'expected_arrival_time' => 'وقت الوصول المجدول',
     'average_waiting_time_unitil_access' => 'متوسط وقت الانتظار حتى الدخول إلى الصالات المعقمة',
     'average_waiting_time_unitil_end_of_inspection' => 'متوسط وقت الخدمة من الفرز حتى نهاية فحص الأمتعة',
     'average_waiting_until_sorting_system' => 'متوسط وقت الانتظار في نظام الفرز حتى ركوب الحافلة',
-    'how_long_does_luggage_arrive_at' => 'كم من الوقت تصل الأمتعة إلى السكن؟',
+    'how_long_does_luggage_arrive_at' => 'متوسط المدة الزمنية لوصول الأمتعة إلى السكن؟',
     'duration_of_arrival_pilgrims' => 'مدة وصول الحجاج',
     'number_of_buses_operated_to_transport_pilgrims' => 'عدد الحافلات المخصصة لنقل الحجاج ',
     'number_of_buses_operating_with_mecca_logo' => 'عدد الحافلات التي تحمل شعار مكة المكرمة',
@@ -272,12 +272,18 @@ return [
     'arrival_date' => 'تاريخ الوصول',
 
     // new 4
-    'invalid' => "غير صالح",
+    'invalid' => "رحلة خارج المبادرة",
     'success_update' => 'تم التحديث بنجاح',
     'field_invalid' => 'هذا الحقل غير صالح',
 
     'first_hajji_arrived_time' => 'وقت وصول الحاج الأول',
     'last_hajji_arrived_time' => 'وقت وصول الحج الأخير',
     'first_bus_leave_time' => 'أول حافلة تغادر الوقت',
+
+    // new 5
+    'source_1' => 'تقرير مطارات المغادرة',
+    'source_2' => 'تقرير مطارات المغادرة التفصيلي ',
+    'destination_1' => 'تقرير مطارات القدوم ',
+    'destination_2' => 'تقرير مطارات القدوم التفصيلي',
 ];
 

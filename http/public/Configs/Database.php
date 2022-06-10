@@ -11,11 +11,11 @@ $database->set(array(
     'database' => getenv('MYSQL_DATABASE'),
     'port' => 3306,
 
-    'host' => 'localhost',
-    'user' => 'root',
-    'password' => '',
-    'database' => 'makka',
-    'port' => 3306,
+    // 'host' => 'localhost',
+    // 'user' => 'root',
+    // 'password' => '',
+    // 'database' => 'makka',
+    // 'port' => 3306,
 
     // Connection options
     'options' => [

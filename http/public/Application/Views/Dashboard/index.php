@@ -25,19 +25,19 @@ $userM = Model::get(User::class);
                 <div class="card-body">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link <?php echo $page == 'ms' ? 'btn-primary text-white' :  '' ?>" aria-current="page" href="<?php echo URL::full('dashboard/ms') ?>">Source - 1</a>
+                            <a class="nav-link <?php echo $page == 'ms' ? 'btn-primary text-white' :  '' ?>" aria-current="page" href="<?php echo URL::full('dashboard/ms') ?>"><?php echo $lang('source_1'); ?></a>
                         </li>                
                         <?php if ( !$userM->isExecutive() ): ?>
                             <li class="nav-item">
-                                <a class="nav-link <?php echo $page == 'ms-2' ? 'btn-primary text-white' :  '' ?>" aria-current="page" href="<?php echo URL::full('dashboard/ms-2') ?>">Source - 2</a>
+                                <a class="nav-link <?php echo $page == 'ms-2' ? 'btn-primary text-white' :  '' ?>" aria-current="page" href="<?php echo URL::full('dashboard/ms-2') ?>"><?php echo $lang('source_2'); ?></a>
                             </li>       
                         <?php endif; ?>         
                         <li class="nav-item">
-                            <a class="nav-link <?php echo $page == 'md' ? 'btn-primary text-white' :  '' ?>" href="<?php echo URL::full('dashboard/md') ?>">Destination - 1</a>
+                            <a class="nav-link <?php echo $page == 'md' ? 'btn-primary text-white' :  '' ?>" href="<?php echo URL::full('dashboard/md') ?>"><?php echo $lang('destination_1'); ?></a>
                         </li>           
                         <?php if ( !$userM->isExecutive() ): ?>     
                             <li class="nav-item">
-                                <a class="nav-link <?php echo $page == 'md-2' ? 'btn-primary text-white' :  '' ?>" href="<?php echo URL::full('dashboard/md-2') ?>">Destination - 2</a>
+                                <a class="nav-link <?php echo $page == 'md-2' ? 'btn-primary text-white' :  '' ?>" href="<?php echo URL::full('dashboard/md-2') ?>"><?php echo $lang('destination_2'); ?></a>
                             </li>  
                         <?php endif; ?>               
                     </ul>

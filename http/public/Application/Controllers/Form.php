@@ -673,6 +673,7 @@ class Form extends Controller
                 'average_waiting_inspection' =>DateHelper::timeToSec( $formValidator->getValue('average_waiting_time_unitil_end_of_inspection') ),
                 'average_luggage_arrive' => DateHelper::timeToSec($formValidator->getValue('how_long_does_luggage_arrive_at') ),
                 'average_bus_ride' => DateHelper::timeToSec($formValidator->getValue('average_waiting_until_sorting_system') ),
+                'duration_pilgrims' => 0,
                 'flight_delay' => $this->_getPositive($formValidator->getValue('flight_delay')),
                 'unmarked_buses' => $this->_getPositive($formValidator->getValue('are_there_unmarked_buses')),
                 'accidents' => $this->_getPositive($formValidator->getValue('are_there_any_accidents')),
