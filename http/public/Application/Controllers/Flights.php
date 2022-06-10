@@ -380,6 +380,7 @@ class Flights extends AuthController
                 $departureInfo['arr'] = json_decode($departureInfo['json'], true);
 
                 $departureCityInfo = Model::get(City::class)->find(['id' => $departureInfo['arr']['departure_city']]);
+                $arrivalCityInfo = Model::get(City::class)->find(['id' => $departureInfo['arr']['arrival_city']]);
             }
 
             $arrivalAM = Model::get(ArrivalForm::class);
@@ -406,11 +407,11 @@ class Flights extends AuthController
                 $flight['sairport']['en_name'] . '/' . $flight['sairport']['ar_name'],
                 $flight['dairport']['en_name'] . '/' . $flight['dairport']['ar_name'],
                 isset($departureInfo['arr']['date']) ? $departureInfo['arr']['date'] : '-',
-                isset($departureInfo['arr']['departure_time']) ? $departureInfo['arr']['departure_time'] : '-',
+                isset($departureInfo['arr']['departure_time']) ? date('Y-m-d H:i',  strtotime($departureInfo['arr']['departure_time'])) : '-',
                 isset($departureCityInfo['en_name']) ? $departureCityInfo['en_name'] .'/' . $departureCityInfo['ar_name'] : '-',
                 isset($departureInfo['arr']['passengers']) ? $departureInfo['arr']['passengers'] : '-',
-                isset($departureInfo['arr']['arrival_city']) ? $departureInfo['arr']['arrival_city'] : '-',
-                isset($departureInfo['arr']['arrival_time']) ? $departureInfo['arr']['arrival_time'] : '-',
+                isset($arrivalCityInfo['en_name']) ? $arrivalCityInfo['en_name'] . '/' . $arrivalCityInfo['ar_name'] : '-',
+                isset($departureInfo['arr']['arrival_time']) ?  date('Y-m-d H:i', strtotime($departureInfo['arr']['arrival_time'])) : '-',
                 isset($departureInfo['arr']['working_counts']) ? $departureInfo['arr']['working_counts'] : '-',
                 isset($departureInfo['arr']['non_working_counts']) ? $departureInfo['arr']['non_working_counts'] : '-',
                 isset($departureInfo['arr']['average_pilgrim_waiting']) ? $departureInfo['arr']['average_pilgrim_waiting'] : '-',
@@ -423,8 +424,8 @@ class Flights extends AuthController
                 isset($departureInfo['arr']['number_of_cases']) ? $departureInfo['arr']['number_of_cases'] : '-',   
                 isset($departureInfo['arr']['number_of_people_fingerprinted']) ? $departureInfo['arr']['number_of_people_fingerprinted'] : '-',    
                 isset($departureInfo['arr']['number_of_bags']) ? $departureInfo['arr']['number_of_bags'] : '-',    
-                isset($departureInfo['arr']['fingerprint_status']) ? $departureInfo['arr']['fingerprint_status'] : '-',    
-                isset($departureInfo['arr']['connection_status']) ? $departureInfo['arr']['connection_status'] : '-', 
+                isset($departureInfo['arr']['fingerprint_status']) ? $lang($departureInfo['arr']['fingerprint_status']) : '-',    
+                isset($departureInfo['arr']['connection_status']) ? $lang($departureInfo['arr']['connection_status']) : '-', 
                 isset($departureInfo['arr']['speed_of_communication']) ? $departureInfo['arr']['speed_of_communication'] : '-',    
                 isset($departureInfo['arr']['challenges']) ? $departureInfo['arr']['challenges'] : '-',    
                 isset($departureInfo['arr']['treatment']) ? $departureInfo['arr']['treatment'] : '-', 
@@ -445,8 +446,8 @@ class Flights extends AuthController
                 isset($arrivalInfo['arr']['flight_delay']) ? $lang($arrivalInfo['arr']['flight_delay']) : '-',
                 isset($arrivalInfo['arr']['number_of_buses_operated_to_transport_pilgrims']) ? $arrivalInfo['arr']['number_of_buses_operated_to_transport_pilgrims'] : '-',
                 isset($arrivalInfo['arr']['number_of_buses_operating_with_mecca_logo']) ? $arrivalInfo['arr']['number_of_buses_operating_with_mecca_logo'] : '-',
-                isset($arrivalInfo['arr']['are_there_unmarked_buses']) ? $arrivalInfo['arr']['are_there_unmarked_buses'] : '-',
-                isset($arrivalInfo['arr']['are_there_any_accidents']) ? $arrivalInfo['arr']['are_there_any_accidents'] : '-',
+                isset($arrivalInfo['arr']['are_there_unmarked_buses']) ? $lang($arrivalInfo['arr']['are_there_unmarked_buses']) : '-',
+                isset($arrivalInfo['arr']['are_there_any_accidents']) ? $lang($arrivalInfo['arr']['are_there_any_accidents']) : '-',
                 isset($arrivalInfo['arr']['number_of_cases']) ? $arrivalInfo['arr']['number_of_cases'] : '-',
                 isset($arrivalInfo['arr']['challenges']) ? $arrivalInfo['arr']['challenges'] : '-',
                 isset($arrivalInfo['arr']['solutions']) ? $arrivalInfo['arr']['solutions'] : '-',
