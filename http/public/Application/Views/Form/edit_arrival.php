@@ -46,7 +46,7 @@ $formValidator = FormValidator::instance("edit-arrival-form");
                                 <label for="city"><?php echo $lang('arrival_city') ?><span class="text-danger">*</span></label>
                                 <select name="arrival_city" id="arrival_city" class="form-control">
                                     <?php foreach ($cities as $city) : ?>
-                                        <?php if ( $city['type'] != City::TYPE_DESTINATION ) continue; ?>
+                                        <?php if ($city['type'] != City::TYPE_DESTINATION) continue; ?>
                                         <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('arrival_city', $flightInfo['dairport']['city']) == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -100,9 +100,9 @@ $formValidator = FormValidator::instance("edit-arrival-form");
                         <div class="row">
                             <div class="col form-group">
                                 <label for="take_off_place"><?php echo $lang('take_off_place') ?><span class="text-danger">*</span></label>
-                                <select name="take_off_place" id="take_off_place" class="form-control">                                    
+                                <select name="take_off_place" id="take_off_place" class="form-control">
                                     <?php foreach ($cities as $city) : ?>
-                                        <?php if ( $city['type'] != City::TYPE_SOURCE ) continue; ?>
+                                        <?php if ($city['type'] != City::TYPE_SOURCE) continue; ?>
                                         <option value="<?php echo $city['id'] ?>" <?php echo $formValidator->getValue('take_off_place', $flightInfo['sairport']['city']) == $city['id'] ? 'selected' : ''; ?>><?php echo $city[$lang->current() . '_name'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -203,7 +203,7 @@ $formValidator = FormValidator::instance("edit-arrival-form");
                                 <?php endif; ?>
                             </div>
                             <div class="col form-group">
-                                <label for=""><?php echo $lang('are_there_any_accidents') ?><span class="text-danger">*</span></label>                                
+                                <label for=""><?php echo $lang('are_there_any_accidents') ?><span class="text-danger">*</span></label>
                                 <select name="are_there_any_accidents" class="form-control" id="are_there_any_accidents">
                                     <option value="yes" <?php echo $formValidator->getValue('are_there_any_accidents', $arrivalInfo['arr']['are_there_any_accidents']) == 'yes' ? 'selected' : '' ?>><?php echo $lang('yes') ?></option>
                                     <option value="no" <?php echo $formValidator->getValue('are_there_any_accidents', $arrivalInfo['arr']['are_there_any_accidents']) == 'no' ? 'selected' : '' ?>><?php echo $lang('no') ?></option>
@@ -221,61 +221,61 @@ $formValidator = FormValidator::instance("edit-arrival-form");
                                     <p class="text-danger"><?php echo $formValidator->getError('number_of_cases'); ?></p>
                                 <?php endif; ?>
                             </div>
-                            
+
                         </div>
-                            <div class="form-group">
-                                <label for="challenges"><?php echo $lang('challenges') ?></label>
-                                <textarea name="challenges" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('challenges', $arrivalInfo['arr']['challenges']); ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="solutions"><?php echo $lang('solutions') ?></label>
-                                <textarea name="solutions" class="form-control" id="solutions" cols="30" rows="3"><?php echo $formValidator->getValue('solutions', $arrivalInfo['arr']['solutions']); ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="recommendations"><?php echo $lang('recommendations') ?></label>
-                                <textarea name="recommendations" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('recommendations', $arrivalInfo['arr']['recommendations']); ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="reviews"><?php echo $lang('reviews') ?></label>
-                                <textarea name="reviews" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('reviews', $arrivalInfo['arr']['reviews']); ?></textarea>
-                            </div>
-                            
+                        <div class="form-group">
+                            <label for="challenges"><?php echo $lang('challenges') ?></label>
+                            <textarea name="challenges" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('challenges', $arrivalInfo['arr']['challenges']); ?></textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="solutions"><?php echo $lang('solutions') ?></label>
+                            <textarea name="solutions" class="form-control" id="solutions" cols="30" rows="3"><?php echo $formValidator->getValue('solutions', $arrivalInfo['arr']['solutions']); ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="recommendations"><?php echo $lang('recommendations') ?></label>
+                            <textarea name="recommendations" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('recommendations', $arrivalInfo['arr']['recommendations']); ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviews"><?php echo $lang('reviews') ?></label>
+                            <textarea name="reviews" class="form-control" id="" cols="30" rows="3"><?php echo $formValidator->getValue('reviews', $arrivalInfo['arr']['reviews']); ?></textarea>
+                        </div>
+
                         <button type="submit" class="btn btn-primary"><?php echo $lang('submit'); ?></button>
-                    </form>
                 </div>
+                </form>
             </div>
         </div>
     </div>
     </div>
+</section>
 
-    <define footer_js>
-        <script>
-            $('#arrival_city').on('change', function() {
+<define footer_js>
+    <script>
+        $('#arrival_city').on('change', function() {
 
-                var val = $(this).val().trim();
-                if ( val == '' ) {
-                    $('#departure_airport').html('<option value=""><?php echo $lang('select_airport') ?></option>');
-                    return;
+            var val = $(this).val().trim();
+            if (val == '') {
+                $('#departure_airport').html('<option value=""><?php echo $lang('select_airport') ?></option>');
+                return;
+            }
+
+            $.ajax({
+                url: '<?php echo URL::full('ajax/form/get-airports-by-city') ?>',
+                data: {
+                    city: $(this).val(),
+                    type: '<?php echo Airport::TYPE_DESTINATION ?>'
+                },
+                type: 'POST',
+                dataType: 'JSON',
+                accepts: 'JSON',
+                beforeSend: function() {
+
+                },
+                success: function(data) {
+                    var options = data.payload;
+                    $('#departure_airport').html(options);
                 }
-
-                $.ajax({
-                    url: '<?php echo URL::full('ajax/form/get-airports-by-city') ?>',
-                    data: {
-                        city: $(this).val(),
-                        type: '<?php echo Airport::TYPE_DESTINATION ?>'
-                    },
-                    type: 'POST',
-                    dataType: 'JSON',
-                    accepts: 'JSON',
-                    beforeSend: function() {
-
-                    },
-                    success: function( data ) {
-                        var options = data.payload;
-                        $('#departure_airport').html(options);
-                    }
-                });
             });
-        </script>
-    </define>
+        });
+    </script>
+</define>
