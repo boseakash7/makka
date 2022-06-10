@@ -90,7 +90,7 @@ $userM = Model::get(User::class);
 
                         <div class="col">
                             <h5><?php echo $lang('arrival_time') ?></h5>
-                            <p><?php echo $departureInfo['arr']['arrival_time'] ?></p>
+                            <p><?php echo date('Y-m-d H:i', strtotime($departureInfo['arr']['arrival_time'])) ?></p>
                         </div>
                     </div>
                     <div class="row">
@@ -183,7 +183,7 @@ $userM = Model::get(User::class);
 
                         <div class="col">
                             <h5><?php echo $lang('speed_of_communication') ?></h5>
-                            <p><?php echo $lang($departureInfo['arr']['speed_of_communication']) ?></p>
+                            <p><?php echo $departureInfo['arr']['speed_of_communication'] ?></p>
                         </div>
 
                         <div class="col">
