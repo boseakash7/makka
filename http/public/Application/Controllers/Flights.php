@@ -496,19 +496,18 @@ class Flights extends AuthController
     {
         $userInfo = $this->user->getInfo();
 
+        $searchBy = [ 'dairport' => $userInfo['airport'] ];
+        if ( $this->user->fromSource() ) $searchBy = [ 'sairport' => $userInfo['airport'] ];
+
         $flightM = Model::get(ModelsFlights::class);
-        $flights = $flightM->findAll([
-            'dairport' => $userInfo['airport'],
-            'status' => [
-                ModelsFlights::STATUS_COMPLETE
-            ]
-        ]);
+        $flights = $flightM->findAll($searchBy);
         $flights = FlightHelper::prepare($flights);
 
         $view = new View();        
         $view->set('Flights/index', [
             'flights' => $flights,
-            'arrival' => true
+            'arrival' => true,
+            'fromcompleted' => true
         ]);
         $view->prepend('header');
         $view->append('footer');

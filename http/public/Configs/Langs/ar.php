@@ -277,7 +277,7 @@ return [
     'field_invalid' => 'هذا الحقل غير صالح',
 
     'first_hajji_arrived_time' => 'وقت وصول الحاج الأول',
-    'last_hajji_arrived_time' => 'وقت وصول الحج الأخير',
+    'last_hajji_arrived_time' => 'وقت وصول الحاج الاخير',
     'first_bus_leave_time' => 'وقت مغادرة اول حافلة',
 
     // new 5
@@ -286,6 +286,8 @@ return [
     'destination_1' => 'تقرير مطارات القدوم ',
     'destination_2' => 'تقرير مطارات القدوم التفصيلي',
 
-    'last_bus_leave_time' => "وقت مغادرة آخر حافلة"
+    'last_bus_leave_time' => "وقت مغادرة آخر حافلة",
+
+    'number_of_bags_desc' => "(الحقائب الخاصة بوزارة الداخلية هي نظام بديل في حال تعطل النظام الرئيسي  )",
 ];
 

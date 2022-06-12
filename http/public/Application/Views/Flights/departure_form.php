@@ -164,6 +164,7 @@ $userM = Model::get(User::class);
 
                         <div class="col">
                             <h5><?php echo $lang('number_of_bags') ?></h5>
+                            <p class="small text-danger"><?php echo $lang('number_of_bags_desc') ?></p>
                             <p><?php echo $departureInfo['arr']['number_of_bags'] ?></p>
                         </div>
                     </div>

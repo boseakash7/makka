@@ -285,6 +285,8 @@ return [
     'destination_1' => 'Destination - 1',
     'destination_2' => 'Destination - 2',
 
-    'last_bus_leave_time' => "Last bus leave time"
+    'last_bus_leave_time' => "Last bus leave time",
+
+    'number_of_bags_desc' => "(The bags of the Ministry of Interior are an alternative system in case the main system is broken)",
 ];
 

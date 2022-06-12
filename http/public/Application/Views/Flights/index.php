@@ -96,6 +96,7 @@ $userM = Model::get(User::class);
                         <td><?php echo $flight['sairport'][$lang->current() . '_name']; ?></td> 
                         <td><?php echo isset($flight['dairport']) ? $flight['dairport'][$lang->current() . '_name'] : '-'; ?></td>      
                         <?php if ( !$userM->isAdmin() ): ?>
+                            <?php if ( !isset($fromcompleted) ): ?>
                             <td>
                                 <?php if ( $flight['status'] == Flights::STATUS_NOT_OPENED ): ?>
                                     <?php if ( $userM->isSup() ): ?>                                        
@@ -142,6 +143,11 @@ $userM = Model::get(User::class);
                                 <a href="<?php echo URL::full('flights/log/' . $flight['id']) ?>" class="btn btn-info m-2" target="_blank"><?php echo $lang('view_log') ?></a>
                                 <?php endif; ?>
                             </td>
+                            <?php else: ?>
+                                <td>
+                                    <a href="<?php echo URL::full('flights/summary/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('view_summery') ?></a>
+                                </td>
+                            <?php endif; ?>
                         <?php elseif ( !$userM->isExecutive() ): ?>
                             <td>
                                 <a href="<?php echo URL::full('flights/summary/' . $flight['id']) ?>" class="btn btn-primary" target="_blank"><?php echo $lang('view_summery') ?></a>
