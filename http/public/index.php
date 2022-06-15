@@ -1,6 +1,6 @@
 <?php
 
-date_default_timezone_set("Asia/Kolkata");
+date_default_timezone_set("Asia/Riyadh");
 define('DS', DIRECTORY_SEPARATOR);
 define('ABS_PATH', dirname(__FILE__));
 

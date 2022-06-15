@@ -147,6 +147,6 @@ $application->set([
      * Define the commands for cli
      */
     'commands' => [        
-        // 'command' => 'Path\To\Command'
+        'migrate' => 'Application\Commands\Migrate'
     ]
 ]);

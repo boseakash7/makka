@@ -33,6 +33,7 @@ return [
     'passengers' => "الركاب",
     'arrival_city' => "مدينة الوصول",
     'arrival_time' => "وقت الوصول الفعلي",
+    'arrival_time_desc' => "وقت الوصول الفعلي (يفضل اخذ الوقت من ادارة المطار)",
     'departure_city' => "مدينة المغادرة",
     'departure_time' => "وقت المغادرة",
     'average_pilgrim_waiting' => "متوسط وقت انتظار الحجاج",
@@ -72,8 +73,9 @@ return [
     'number_of_staffs' => 'عدد موظفين حياك',
     'flight_delay' => 'تأخير الرحلة',
     'take_off_place' => 'مكان الإقلاع',
-    'expected_arrival_time' => 'وقت الوصول المجدول',
-    'average_waiting_time_unitil_access' => 'متوسط وقت الانتظار حتى الدخول إلى الصالات المعقمة',
+    'expected_arrival_time' => 'مدة وصول الحجاج للسكن',
+    'expected_arrival_time_desc' => '(كم ساعة استغرق الوصول للسكن)',
+    'average_waiting_time_unitil_access' => 'متوسط وقت الوصول الى صالات المبادرة',
     'average_waiting_time_unitil_end_of_inspection' => 'متوسط وقت الخدمة من الفرز حتى نهاية فحص الأمتعة',
     'average_waiting_until_sorting_system' => 'متوسط وقت الانتظار في نظام الفرز حتى ركوب الحافلة',
     'how_long_does_luggage_arrive_at' => 'متوسط المدة الزمنية لوصول الأمتعة إلى السكن؟',
@@ -267,7 +269,7 @@ return [
     'counters_working_end_time_desc' => 'قم بادخال ساعة نهاية العمل (نهاية اعمال اليوم)',
 
     // Csv
-    'export_csv' => 'تصدير CSV',
+    'export_csv' => 'تصدير XLS',
     'departure_date' => 'تاريخ المغادرة',
     'arrival_date' => 'تاريخ الوصول',
 
@@ -276,9 +278,9 @@ return [
     'success_update' => 'تم التحديث بنجاح',
     'field_invalid' => 'هذا الحقل غير صالح',
 
-    'first_hajji_arrived_time' => 'وقت وصول الحاج الأول',
-    'last_hajji_arrived_time' => 'وقت وصول الحاج الاخير',
-    'first_bus_leave_time' => 'وقت مغادرة اول حافلة',
+    'first_hajji_arrived_time' => 'وقت وصول اول حاج لصالات المبادرة',
+    'last_hajji_arrived_time' => 'وقت وصول آخر حاج لصالات المبادرة',
+    'first_bus_leave_time' => 'وقت مغادرة اول حافلة من منطقة تحميل الركاب',
 
     // new 5
     'source_1' => 'تقرير مطارات المغادرة',
@@ -286,7 +288,7 @@ return [
     'destination_1' => 'تقرير مطارات القدوم ',
     'destination_2' => 'تقرير مطارات القدوم التفصيلي',
 
-    'last_bus_leave_time' => "وقت مغادرة آخر حافلة",
+    'last_bus_leave_time' => "وقت وصول اخر حافلة الى الفندق لإنزال الركاب",
 
     'number_of_bags_desc' => "(الحقائب الخاصة بوزارة الداخلية هي نظام بديل في حال تعطل النظام الرئيسي  )",
 ];

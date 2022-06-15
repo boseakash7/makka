@@ -303,7 +303,7 @@ class Flights extends AuthController
        
         $response->setHeaders([
             'Content-Type: text/csv; charset=utf-8',
-            'content-Disposition: attachment; filename=flights.csv'
+            'content-Disposition: attachment; filename=flights.xls'
         ]);
 
         $output = fopen("php://output", "w");

@@ -90,6 +90,7 @@ $userM = Model::get(User::class);
                     <div class="row">
                         <div class="col">
                             <h5><?php echo $lang('arrival_time') ?></h5>
+                            <p class="small text-danger"><?php echo $lang('arrival_time_desc'); ?></p>
                             <p><?php echo date('Y-m-d H:i', strtotime($arrivalInfo['arr']['arrival_time'])) ?></p>
                         </div>
 
@@ -102,6 +103,7 @@ $userM = Model::get(User::class);
                     <div class="row">
                         <div class="col">
                             <h5><?php echo $lang('expected_arrival_time') ?></h5>
+                            <p class="small text-danger"><?php echo $lang('expected_arrival_time_desc'); ?></p>
                             <p><?php echo $arrivalInfo['arr']['expected_arrival_time'] ?></p>
                         </div>
 

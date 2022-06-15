@@ -312,6 +312,7 @@ class Form extends Controller
             'expected_arrival_time' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'average_waiting_time_unitil_access' => [
                 'required' => true,
@@ -552,6 +553,7 @@ class Form extends Controller
             'expected_arrival_time' => [
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '/^\d{2}:\d{2}:\d{2}$/'
             ],
             'average_waiting_time_unitil_access' => [
                 'required' => true,

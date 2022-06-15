@@ -194,7 +194,7 @@ $userM = Model::get(User::class);
         <?php if( count($flights) > 0 ): ?>
             setTimeout(function() {
                 window.location.reload();
-            }, 30000);
+            }, 90000);
         <?php endif; ?>
     </script>
 </define>

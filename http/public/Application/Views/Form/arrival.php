@@ -105,7 +105,7 @@ $formValidator = FormValidator::instance("arrival-form");
                             </div>
                             <div class="col form-group">
                                 <label for="expected_arrival_time"><?php echo $lang('expected_arrival_time') ?><span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" name="expected_arrival_time" id="expected_arrival_time" value="<?php echo $formValidator->getValue('expected_arrival_time'); ?>" />
+                                <input type="text" class="form-control" name="expected_arrival_time" id="expected_arrival_time" value="<?php echo $formValidator->getValue('expected_arrival_time'); ?>" placeholder="hh:mm:ss"/>
                                 <?php if ($formValidator->hasError('expected_arrival_time')) : ?>
                                     <p class="text-danger"><?php echo $formValidator->getError('expected_arrival_time'); ?></p>
                                 <?php endif; ?>
@@ -267,6 +267,11 @@ $formValidator = FormValidator::instance("arrival-form");
         });
 
         var cleave = new Cleave('#how_long_does_luggage_arrive_at', {
+            time: true,
+            timePattern: ['h', 'm', 's']
+        });
+
+        var cleave = new Cleave('#expected_arrival_time', {
             time: true,
             timePattern: ['h', 'm', 's']
         });

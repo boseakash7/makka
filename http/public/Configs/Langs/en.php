@@ -31,6 +31,7 @@ return [
     'passengers' => "Passengers",
     'arrival_city' => "Arrival City",
     'arrival_time' => "Arrival Time",
+    'arrival_time_desc' => "Actual arrival time (preferably take the time from the airport administration)",
     'departure_city' => "Departure City",
     'departure_time' => "Departure Time",
     'average_pilgrim_waiting' => "Arrival Pilgrim Waiting",
@@ -72,6 +73,7 @@ return [
     'flight_delay' => 'Flight Delay',
     'take_off_place' => 'Take off place',
     'expected_arrival_time' => 'Expected arrival time',
+    'expected_arrival_time_desc' => '(How many hours did it take to get to the accommodation)',
     'average_waiting_time_unitil_access' => 'Average waiting time until access to sterile lounges',
     'average_waiting_time_unitil_end_of_inspection' => 'Average service time from sorting until the end of the inspection for luggage',
     'average_waiting_until_sorting_system' => 'Aaverage waiting time in the sorting system until bus rides',
@@ -266,7 +268,7 @@ return [
     'counters_working_end_time_desc' => 'Enter the end of work hour (end of work of the day)',
 
     // Csv
-    'export_csv' => 'Export CSV',
+    'export_csv' => 'Export XLS',
     'departure_date' => 'Departure Date',
     'arrival_date' => 'Arrival Date',
 
