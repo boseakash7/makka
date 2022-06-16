@@ -290,5 +290,15 @@ return [
     'last_bus_leave_time' => "Last bus leave time",
 
     'number_of_bags_desc' => "(The bags of the Ministry of Interior are an alternative system in case the main system is broken)",
+
+    // new 
+    'q1' => "Q1",
+    'q2' => "Q2",
+    'q3' => "Q3",
+    'q4' => "Q4",
+    'q5' => "Q5",
+
+    'export_arrival_assessment_csv' => "Export Arrival Assessment XLS",
+    'export_departure_assessment_csv' => "Export Departure Assessment XLS"
 ];
 

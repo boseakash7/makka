@@ -291,5 +291,15 @@ return [
     'last_bus_leave_time' => "وقت وصول اخر حافلة الى الفندق لإنزال الركاب",
 
     'number_of_bags_desc' => "(الحقائب الخاصة بوزارة الداخلية هي نظام بديل في حال تعطل النظام الرئيسي  )",
+
+    // new 
+    'q1' => "Q1",
+    'q2' => "Q2",
+    'q3' => "Q3",
+    'q4' => "Q4",
+    'q5' => "Q5",
+
+    'export_arrival_assessment_csv' => "تقييم وصول الصادرات XLS",
+    'export_departure_assessment_csv' => "تقييم مغادرة التصدير XLS"
 ];
 

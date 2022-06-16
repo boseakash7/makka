@@ -24,11 +24,13 @@ $userM = Model::get(User::class);
 </define>
 <define right_header>
     <?php if ( !isset($arrival) && $userM->isSup() ): ?>
-    <a href="<?php echo URL::full('flights/add') ?>" class="btn btn-primary"><?php echo $lang('add') ?></a>
+    <a href="<?php echo URL::full('flights/add') ?>" class="btn btn-primary my-2"><?php echo $lang('add') ?></a>
     <?php endif; ?>
-    <a href="<?php echo URL::current() ?>" class="btn btn-primary"><?php echo $lang('reload') ?></a>
+    <a href="<?php echo URL::current() ?>" class="btn btn-primary my-2"><?php echo $lang('reload') ?></a>
     <?php if( $userM->isSupAdmin() ) : ?>
-        <a target="_blank" href="<?php echo URL::full('flights/export') ?>" class="btn btn-primary"><?php echo $lang('export_csv') ?></a>
+        <a target="_blank" href="<?php echo URL::full('export/flights') ?>" class="btn btn-primary my-2"><?php echo $lang('export_csv') ?></a>
+        <a target="_blank" href="<?php echo URL::full('export/arrival-assessments') ?>" class="btn btn-primary my-2"><?php echo $lang('export_arrival_assessment_csv') ?></a>
+        <a target="_blank" href="<?php echo URL::full('export/departure-assessments') ?>" class="btn btn-primary my-2"><?php echo $lang('export_departure_assessment_csv') ?></a>
     <?php endif; ?>
 </define>
 <section class="section">

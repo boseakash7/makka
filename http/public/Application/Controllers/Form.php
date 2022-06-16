@@ -702,9 +702,9 @@ class Form extends Controller
                 'created_at' => time()
             ]);
 
-            Model::get(Flights::class)->update($arrivalInfo['flight_id'], [
-                'status' => Flights::STATUS_COMPLETE
-            ]);
+            // Model::get(Flights::class)->update($arrivalInfo['flight_id'], [
+            //     'status' => Flights::STATUS_COMPLETE
+            // ]);
 
             throw new Redirect('flights/arrival-form/' . $arrivalInfo['flight_id']);
         }
@@ -1191,8 +1191,7 @@ class Form extends Controller
                 'created_at' => time()
             ]);
 
-            Model::get(Flights::class)->update($flightInfo['id'], [
-                'status' => Flights::STATUS_ON_AIR,
+            Model::get(Flights::class)->update($flightInfo['id'], [               
                 'dairport' => $formValidator->getValue('departure_airport')
             ]);
 

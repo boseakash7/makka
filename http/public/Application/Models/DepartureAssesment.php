@@ -14,6 +14,12 @@ class DepartureAssesment extends Model
         return $this->_db->insert($this->_table, $data);
     }
 
+    public function all()
+    {
+        $SQL = "SELECT * FROM `{$this->_table}`";
+        return $this->_db->query($SQL)->getAll();
+    }
+
     public function getByFlightId( $id )
     {
         $SQL = "SELECT * FROM `{$this->_table}` WHERE `flight_id` = ?";
