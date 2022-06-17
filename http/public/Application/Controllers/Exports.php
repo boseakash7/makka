@@ -38,9 +38,9 @@ class Exports extends AuthController
             'content-Disposition: attachment; filename=flights.xls'
         ]);
 
-        $output = fopen("php://output", "w");
+        $data = [];
 
-        fputcsv($output, array(
+        $data[] = array(
             $lang('id'),
             $lang('flight_number'),
             $lang('airlines'),
@@ -99,7 +99,7 @@ class Exports extends AuthController
             $lang('solutions'),
             $lang('recommendations'),
             $lang('reviews')
-        ));
+        );
 
         $departureAM = Model::get(DepartureForm::class);
 
@@ -126,7 +126,7 @@ class Exports extends AuthController
                 $takeOffPlace = Model::get(City::class)->find(['id' => $arrivalInfo['arr']['take_off_place']]);
             }
             
-            $list = array(
+            $data []= array(
                 $flight['id'],
                 $flight['number'],
                 $flight['airline']['en_name'] . '/' . $flight['airline']['ar_name'],
@@ -189,13 +189,11 @@ class Exports extends AuthController
                 
 
             );
-            fputcsv($output, $list);
         }
         
-        fclose($output);
         
         $file = new File('text/csv');
-        $file->set($output);
+        $file->set($this->_buildTable($data));
         $response->set($file);
     }
 
@@ -220,28 +218,28 @@ class Exports extends AuthController
         $flightM = Model::get(Flights::class);
         $flights = $flightM->getByIds(array_map(function($item) {  return $item['flight_id']; }, $ass));
 
-        $output = fopen("php://output", "w");
-        fputcsv($output, [
+        $data = [];
+        $data[] = [
             $lang('flight_number'),
             $lang('q1'),
             $lang('q2'),
             $lang('q3')
-        ]);        
+        ];        
         
         foreach ( $ass as $row )
         {
             $json = json_decode($row['json'], true);
 
-            fputcsv($output, [
+            $data[] = [
                 isset($flights[$row['flight_id']]) ? $flights[$row['flight_id']]['number'] : '-',
                 $this->_getAssessmentValue($json['employment_interaction']),
                 $this->_getAssessmentValue($json['clarity_procedure']),
                 $this->_getAssessmentValue($json['service_provided'])
-            ]); 
+            ]; 
         }
 
         $file = new File('text/csv');
-        $file->set($output);
+        $file->set($this->_buildTable($data));
         $response->set($file);
     }
 
@@ -266,32 +264,32 @@ class Exports extends AuthController
         $flightM = Model::get(Flights::class);
         $flights = $flightM->getByIds(array_map(function($item) {  return $item['flight_id']; }, $ass));
 
-        $output = fopen("php://output", "w");
-        fputcsv($output, [
+        $data[] = [];
+        $data[] = [
             $lang('flight_number'),
             $lang('q1'),
             $lang('q2'),
             $lang('q3'),
             $lang('q4'),
             $lang('q5')
-        ]);        
+        ];
         
         foreach ( $ass as $row )
         {
             $json = json_decode($row['json'], true);
 
-            fputcsv($output, [
+            $data[] = [
                 isset($flights[$row['flight_id']]) ? $flights[$row['flight_id']]['number'] : '-',
                 $this->_getAssessmentValue($json['employment_interaction']),
                 $this->_getAssessmentValue($json['clarity_procedure']),
                 $this->_getAssessmentValue($json['service_provided']),
                 $this->_getAssessmentValue($json['awareness']),
                 $this->_getAssessmentValue($json['makkah_hall'])
-            ]); 
+            ]; 
         }
 
         $file = new File('text/csv');
-        $file->set($output);
+        $file->set($this->_buildTable($data));
         $response->set($file);
     }
 
@@ -310,5 +308,20 @@ class Exports extends AuthController
         }
 
         return $output;
+    }
+
+    private function _buildTable( $data )
+    {
+        
+        $html = "<table>";
+        foreach( $data as $row )
+        {
+            $html .= '<tr>';
+            $html .= implode('', array_map(function($item) { return '<td>' . $item . '</td>';  }, $row));
+            $html .= "</tr>";
+        }
+        $html .= "</table>";
+
+        return $html;
     }
 }
