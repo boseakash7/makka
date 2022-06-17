@@ -10,6 +10,7 @@ use System\Responses\View;
 $lang = Model::get(Language::class);
 
 $userM = Model::get(User::class);
+
 ?>
 <define title>
     <?php echo $lang('arrival_form', ['flight' => $flight['number']]) ?>
