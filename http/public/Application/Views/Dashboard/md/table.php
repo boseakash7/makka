@@ -87,9 +87,9 @@ $cities = $db->query($CITYSQL, $dbValues2)->getAll();
                                 <td><?php echo $lang('passengers') ?></td>
                                 <td><?php echo $lang('average_waiting_time_unitil_access') ?></td>
                                 <td><?php echo $lang('average_waiting_time_unitil_end_of_inspection') ?></td>
-                                <td><?php echo $lang('average_waiting_until_sorting_system') ?></td>
                                 <td><?php echo $lang('baggage_arrival_time_to_accommodation') ?></td>
-                                <!-- <td><?php echo $lang('duration_of_arrival_pilgrims') ?></td> -->
+                                <td><?php echo $lang('average_waiting_until_sorting_system') ?></td>
+                                <!-- <td><?php // echo $lang('duration_of_arrival_pilgrims') ?></td> -->
                                 <td><?php echo $lang('hajj_satisfaction_rate') ?></td>
                             </tr>
                         </thead>
