@@ -300,6 +300,9 @@ return [
     'q5' => "Q5",
 
     'export_arrival_assessment_csv' => "تقييم وصول الصادرات XLS",
-    'export_departure_assessment_csv' => "تقييم مغادرة التصدير XLS"
+    'export_departure_assessment_csv' => "تقييم مغادرة التصدير XLS",
+
+    'full_journey' => "الوقت المستغرق لإنهاء إجراءات الرحلة",
+    'all_full_journey' => "متوسط الوقت المستغرق لإنهاء إجراءات الرحلات في كل المدن"
 ];
 

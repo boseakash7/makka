@@ -47,6 +47,8 @@ $SQL10 = "SELECT CONCAT(ROUND(AVG(`connection_status`) / 2 * 100), '%') FROM `de
 $SQL11 = "SELECT CONCAT(ROUND(AVG(`fingerprint_status`) / 2 * 100), '%') FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
 $SQL12 = "SELECT FLOOR(AVG(`check_out_time` - `check_in_time`)) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL2 ) AND `check_out_time` - `check_in_time` >= 0";
 $SQL13 = "SELECT FLOOR(AVG(`average_pilgrim_service`)) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL2 )";
+$SQL14 = "SELECT AVG(`x`.`time`)  FROM ( SELECT MAX(`check_out_time`) - MIN(`check_in_time`) as `time`, `flight`  FROM `passengers` WHERE `check_out_time` - `check_in_time` >= 0  GROUP BY `flight`) AS `x`
+    WHERE `x`.`flight` IN ( $SUBSQL2 )";
 
 $CITYSQL = "SELECT
             `id` AS `i`,
@@ -64,7 +66,8 @@ $CITYSQL = "SELECT
         ($SQL10) AS `connection_status`,
         ($SQL11) AS `fingerprint_status`,
         ($SQL12) AS `average_waiting_hajj`,
-        ($SQL13) AS `average_pilgrim_service`
+        ($SQL13) AS `average_pilgrim_service`,
+        ($SQL14) AS `full_journey`
         FROM
         `cities`
         WHERE `type` = 'source'
@@ -104,9 +107,11 @@ $cities = $db->query($CITYSQL, $dbValues2)->getAll();
                                 <th><?php echo $lang('fingerprint_status') ?></th>
                                 <th><?php echo $lang('connection_status') ?></th>
                                 <th><?php echo $lang('connection_speed') ?></th>
+                                <th><?php echo $lang('full_journey') ?></th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $totalJourney = 0 ?>
                             <?php foreach ( $cities as $city ): ?>
                                 <tr>
                                     <td><?php echo $city[$lang->current() . '_name'] ;?></td>
@@ -123,8 +128,15 @@ $cities = $db->query($CITYSQL, $dbValues2)->getAll();
                                     <td><?php echo isset($city['fingerprint_status']) ? $city['fingerprint_status'] : 0 ?></td>
                                     <td><?php echo isset($city['connection_status']) ? $city['connection_status'] : 0 ?></td>
                                     <td><?php echo isset($city['communication_speed']) ? $city['communication_speed'] : 0 ?></td>
+                                    <td><?php echo isset($city['full_journey']) ? DateHelper::secToHR($city['full_journey']) : '00:00:00' ?></td>
+                                    <?php $totalJourney += $city['full_journey']; ?>
                                 </tr>
                             <?php endforeach; ?>
+                            <tr>
+                                    <td colspan="14"><?php echo $lang('all_full_journey') ;?></td>
+                                    <td><?php echo DateHelper::secToHR($totalJourney / count($cities)) ?></td>                                   
+                                    <?php $totalJourney += $city['full_journey']; ?>
+                                </tr>
                         </tbody>
                     </table>
             </div>

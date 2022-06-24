@@ -205,10 +205,6 @@ class Exports extends AuthController
 
     public function arrivalAssessments( Request $request, Response $response )
     {
-        $response->setHeaders([
-            'Content-Type: text/csv; charset=utf-8',
-            'content-Disposition: attachment; filename=arrival-assessments.xls'
-        ]);
 
         $lang = Model::get(Language::class);
 
@@ -223,10 +219,20 @@ class Exports extends AuthController
          */
         $flightM = Model::get(Flights::class);
         $flights = $flightM->getByIds(array_map(function($item) {  return $item['flight_id']; }, $ass));
+        $flights = FlightHelper::prepare($flights);     
+        
+        /**
+         * @var ArrivalForm
+         */
+        $arriFM = Model::get(ArrivalForm::class);        
+
 
         $data = [];
         $data[] = [
             $lang('flight_number'),
+            $lang('date'),
+            $lang('source'),
+            $lang('destination'),
             $lang('q1'),
             $lang('q2'),
             $lang('q3')
@@ -236,8 +242,21 @@ class Exports extends AuthController
         {
             $json = json_decode($row['json'], true);
 
+            $date = $arriFM->getByFlightId($row['flight_id']);
+
+            if ( $date )            
+            {
+                $date = json_decode($date['json'], true);
+                $date = $date['date'];
+            } else {
+                $date = '-';
+            }
+
             $data[] = [
                 isset($flights[$row['flight_id']]) ? $flights[$row['flight_id']]['number'] : '-',
+                $date,
+                isset($flights[$row['flight_id']]) ? $flights[$row['flight_id']]['sairport'][$lang->current() . '_name'] : '-',
+                isset($flights[$row['flight_id']]) && isset($flights[$row['flight_id']]['dairport']) ? $flights[$row['flight_id']]['dairport'][$lang->current() . '_name'] : '-',
                 $this->_getAssessmentValue($json['employment_interaction']),
                 $this->_getAssessmentValue($json['clarity_procedure']),
                 $this->_getAssessmentValue($json['service_provided'])
@@ -246,6 +265,11 @@ class Exports extends AuthController
 
         $file = new File('text/csv');
         $file->set($this->_buildTable($data));
+
+        $response->setHeaders([
+            'Content-Type: text/csv; charset=utf-8',
+            'content-Disposition: attachment; filename=arrival-assessments.xls'
+        ]);
         $response->set($file);
     }
 
@@ -269,6 +293,12 @@ class Exports extends AuthController
          */
         $flightM = Model::get(Flights::class);
         $flights = $flightM->getByIds(array_map(function($item) {  return $item['flight_id']; }, $ass));
+        $flights = FlightHelper::prepare($flights);
+
+        /**
+         * @var ArrivalForm
+         */
+        $destFM = Model::get(ArrivalForm::class);        
 
         $data[] = [];
         $data[] = [
@@ -283,9 +313,22 @@ class Exports extends AuthController
         foreach ( $ass as $row )
         {
             $json = json_decode($row['json'], true);
+            
+            $date = $destFM->getByFlightId($row['flight_id']);
+
+            if ( $date )            
+            {
+                $date = json_decode($date['json'], true);
+                $date = $date['date'];
+            } else {
+                $date = '-';
+            }
 
             $data[] = [
                 isset($flights[$row['flight_id']]) ? $flights[$row['flight_id']]['number'] : '-',
+                $date,
+                isset($flights[$row['flight_id']]) ? $flights[$row['flight_id']]['sairport'][$lang->current() . '_name'] : '-',
+                isset($flights[$row['flight_id']]) && isset($flights[$row['flight_id']]['dairport']) ? $flights[$row['flight_id']]['dairport'][$lang->current() . '_name'] : '-',
                 $this->_getAssessmentValue($json['employment_interaction']),
                 $this->_getAssessmentValue($json['clarity_procedure']),
                 $this->_getAssessmentValue($json['service_provided']),

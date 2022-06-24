@@ -299,6 +299,9 @@ return [
     'q5' => "Q5",
 
     'export_arrival_assessment_csv' => "Export Arrival Assessment XLS",
-    'export_departure_assessment_csv' => "Export Departure Assessment XLS"
+    'export_departure_assessment_csv' => "Export Departure Assessment XLS",
+
+    'full_journey' => "Hajji journey full time",
+    'all_full_journey' => "All Hajji journey full time"
 ];
 
