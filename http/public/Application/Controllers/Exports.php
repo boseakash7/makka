@@ -11,6 +11,7 @@ use Application\Models\City;
 use Application\Models\DepartureAssesment;
 use Application\Models\DepartureForm;
 use Application\Models\Flights;
+use Application\Models\Passenger;
 use System\Core\Controller;
 use System\Core\Model;
 use System\Core\Request;
@@ -56,6 +57,8 @@ class Exports extends AuthController
             $lang('departure_time'),
             $lang('departure_city'),
             $lang('passengers'),
+            $lang('first_check_in'),
+            $lang('last_check_out'),
             $lang('arrival_city'),
             $lang('arrival_time'),
             $lang('working_counts'),
@@ -129,6 +132,12 @@ class Exports extends AuthController
                 $takeOffPlace = Model::get(City::class)->find(['id' => $arrivalInfo['arr']['take_off_place']]);
             }
             
+            $firstCheckInTime = Model::get(Passenger::class)->firstCheckInTime($flight['id']);
+            $firstCheckInTime = $firstCheckInTime ? date('Y-m-d H:i:s', $firstCheckInTime) : '-';
+
+            $lastCheckOutTime = Model::get(Passenger::class)->lastCheckOutTime($flight['id']);
+            $lastCheckOutTime = $lastCheckOutTime ? date('Y-m-d H:i:s', $lastCheckOutTime) : '-';
+            
             $data []= array(
                 $flight['id'],
                 $flight['number'],
@@ -145,6 +154,8 @@ class Exports extends AuthController
                 isset($departureInfo['arr']['departure_time']) ? date('Y-m-d H:i',  strtotime($departureInfo['arr']['departure_time'])) : '-',
                 isset($departureCityInfo['en_name']) ? $departureCityInfo['en_name'] .'/' . $departureCityInfo['ar_name'] : '-',
                 isset($departureInfo['arr']['passengers']) ? $departureInfo['arr']['passengers'] : '-',
+                $firstCheckInTime,
+                $lastCheckOutTime,
                 isset($arrivalCityInfo['en_name']) ? $arrivalCityInfo['en_name'] . '/' . $arrivalCityInfo['ar_name'] : '-',
                 isset($departureInfo['arr']['arrival_time']) ?  date('Y-m-d H:i', strtotime($departureInfo['arr']['arrival_time'])) : '-',
                 isset($departureInfo['arr']['working_counts']) ? $departureInfo['arr']['working_counts'] : '-',

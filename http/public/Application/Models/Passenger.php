@@ -19,6 +19,24 @@ class Passenger extends Model
         return $this->_db->update($this->_table, $id, $data);
     }
 
+    public function firstCheckInTime( $flightId )
+    {
+        $SQL = "SELECT MIN(`check_in_time`) AS `time` FROM `{$this->_table}` WHERE `flight` = ?";
+
+        $result = $this->_db->query($SQL, [ $flightId ])->get();
+
+        return $result ? $result['time'] : 0;
+    }
+
+    public function lastCheckOutTime( $flightId )
+    {
+        $SQL = "SELECT MAX(`check_out_time`) AS `time` FROM `{$this->_table}` WHERE `flight` = ?";
+
+        $result = $this->_db->query($SQL, [ $flightId ])->get();
+
+        return $result ? $result['time'] : 0;
+    }
+
     public function find( array $with )
     {
         return $this->_prepareFind($with, function($result) {

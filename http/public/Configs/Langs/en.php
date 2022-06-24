@@ -302,6 +302,9 @@ return [
     'export_departure_assessment_csv' => "Export Departure Assessment XLS",
 
     'full_journey' => "Hajji journey full time",
-    'all_full_journey' => "All Hajji journey full time"
+    'all_full_journey' => "All Hajji journey full time",
+
+    'first_check_in' => "First Check In",
+    'last_check_out' => "Last Check Out"
 ];
 

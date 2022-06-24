@@ -53,6 +53,7 @@ $SQL10 = "SELECT CONCAT(ROUND(AVG(`connection_status`) / 2 * 100), '%') AS `coun
 $SQL11 = "SELECT CONCAT(ROUND(AVG(`fingerprint_status`) / 2 * 100), '%') AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 $SQL12 = "SELECT FLOOR(AVG(`check_out_time` - `check_in_time`)) as `count` FROM `passengers` WHERE `flight` IN ( $SUBSQL1 ) AND `check_out_time` - `check_in_time` >= 0";
 $SQL13 = "SELECT FLOOR(AVG(`average_pilgrim_service`)) AS `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
+$SQL14 = "SELECT SUM(`passengers`) as `count` FROM `departure_form` WHERE `flight_id` IN ( $SUBSQL1 )";
 
 $workingCounts = $db->query($SQL1, $dbValues1)->get();
 $workingCounts = $workingCounts['count'];
@@ -92,6 +93,9 @@ $waitingTime = $waitingTime['count'];
 
 $avgService = $db->query($SQL13, $dbValues1)->get();
 $avgService = $avgService['count'];
+
+$passengersTotal = $db->query($SQL14, $dbValues1)->get();
+$passengersTotal = $passengersTotal['count'];
 
 
 ?>
@@ -236,6 +240,17 @@ $avgService = $avgService['count'];
             </div>
             <div class="card-body">
                 <div class="number text-center h1 text-primary"><?php echo isset($comSpeed) ? $comSpeed : 0 ?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center"><?php echo $lang('passengers') ?></h3>
+            </div>
+            <div class="card-body">
+                <div class="number text-center h1 text-primary"><?php echo Number::pretty($passengersTotal) ?></div>
             </div>
         </div>
     </div>
