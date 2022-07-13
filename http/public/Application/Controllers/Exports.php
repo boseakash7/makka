@@ -359,12 +359,26 @@ class Exports extends AuthController
     private function _getAssessmentValue( $value )
     {
         $output = 3;
-        switch( strtolower($value) )
+        switch( $value )
         {
-            case 'yes':
+            case 'Yes':
+
+            // For old data
+            case 'Satisfactory':
+            case 'সন্তুষ্ট':
+            case 'Memuaskan':
+            case 'Puas':
+            case 'مطمئن':
+            case 'راضي':
                 $output = 1;
                 break;
-            case 'somewhat':
+            case 'Somewhat':
+            case 'Unsatisfactory':            
+            case 'ভালো':
+            case 'Tidak Memuaskan':
+            case 'Biasa':      
+            case 'کچھ بھی نہیں':
+            case 'نوعاً ما':
                 $output = 2;
                 break;
         }
