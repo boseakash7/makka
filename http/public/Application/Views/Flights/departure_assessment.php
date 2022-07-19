@@ -40,6 +40,7 @@ $lang = Model::get(Language::class);
                 <div class="card">
                     <div class="card-header">
                         <span class="badge custom-badge"><?php echo $departureInfo['langFull'] ?></span>
+                        #<?php echo $departureInfo['id'] ?>
                     </div>
                     <div class="card-body">
                         <?php if ($departureInfo['lang'] == 'en') : ?>

@@ -248,7 +248,8 @@ class Exports extends AuthController
             $lang('destination'),
             $lang('q1'),
             $lang('q2'),
-            $lang('q3')
+            $lang('q3'),
+            $lang('id')
         ];        
         
         foreach ( $ass as $row )
@@ -272,7 +273,8 @@ class Exports extends AuthController
                 isset($flights[$row['flight_id']]) && isset($flights[$row['flight_id']]['dairport']) ? $flights[$row['flight_id']]['dairport'][$lang->current() . '_name'] : '-',
                 $this->_getAssessmentValue($json['employment_interaction']),
                 $this->_getAssessmentValue($json['clarity_procedure']),
-                $this->_getAssessmentValue($json['service_provided'])
+                $this->_getAssessmentValue($json['service_provided']),
+                $row['id']
             ]; 
         }
 
@@ -316,11 +318,15 @@ class Exports extends AuthController
         $data[] = [];
         $data[] = [
             $lang('flight_number'),
+            $lang('date'),
+            $lang('source'),
+            $lang('destination'),
             $lang('q1'),
             $lang('q2'),
             $lang('q3'),
             $lang('q4'),
-            $lang('q5')
+            $lang('q5'),
+            $lang('id')
         ];
         
         foreach ( $ass as $row )
@@ -344,9 +350,10 @@ class Exports extends AuthController
                 isset($flights[$row['flight_id']]) && isset($flights[$row['flight_id']]['dairport']) ? $flights[$row['flight_id']]['dairport'][$lang->current() . '_name'] : '-',
                 $this->_getAssessmentValue($json['employment_interaction']),
                 $this->_getAssessmentValue($json['clarity_procedure']),
-                $this->_getAssessmentValue($json['service_provided']),
+                $this->_getAssessmentValue($json['service_provided']),                
+                $this->_getAssessmentValue($json['makkah_hall']),
                 $this->_getAssessmentValue($json['awareness']),
-                $this->_getAssessmentValue($json['makkah_hall'])
+                $row['id']
             ]; 
         }
 
@@ -370,6 +377,9 @@ class Exports extends AuthController
             case 'Puas':
             case 'مطمئن':
             case 'راضي':
+            case 'Quick':
+            case 'Easy':
+            case 'Comfortable':
                 $output = 1;
                 break;
             case 'Somewhat':
